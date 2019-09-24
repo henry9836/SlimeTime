@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private bool canFire = true;
     private Vector2 aimVec;
+    private GameObject aimIndicator;
 
     void Start()
     {
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("playerType of " + name + " is unassigned!");
         }
+
+        aimIndicator = transform.GetChild(0).gameObject;
 
         //Reset vars
         canFire = true;
@@ -39,10 +42,37 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //AIM UI
+        //AIMMING
         Vector3 aimVec = new Vector3(0, 0, 0);
-        aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"), 0);
+        aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
+
+        float x = Mathf.Sqrt((aimVec.x * aimVec.x) + (aimVec.z * aimVec.z));
+        x = 1 / x;
+        aimVec = new Vector3(aimVec.x * x, aimVec.y, aimVec.z * x);
+
         Debug.Log(aimVec);
+
+        aimIndicator.transform.localPosition = aimVec * aimDistance;
+
+        //MOVEMENT
+
+        Vector3 movementVec = new Vector3(0, 0, 0);
+
+        if (Input.GetAxisRaw("P" + (int)playerType + "VERT") != 0)
+        {
+            movementVec += transform.forward * -Input.GetAxisRaw("P" + (int)playerType + "VERT");
+        }
+
+        if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") != 0)
+        {
+            movementVec += transform.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
+        }
+
+        if (GetComponent<Rigidbody>().velocity.magnitude < maxSpeed)
+        {
+            GetComponent<Rigidbody>().AddForce(movementVec * speed);
+        }
+
     }
 
     IEnumerator coolDown()
