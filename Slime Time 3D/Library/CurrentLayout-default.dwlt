@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 96
+  controlID: 53
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 97
+  controlID: 54
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 98
+  controlID: 55
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: c04b0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 36fbffff5cfbffff6cfbffff6efbffffb2490000
+      m_ExpandedIDs: 58f5ffff94f6ffffc2f6ffff6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.547062, y: -2.0811148, z: 7.6162806}
+    m_Target: {x: -5.1555195, y: -2.3150134, z: -9.978517}
     speed: 2
-    m_Value: {x: 2.547062, y: -2.0811148, z: 7.6162806}
+    m_Value: {x: -5.1555195, y: -2.3150134, z: -9.978517}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -477,13 +477,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.20927945, y: 0.09283182, z: -0.01996243, w: -0.97323567}
+    m_Target: {x: -0.11872065, y: 0.7543258, z: -0.142187, w: -0.62983376}
     speed: 2
-    m_Value: {x: -0.2073571, y: 0.1132841, z: -0.024182653, w: -0.97138304}
+    m_Value: {x: -0.117563486, y: 0.75547874, z: -0.14123116, w: -0.62887555}
   m_Size:
     m_Target: 9.959541
     speed: 2
-    m_Value: 10.428839
+    m_Value: 9.959541
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -638,20 +638,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: D:\Projects\Slime Time 3D
+  m_LastProjectPath: D:\Projects\Slime Time 3D\SlimeTime\Slime Time 3D
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de390000
-    m_LastClickedID: 14814
-    m_ExpandedIDs: 00000000de39000000ca9a3b
+    m_SelectedIDs: c43f0000
+    m_LastClickedID: 16324
+    m_ExpandedIDs: 000000005639000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,7 +679,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 0000000056390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
