@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class PlayerController : MonoBehaviour
+public class PlayerController2D : MonoBehaviour
 {
     public enum PLAYER{
         UNASSIGNED,
