@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameManager Cannot Find Any Players!");
         }
 
+        StartCoroutine(checkPlayers());
+
     }
 
     public void SlimeKilled()
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         //If all players are dead
         if (gameover)
         {
+            Debug.Log("GAMEOVER");
             StartCoroutine(returnToMain());
         }
 
@@ -76,7 +79,7 @@ public class GameManager : MonoBehaviour
     IEnumerator returnToMain()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
