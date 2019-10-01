@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float fireForce = 1.0f;
     public float fireCoolDown = 0.2f;
     public float aimDistance = 1.0f;
+    public float health = 100.0f;
 
     public GameObject baseProjectile;
     public GameObject pickupSlot;
