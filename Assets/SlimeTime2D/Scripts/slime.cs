@@ -65,7 +65,7 @@ public class slime : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            GameObject.Find("gamemanagerPrefab").GetComponent<slimeSpawner>().currentSlimes -= 1;
+          //  GameObject.Find("gamemanagerPrefab").GetComponent<slimeSpawner>().currentSlimes -= 1;
 
             Instantiate(explodeParticle, transform.position, Quaternion.identity);
             if (playerno == 0)
