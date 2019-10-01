@@ -10,12 +10,18 @@ public class slimeSpawner : MonoBehaviour
     public List<GameObject> slimePrefab;
     public int toSpawn;
     public int haveSpawn;
-    public int remainingSpawn;
     public bool isSpawning = true;
-    public float grace = 5.0f;
-    public float gracetimer;
-    private bool onceGRACE = true;
-    private bool onceSpawnng = true;
+
+
+    private float stage1;
+    public float stage1timer;
+    private float stage1Delay;
+    private float stage2;
+    public float stage2timer;
+    private float stage2Delay;
+
+
+    public bool onceSpawnng = true;
     private bool onceLAZER = true;
     public GameObject LAZERNODEprefab;
     public float LAZERNODEheight;
@@ -24,8 +30,6 @@ public class slimeSpawner : MonoBehaviour
     public Vector2 finishXYpos;
 
     public Vector2 spawnSaftyXY;
-
-
     public List<Vector3> ValidPositionsFIRE;
     public List<Vector3> ValidPositionsICE;
     public List<Vector3> ValidPositionsNORMAL;
@@ -35,7 +39,11 @@ public class slimeSpawner : MonoBehaviour
     public List<Vector3> TempInvalidNORMAL;
 
 
-
+    public void NextWave(int wave)
+    {
+        isSpawning = true;
+        toSpawn = wave;
+    }
 
 
 
@@ -48,20 +56,6 @@ public class slimeSpawner : MonoBehaviour
             onceLAZER = false;
             StartCoroutine(LAZERscan());
         }
-
-        if (remainingSpawn == 0)
-        {
-            gracetimer -= Time.deltaTime;
-            if (gracetimer <= 0.0f)
-            {
-                gracetimer = grace;
-                timer = 0.0f;
-                isSpawning = true;
-                onceSpawnng = true;
-            }
-                
-        }
-
 
         int pointcount = Mathf.FloorToInt((finishXYpos.y - startXYpos.y) / LAZERNODEdetail.y) * Mathf.FloorToInt((finishXYpos.x - startXYpos.x) / LAZERNODEdetail.x);
 
@@ -80,7 +74,7 @@ public class slimeSpawner : MonoBehaviour
                 {
                     if (ValidPositionsFIRE[j].x > minXY.x && ValidPositionsFIRE[j].x < maxXY.x)
                     {
-                        if (ValidPositionsFIRE[j].y > minXY.y && ValidPositionsFIRE[j].y < maxXY.y)
+                        if (ValidPositionsFIRE[j].z > minXY.y && ValidPositionsFIRE[j].z < maxXY.y)
                         {
                             TempInvalidFIRE.Add(ValidPositionsFIRE[j]);
                             ValidPositionsFIRE.RemoveAt(j);
@@ -92,7 +86,7 @@ public class slimeSpawner : MonoBehaviour
                 {
                     if (ValidPositionsICE[j].x > minXY.x && ValidPositionsICE[j].x < maxXY.x)
                     {
-                        if (ValidPositionsICE[j].y > minXY.y && ValidPositionsICE[j].y < maxXY.y)
+                        if (ValidPositionsICE[j].z > minXY.y && ValidPositionsICE[j].z < maxXY.y)
                         {
                             TempInvalidICE.Add(ValidPositionsICE[j]);
                             ValidPositionsICE.RemoveAt(j);
@@ -104,7 +98,7 @@ public class slimeSpawner : MonoBehaviour
                 {
                     if (ValidPositionsNORMAL[j].x > minXY.x && ValidPositionsNORMAL[j].x < maxXY.x)
                     {
-                        if (ValidPositionsNORMAL[j].y > minXY.y && ValidPositionsNORMAL[j].y < maxXY.y)
+                        if (ValidPositionsNORMAL[j].z > minXY.y && ValidPositionsNORMAL[j].z < maxXY.y)
                         {
                             TempInvalidNORMAL.Add(ValidPositionsNORMAL[j]);
                             ValidPositionsNORMAL.RemoveAt(j);
@@ -124,17 +118,25 @@ public class slimeSpawner : MonoBehaviour
             {
                 if (onceSpawnng == true)
                 {
+                    stage1 = 0.75f * toSpawn;
+                    stage2 = toSpawn - stage1;
+
+                    stage1Delay = stage1timer / stage1;
+                    stage2Delay = stage2timer / stage2;
 
                     onceSpawnng = false;
                 }
-                if (timer <= 10.0f)
+                if (timer <= stage1timer)
                 {
+                      
                     //spawn 75%
-                    
+
                 }
-                else if (timer <= 30.0f)
+                else if (timer <= stage2timer)
                 {
                     //the rest
+
+                    isSpawning = false;
                 }
                 //if (timer >= 2.0f && currentSlimes < maxSlimes)
                 //{
