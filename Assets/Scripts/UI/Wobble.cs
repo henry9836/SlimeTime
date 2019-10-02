@@ -26,7 +26,6 @@ public class Wobble : MonoBehaviour
         pos.y = (Mathf.Sin(Time.time * verticalWaveSpeed)) * verticalMagnitude;
         pos.z = 0;
         transform.position = posInitial + pos;
-        Debug.Log(pos.y);
 
         // Rotation Wobble
         Vector3 rot;
