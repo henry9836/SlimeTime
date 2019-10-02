@@ -49,12 +49,15 @@ public class slimeSpawner : MonoBehaviour
 
     public void NextWave(int wave)
     {
+        onceSpawnng = true;
+        timer = 0.0f;
         isSpawning = true;
         toSpawn = wave;
+        haveSpawn = 0;
         GameObject.Find("GameManager").GetComponent<GameManager>().remainingSpawn = toSpawn;
     }
 
-    
+
 
     void Update()
     {
@@ -167,14 +170,13 @@ public class slimeSpawner : MonoBehaviour
             {
                 if (onceSpawnng == true)
                 {
-                    stage1 = 0.75f * toSpawn;
-                    stage2 = toSpawn - stage1;
+                    stage1 = Mathf.CeilToInt(0.75f * toSpawn);
+                    stage2 = (toSpawn - stage1);
 
-                    stage1Delay = stage1time / stage1;
-                    stage2Delay = stage2time / stage2;
+                    stage1Delay = stage1time / (stage1 + 2);
+                    stage2Delay = (stage2time - stage1time) / (stage2 + 2);
 
-                    GameObject.Find("GameManager").GetComponent<GameManager>().remainingSpawn = ;
-
+                    
                     onceSpawnng = false;
                 }
                 if (timer <= stage1time)
@@ -183,6 +185,9 @@ public class slimeSpawner : MonoBehaviour
                     stage1timer += Time.deltaTime;
                     if (stage1timer >= stage1Delay)
                     {
+                        gameObject.GetComponent<GameManager>().remainingSpawn -= 1;
+
+                        haveSpawn += 1;
                         stage1timer = 0.0f;
                         float spawnPosRad = 0.0f;
                         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
@@ -237,7 +242,8 @@ public class slimeSpawner : MonoBehaviour
                     stage2timer += Time.deltaTime;
                     if (stage2timer >= stage2Delay)
                     {
-
+                        gameObject.GetComponent<GameManager>().remainingSpawn -= 1;
+                        haveSpawn += 1;
                         stage2timer = 0.0f;
                         float spawnPosRad = 0.0f;
                         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
@@ -286,10 +292,10 @@ public class slimeSpawner : MonoBehaviour
                     }
 
                 }
-                else
-                {
-                    isSpawning = false;
-                }
+                //else
+                //{
+                //    isSpawning = false;
+                //}
 
             }
 
