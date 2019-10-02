@@ -88,9 +88,9 @@ public class GameManager : MonoBehaviour
     IEnumerator returnToMain()
     {
         gameoverLock = true;
-
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("MainMenu");
+        GetComponent<SceneSwitcher>().SceneSwitch("MainMenu");
+        yield return null;
+        //SceneManager.LoadScene("MainMenu");
     }
 
 }
