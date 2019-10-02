@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209072563657535714}
   - component: {fileID: 6525390337991096898}
+  - component: {fileID: 2223859101471872379}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,3 +44,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57681bf02682b94f8e6bc2a3b7a9a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  remainingSpawn: 0
+  grace: 5
+  gracetimer: 0
+--- !u!114 &2223859101471872379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999512730116933380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105ac9690d84c8543a8a83017ba57c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  slimeHP: 
+  persentgaes: []
+  slimePrefab: []
+  toSpawn: 0
+  haveSpawn: 0
+  isSpawning: 1
+  stage1timer: 0
+  stage2timer: 0
+  onceSpawnng: 1
+  LAZERNODEprefab: {fileID: 5527494301343044635, guid: 2e350f23221f7cc49a6f39e9f6bfcf43,
+    type: 3}
+  LAZERNODEheight: 10
+  LAZERNODEdetail: {x: 0.1, y: 0.1}
+  startXYpos: {x: 0, y: 0}
+  finishXYpos: {x: 10, y: 10}
+  spawnSaftyXY: {x: 0, y: 0}
+  ValidPositionsFIRE: []
+  ValidPositionsICE: []
+  ValidPositionsNORMAL: []
+  InvalidPositions: []
+  TempInvalidFIRE: []
+  TempInvalidICE: []
+  TempInvalidNORMAL: []
