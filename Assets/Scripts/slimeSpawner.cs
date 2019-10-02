@@ -16,7 +16,6 @@ public class slimeSpawner : MonoBehaviour
 
     public bool isdone = false; 
 
-
     private float stage1;
     public float stage1time;
     public float stage1timer;
@@ -91,24 +90,24 @@ public class slimeSpawner : MonoBehaviour
                     float temp = Mathf.Sqrt(((Mathf.Pow(ValidPositionsFIRE[i].x - diffCentreXY.x, 2)) + (Mathf.Pow(ValidPositionsFIRE[i].z - diffCentreXY.y, 2))));
                     ValidPositionsFIRE[i] = new Vector4(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z, temp);
 
-                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z), Quaternion.identity);
-                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsFIRE[i].w), 0.1f);
+                   // GameObject test = Instantiate(radtest, new Vector3(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z), Quaternion.identity);
+                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsFIRE[i].w), 0.1f);
                 }
                 for (int i = 0; i < ValidPositionsICE.Count; i++)
                 {
                     float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsICE[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsICE[i].z - diffCentreXY.y, 2)));
                     ValidPositionsICE[i] = new Vector4(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z, temp);
 
-                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z), Quaternion.identity);
-                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsICE[i].w), 0.1f);
+                    //GameObject test = Instantiate(radtest, new Vector3(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z), Quaternion.identity);
+                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsICE[i].w), 0.1f);
                 }
                 for (int i = 0; i < ValidPositionsNORMAL.Count; i++)
                 {
                     float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsNORMAL[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsNORMAL[i].z - diffCentreXY.y, 2)));
                     ValidPositionsNORMAL[i] = new Vector4(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z, temp);
 
-                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z), Quaternion.identity);
-                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsNORMAL[i].w), 0.1f);
+                    //GameObject test = Instantiate(radtest, new Vector3(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z), Quaternion.identity);
+                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsNORMAL[i].w), 0.1f);
                 }
             }
 
@@ -173,6 +172,8 @@ public class slimeSpawner : MonoBehaviour
 
                     stage1Delay = stage1time / stage1;
                     stage2Delay = stage2time / stage2;
+
+                    GameObject.Find("GameManager").GetComponent<GameManager>().remainingSpawn = ;
 
                     onceSpawnng = false;
                 }
