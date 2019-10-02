@@ -13,7 +13,8 @@ public class slimeSpawner : MonoBehaviour
     public bool isSpawning = true;
 
     public GameObject radtest;
-    
+
+    public bool isdone = false; 
 
 
     private float stage1;
@@ -70,7 +71,15 @@ public class slimeSpawner : MonoBehaviour
 
         int pointcount = Mathf.FloorToInt((finishXYpos.y - startXYpos.y) / LAZERNODEdetail.y) * Mathf.FloorToInt((finishXYpos.x - startXYpos.x) / LAZERNODEdetail.x);
 
-        if (ValidPositionsFIRE.Count + ValidPositionsICE.Count + ValidPositionsNORMAL.Count + InvalidPositions.Count + TempInvalidFIRE.Count + TempInvalidICE.Count + TempInvalidNORMAL.Count == pointcount && isSpawning == true)
+        if (ValidPositionsFIRE.Count + ValidPositionsICE.Count + ValidPositionsNORMAL.Count + InvalidPositions.Count + TempInvalidFIRE.Count + TempInvalidICE.Count + TempInvalidNORMAL.Count == pointcount)
+        {
+            isdone = true;
+            InvalidPositions.Clear();
+        }
+
+        
+
+        if (isdone == true && isSpawning == true)
         {
             if (onceRAD == true)
             {
@@ -82,32 +91,25 @@ public class slimeSpawner : MonoBehaviour
                     float temp = Mathf.Sqrt(((Mathf.Pow(ValidPositionsFIRE[i].x - diffCentreXY.x, 2)) + (Mathf.Pow(ValidPositionsFIRE[i].z - diffCentreXY.y, 2))));
                     ValidPositionsFIRE[i] = new Vector4(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z, temp);
 
-                    //GameObject test = Instantiate(radtest, new Vector3(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z), Quaternion.identity);
-                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsFIRE[i].w), 0.1f);
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsFIRE[i].w), 0.1f);
                 }
                 for (int i = 0; i < ValidPositionsICE.Count; i++)
                 {
                     float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsICE[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsICE[i].z - diffCentreXY.y, 2)));
                     ValidPositionsICE[i] = new Vector4(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z, temp);
 
-                    //GameObject test = Instantiate(radtest, new Vector3(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z), Quaternion.identity);
-                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsICE[i].w), 0.1f);
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsICE[i].w), 0.1f);
                 }
                 for (int i = 0; i < ValidPositionsNORMAL.Count; i++)
                 {
                     float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsNORMAL[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsNORMAL[i].z - diffCentreXY.y, 2)));
                     ValidPositionsNORMAL[i] = new Vector4(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z, temp);
 
-                    //GameObject test = Instantiate(radtest, new Vector3(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z), Quaternion.identity);
-                    //test.transform.localScale = new Vector3(0.1f, (ValidPositionsNORMAL[i].w), 0.1f);
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsNORMAL[i].w), 0.1f);
                 }
-                for (int i = 0; i < InvalidPositions.Count; i++)
-                {
-                    float temp = Mathf.Sqrt((Mathf.Pow(InvalidPositions[i].x, 2) + Mathf.Pow(InvalidPositions[i].z, 2)));
-                    InvalidPositions[i] = new Vector4(InvalidPositions[i].x, InvalidPositions[i].y, InvalidPositions[i].z, temp);
-                }
-
-
             }
 
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -124,7 +126,6 @@ public class slimeSpawner : MonoBehaviour
                     {
                         if (ValidPositionsFIRE[j].z > minXY.y && ValidPositionsFIRE[j].z < maxXY.y)
                         {
-                            Debug.Log("chnage");
                             TempInvalidFIRE.Add(ValidPositionsFIRE[j]);
                             ValidPositionsFIRE.RemoveAt(j);
                             j--;
@@ -182,7 +183,6 @@ public class slimeSpawner : MonoBehaviour
                     if (stage1timer >= stage1Delay)
                     {
                         stage1timer = 0.0f;
-                        //choose position
                         float spawnPosRad = 0.0f;
                         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
                         {
@@ -198,7 +198,6 @@ public class slimeSpawner : MonoBehaviour
                         }
 
                         spawnPosRad = Random.Range(0.0f, spawnPosRad);
-                        Debug.Log("hi");
 
                         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
                         {
@@ -215,7 +214,7 @@ public class slimeSpawner : MonoBehaviour
                             if (spawnPosRad <= 0.0f)
                             {
                                 spawnPosRad = Mathf.Infinity;
-                                Instantiate(slimePrefab[1], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y +100, ValidPositionsICE[j].z), Quaternion.identity);
+                                Instantiate(slimePrefab[1], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
 
                             }
                         }
@@ -225,7 +224,7 @@ public class slimeSpawner : MonoBehaviour
                             if (spawnPosRad <= 0.0f)
                             {
                                 spawnPosRad = Mathf.Infinity;
-                                Instantiate(slimePrefab[2], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y +100, ValidPositionsNORMAL[j].z), Quaternion.identity);
+                                Instantiate(slimePrefab[2], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
                             }
                         }
 
@@ -234,36 +233,63 @@ public class slimeSpawner : MonoBehaviour
                 }
                 else if (timer <= stage2time)
                 {
-                    //the rest
+                    stage2timer += Time.deltaTime;
+                    if (stage2timer >= stage2Delay)
+                    {
 
+                        stage2timer = 0.0f;
+                        float spawnPosRad = 0.0f;
+                        for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+                        {
+                            spawnPosRad += ValidPositionsFIRE[j].w;
+                        }
+                        for (int j = 0; j < ValidPositionsICE.Count; j++)
+                        {
+                            spawnPosRad += ValidPositionsICE[j].w;
+                        }
+                        for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+                        {
+                            spawnPosRad += ValidPositionsNORMAL[j].w;
+                        }
+
+                        spawnPosRad = Random.Range(0.0f, spawnPosRad);
+
+                        for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+                        {
+                            spawnPosRad -= ValidPositionsFIRE[j].w;
+                            if (spawnPosRad <= 0.0f)
+                            {
+                                spawnPosRad = Mathf.Infinity;
+                                Instantiate(slimePrefab[0], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                            }
+                        }
+                        for (int j = 0; j < ValidPositionsICE.Count; j++)
+                        {
+                            spawnPosRad -= ValidPositionsICE[j].w;
+                            if (spawnPosRad <= 0.0f)
+                            {
+                                spawnPosRad = Mathf.Infinity;
+                                Instantiate(slimePrefab[1], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
+
+                            }
+                        }
+                        for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+                        {
+                            spawnPosRad -= ValidPositionsNORMAL[j].w;
+                            if (spawnPosRad <= 0.0f)
+                            {
+                                spawnPosRad = Mathf.Infinity;
+                                Instantiate(slimePrefab[2], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
                     isSpawning = false;
                 }
-                //if (timer >= 2.0f && currentSlimes < maxSlimes)
-                //{
-                //    currentSlimes += 1;
-                //    float rand = Random.Range(0.0f, 100.0f);
-                //    int HPChosen = 0;
-                //    for (int i = 0; i < slimeHP.Count; i++)
-                //    {
-                //        float temp = persentgaes[i];
-                //        for (int j = 0; j < i; j++)
-                //        {
-                //            temp += persentgaes[j];
-                //        }
-                //        if (rand < temp)
-                //        {
-                //            HPChosen = slimeHP[i];
-                //            i = slimeHP.Count;
-                //        }
-                //    }
-                //    if (HPChosen == 0)
-                //    {
-                //        HPChosen = 1;
-                //    }
-                //    timer = 0.0f;
-                //    GameObject objRef = Instantiate(slimePrefab[Random.Range(0, slimePrefab.Count)], new Vector3(Random.Range(-7f, 7f), Random.Range(3.3f, -3.3f), 0.0f), Quaternion.identity);
-                //    objRef.GetComponent<slime>().Init(HPChosen);
-                //}
+
             }
 
 
@@ -321,3 +347,30 @@ public class slimeSpawner : MonoBehaviour
 
     }
 }
+
+//if (timer >= 2.0f && currentSlimes < maxSlimes)
+//{
+//    currentSlimes += 1;
+//    float rand = Random.Range(0.0f, 100.0f);
+//    int HPChosen = 0;
+//    for (int i = 0; i < slimeHP.Count; i++)
+//    {
+//        float temp = persentgaes[i];
+//        for (int j = 0; j < i; j++)
+//        {
+//            temp += persentgaes[j];
+//        }
+//        if (rand < temp)
+//        {
+//            HPChosen = slimeHP[i];
+//            i = slimeHP.Count;
+//        }
+//    }
+//    if (HPChosen == 0)
+//    {
+//        HPChosen = 1;
+//    }
+//    timer = 0.0f;
+//    GameObject objRef = Instantiate(slimePrefab[Random.Range(0, slimePrefab.Count)], new Vector3(Random.Range(-7f, 7f), Random.Range(3.3f, -3.3f), 0.0f), Quaternion.identity);
+//    objRef.GetComponent<slime>().Init(HPChosen);
+//}

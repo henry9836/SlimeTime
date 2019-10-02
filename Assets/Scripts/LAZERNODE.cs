@@ -87,8 +87,6 @@ public class LAZERNODE : MonoBehaviour
             {
                 InvalidPosition.Add(new Vector3(this.gameObject.transform.position.x, 0.0f, this.gameObject.transform.position.z));
             }
-            //GetComponent<LineRenderer>().enabled = false;
-            //yield return null;
             yield return new WaitForSeconds(0.01f);
 
             transform.localPosition += new Vector3(LAZERNODEdetail.x, 0.0f, 0.0f);
