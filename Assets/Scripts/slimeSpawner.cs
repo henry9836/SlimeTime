@@ -12,6 +12,8 @@ public class slimeSpawner : MonoBehaviour
     public int haveSpawn;
     public bool isSpawning = true;
 
+    public GameObject radtest;
+
 
     private float stage1;
     public float stage1timer;
@@ -20,7 +22,7 @@ public class slimeSpawner : MonoBehaviour
     public float stage2timer;
     private float stage2Delay;
 
-
+    private bool onceRAD = true;
     public bool onceSpawnng = true;
     private bool onceLAZER = true;
     public GameObject LAZERNODEprefab;
@@ -29,23 +31,26 @@ public class slimeSpawner : MonoBehaviour
     public Vector2 startXYpos;
     public Vector2 finishXYpos;
 
+    public Vector2 diffCentreXY;
+
     public Vector2 spawnSaftyXY;
-    public List<Vector3> ValidPositionsFIRE;
-    public List<Vector3> ValidPositionsICE;
-    public List<Vector3> ValidPositionsNORMAL;
-    public List<Vector3> InvalidPositions;
-    public List<Vector3> TempInvalidFIRE;
-    public List<Vector3> TempInvalidICE;
-    public List<Vector3> TempInvalidNORMAL;
+    public List<Vector4> ValidPositionsFIRE;
+    public List<Vector4> ValidPositionsICE;
+    public List<Vector4> ValidPositionsNORMAL;
+    public List<Vector4> InvalidPositions;
+    public List<Vector4> TempInvalidFIRE;
+    public List<Vector4> TempInvalidICE;
+    public List<Vector4> TempInvalidNORMAL;
 
 
     public void NextWave(int wave)
     {
         isSpawning = true;
         toSpawn = wave;
+        GameObject.Find("GameManager").GetComponent<GameManager>().remainingSpawn = toSpawn;
     }
 
-
+    
 
     void Update()
     {
@@ -55,12 +60,51 @@ public class slimeSpawner : MonoBehaviour
         {
             onceLAZER = false;
             StartCoroutine(LAZERscan());
+
+
         }
 
         int pointcount = Mathf.FloorToInt((finishXYpos.y - startXYpos.y) / LAZERNODEdetail.y) * Mathf.FloorToInt((finishXYpos.x - startXYpos.x) / LAZERNODEdetail.x);
 
         if (ValidPositionsFIRE.Count + ValidPositionsICE.Count + ValidPositionsNORMAL.Count + InvalidPositions.Count + TempInvalidFIRE.Count + TempInvalidICE.Count + TempInvalidNORMAL.Count == pointcount && isSpawning == true)
         {
+            if (onceRAD == true)
+            {
+                onceRAD = false;
+                //initial calculations
+
+                for (int i = 0; i < ValidPositionsFIRE.Count; i++)
+                {
+                    float temp = Mathf.Sqrt(((Mathf.Pow(ValidPositionsFIRE[i].x - diffCentreXY.x, 2)) + (Mathf.Pow(ValidPositionsFIRE[i].z - diffCentreXY.y, 2))));
+                    ValidPositionsFIRE[i] = new Vector4(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z, temp);
+
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsFIRE[i].x, ValidPositionsFIRE[i].y, ValidPositionsFIRE[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsFIRE[i].w), 0.1f);
+                }
+                for (int i = 0; i < ValidPositionsICE.Count; i++)
+                {
+                    float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsICE[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsICE[i].z - diffCentreXY.y, 2)));
+                    ValidPositionsICE[i] = new Vector4(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z, temp);
+
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsICE[i].x, ValidPositionsICE[i].y, ValidPositionsICE[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsICE[i].w), 0.1f);
+                }
+                for (int i = 0; i < ValidPositionsNORMAL.Count; i++)
+                {
+                    float temp = Mathf.Sqrt((Mathf.Pow(ValidPositionsNORMAL[i].x - diffCentreXY.x, 2) + Mathf.Pow(ValidPositionsNORMAL[i].z - diffCentreXY.y, 2)));
+                    ValidPositionsNORMAL[i] = new Vector4(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z, temp);
+
+                    GameObject test = Instantiate(radtest, new Vector3(ValidPositionsNORMAL[i].x, ValidPositionsNORMAL[i].y, ValidPositionsNORMAL[i].z), Quaternion.identity);
+                    test.transform.localScale = new Vector3(0.1f, (ValidPositionsNORMAL[i].w), 0.1f);
+                }
+                for (int i = 0; i < InvalidPositions.Count; i++)
+                {
+                    float temp = Mathf.Sqrt((Mathf.Pow(InvalidPositions[i].x, 2) + Mathf.Pow(InvalidPositions[i].z, 2)));
+                    InvalidPositions[i] = new Vector4(InvalidPositions[i].x, InvalidPositions[i].y, InvalidPositions[i].z, temp);
+                }
+
+
+            }
 
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -76,6 +120,7 @@ public class slimeSpawner : MonoBehaviour
                     {
                         if (ValidPositionsFIRE[j].z > minXY.y && ValidPositionsFIRE[j].z < maxXY.y)
                         {
+                            Debug.Log("chnage");
                             TempInvalidFIRE.Add(ValidPositionsFIRE[j]);
                             ValidPositionsFIRE.RemoveAt(j);
                             j--;
@@ -128,7 +173,7 @@ public class slimeSpawner : MonoBehaviour
                 }
                 if (timer <= stage1timer)
                 {
-                      
+
                     //spawn 75%
 
                 }
@@ -171,6 +216,7 @@ public class slimeSpawner : MonoBehaviour
             //reset valid positions
             for (int i = 0; i < TempInvalidFIRE.Count; i++)
             {
+                Debug.Log("fire chnage"); 
                 ValidPositionsFIRE.Add(TempInvalidFIRE[i]);
                 TempInvalidFIRE.RemoveAt(i);
                 i--;
