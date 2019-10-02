@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -13,9 +14,14 @@ public class GameManager : MonoBehaviour
 
     GameObject[] players;
 
+    private bool gameoverLock;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        gameoverLock = false;
+
         players = GameObject.FindGameObjectsWithTag("Player");
 
         if (players.Length <= 0)
@@ -39,7 +45,10 @@ public class GameManager : MonoBehaviour
         if (gameover)
         {
             Debug.Log("GAMEOVER");
-            StartCoroutine(returnToMain());
+            if (!gameoverLock)
+            {
+                StartCoroutine(returnToMain());
+            }
         }
 
         if (remainingSpawn == 0 && !gameover) // no slimes left (need to manage that here)
@@ -78,6 +87,8 @@ public class GameManager : MonoBehaviour
     //Returns to main menu
     IEnumerator returnToMain()
     {
+        gameoverLock = true;
+
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("MainMenu");
     }
