@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public float grace = 5.0f;
     public float gracetimer;
     public bool gameover;
+    public int currentWave = 1;
 
 
     GameObject[] players;
@@ -57,9 +58,8 @@ public class GameManager : MonoBehaviour
             if (gracetimer <= 0.0f)
             {
                 gracetimer = grace;
-                GameObject.Find("GameManager").GetComponent<slimeSpawner>().timer = 0.0f;
-                GameObject.Find("GameManager").GetComponent<slimeSpawner>().isSpawning = true;
-                GameObject.Find("GameManager").GetComponent<slimeSpawner>().onceSpawnng = true;
+                currentWave++;
+                GetComponent<slimeSpawner>().NextWave(currentWave);
             }
         }
     }
