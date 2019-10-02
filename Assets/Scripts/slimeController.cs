@@ -46,6 +46,13 @@ public class slimeController : MonoBehaviour
             StartCoroutine(SwingInTheAir());
         }
 
+        //Kill floor
+
+        if (transform.position.y < -10)
+        {
+            health -= 999.0f;
+        }
+
     }
 
     IEnumerator SwingInTheAir()
