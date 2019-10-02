@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<BoxCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
+            if (transform.position.y < -10) { health -= 9999; }
+            
             //AIMMING
             Vector3 aimVec = new Vector3(0, 0, 0);
             aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
