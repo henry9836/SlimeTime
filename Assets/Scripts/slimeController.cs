@@ -38,6 +38,7 @@ public class slimeController : MonoBehaviour
     {
         if (health <= 0)
         {
+            GameObject.Find("GameManager").GetComponent<GameManager>().SlimeKilled();
             Destroy(this.gameObject);
         }
 
