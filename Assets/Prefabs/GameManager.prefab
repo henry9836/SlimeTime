@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6525390337991096898}
   - component: {fileID: 2223859101471872379}
   - component: {fileID: 1222309611}
+  - component: {fileID: 1492874201}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4999512730116933380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2886479, y: 2.884481, z: 9.503926}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2.4711}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,9 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainingSpawn: 0
-  grace: 5
+  grace: 10
   gracetimer: 0
   gameover: 0
+  currentWave: 1
 --- !u!114 &2223859101471872379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,29 +64,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  slimeHP: 
-  persentgaes: []
   slimePrefab:
   - {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d, type: 3}
   - {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d, type: 3}
   - {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d, type: 3}
-  toSpawn: 20
+  toSpawn: 0
   haveSpawn: 0
-  isSpawning: 1
+  isSpawning: 0
   radtest: {fileID: 5057357899373674027, guid: c400b2b8244cff44a8a03676ddf9a75e, type: 3}
+  radTest: 0
+  isdone: 0
   stage1time: 10
   stage1timer: 0
-  stage2time: 20
+  stage2time: 10
   stage2timer: 0
   onceSpawnng: 1
   LAZERNODEprefab: {fileID: 5527494301343044635, guid: 2e350f23221f7cc49a6f39e9f6bfcf43,
     type: 3}
   LAZERNODEheight: 10
-  LAZERNODEdetail: {x: 0.1, y: 0.1}
-  startXYpos: {x: 0, y: 0}
-  finishXYpos: {x: 10, y: 10}
+  LAZERNODEdetail: {x: 1, y: 1}
+  startXYpos: {x: -80, y: -80}
+  finishXYpos: {x: 80, y: 80}
   diffCentreXY: {x: 0, y: 0}
-  spawnSaftyXY: {x: 10, y: 10}
+  spawnSaftyXY: {x: 20, y: 0, z: 20}
   ValidPositionsFIRE: []
   ValidPositionsICE: []
   ValidPositionsNORMAL: []
@@ -112,3 +114,22 @@ MonoBehaviour:
   isSwitching: 0
   isRespawning: 0
   fadeTimeCur: 0
+--- !u!114 &1492874201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999512730116933380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82873704b9ce54f4480a055f873970ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  spanwRate: 5
+  spawnRateModifier: 0.95
+  powerups:
+  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
+  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
+  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
