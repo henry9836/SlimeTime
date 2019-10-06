@@ -766,11 +766,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4999512730116933380, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 209072563657535714, guid: 1da96de4e1c32e94d876799d524fa1f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -826,129 +821,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 209072563657535714, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.4711
-      objectReference: {fileID: 0}
     - target: {fileID: 6525390337991096898, guid: 1da96de4e1c32e94d876799d524fa1f4,
         type: 3}
       propertyPath: currentWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6525390337991096898, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: grace
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: slimePrefab.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: radtest
-      value: 
-      objectReference: {fileID: 5057357899373674027, guid: c400b2b8244cff44a8a03676ddf9a75e,
-        type: 3}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: startXYpos.x
-      value: -80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: startXYpos.y
-      value: -80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: LAZERNODEdetail.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: LAZERNODEdetail.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: diffCentreXY.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: diffCentreXY.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: toSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: stage1time
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: stage2time
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: slimePrefab.Array.data[0]
-      value: 
-      objectReference: {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d,
-        type: 3}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: slimePrefab.Array.data[1]
-      value: 
-      objectReference: {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d,
-        type: 3}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: slimePrefab.Array.data[2]
-      value: 
-      objectReference: {fileID: 248048381494170169, guid: f4d2febb44f9dc243a72fba4fe6a855d,
-        type: 3}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: finishXYpos.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: finishXYpos.x
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: isSpawning
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: radTest
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: spawnSaftyXY.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: spawnSaftyXY.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
-        type: 3}
-      propertyPath: spawnSaftyXY.z
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da96de4e1c32e94d876799d524fa1f4, type: 3}
