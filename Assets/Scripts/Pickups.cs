@@ -7,6 +7,7 @@ public class Pickups : MonoBehaviour
     public float timer;
     public float spanwRate;
     public float spawnRateModifier;
+    public float maxSpawnRate;
     public List<GameObject> powerups;
     public bool startdelay = false;
     public float startdelaytime;
@@ -32,7 +33,14 @@ public class Pickups : MonoBehaviour
 
         if (timer >= spanwRate && startdelay == true)
         {
-            spanwRate *= spawnRateModifier;
+            if (spanwRate <= maxSpawnRate)
+            {
+                spanwRate = maxSpawnRate;
+            }
+            else
+            {
+                spanwRate *= spawnRateModifier;
+            }
             timer = 0.0f;
 
             int tospawn = Random.Range(0, (sizeof(POWERUPS) - 1));

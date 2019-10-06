@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 428157292}
   - component: {fileID: 428157291}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: W
   m_TagString: FIRE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

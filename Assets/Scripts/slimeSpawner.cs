@@ -314,8 +314,53 @@ public class slimeSpawner : MonoBehaviour
 
     public IEnumerator Spawnpowerup(Pickups.POWERUPS temp)
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        Debug.Log(temp);
+        for (int i = 0; i < players.Length; i++)
+        {
+            Vector3 position = players[i].gameObject.transform.localPosition;
+            Vector3 maxXY = position + (spawnSaftyXY / 2);
+            Vector3 minXY = position - (spawnSaftyXY / 2);
+
+            for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+            {
+                if (ValidPositionsFIRE[j].x > minXY.x && ValidPositionsFIRE[j].x < maxXY.x)
+                {
+                    if (ValidPositionsFIRE[j].z > minXY.z && ValidPositionsFIRE[j].z < maxXY.z)
+                    {
+                        TempInvalidFIRE.Add(ValidPositionsFIRE[j]);
+                        ValidPositionsFIRE.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+            for (int j = 0; j < ValidPositionsICE.Count; j++)
+            {
+                if (ValidPositionsICE[j].x > minXY.x && ValidPositionsICE[j].x < maxXY.x)
+                {
+                    if (ValidPositionsICE[j].z > minXY.z && ValidPositionsICE[j].z < maxXY.z)
+                    {
+                        TempInvalidICE.Add(ValidPositionsICE[j]);
+                        ValidPositionsICE.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+            for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+            {
+                if (ValidPositionsNORMAL[j].x > minXY.x && ValidPositionsNORMAL[j].x < maxXY.x)
+                {
+                    if (ValidPositionsNORMAL[j].z > minXY.z && ValidPositionsNORMAL[j].z < maxXY.z)
+                    {
+                        TempInvalidNORMAL.Add(ValidPositionsNORMAL[j]);
+                        ValidPositionsNORMAL.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+        }
+
+
         float spawnPosRad = 0.0f;
         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
         {
