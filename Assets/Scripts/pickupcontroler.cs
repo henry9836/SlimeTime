@@ -6,7 +6,7 @@ public class pickupcontroler : MonoBehaviour
 {
     public float lifetime = 30.0f;
     private bool once = true;
-    //public enum type = GameObject.Find("GameManager").GetComponent<Pickups>().POWERUPS;
+    public Pickups.POWERUPS type;
 
     void FixedUpdate()
     {

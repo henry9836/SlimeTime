@@ -286,10 +286,7 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-
                 Instantiate(slimePrefab[0], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
-
-
             }
         }
         for (int j = 0; j < ValidPositionsICE.Count; j++)
@@ -298,10 +295,7 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-
                 Instantiate(slimePrefab[1], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
-
-
             }
         }
         for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
@@ -310,13 +304,13 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-
                 Instantiate(slimePrefab[2], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
-
             }
         }
         yield return null;
     }
+
+
 
     public IEnumerator Spawnpowerup(Pickups.POWERUPS temp)
     {
@@ -344,7 +338,8 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power =  Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
             }
         }
         for (int j = 0; j < ValidPositionsICE.Count; j++)
@@ -353,7 +348,8 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
             }
         }
         for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
@@ -362,7 +358,8 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
             }
         }
         yield return null;
