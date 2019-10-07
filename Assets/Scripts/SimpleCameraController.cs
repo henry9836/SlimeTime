@@ -108,7 +108,6 @@ namespace UnityTemplateProjects
         
         void Update()
         {
-            // Exit Sample  
 
             if (Input.GetKey(KeyCode.Escape))
             {
