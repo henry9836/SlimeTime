@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class LAZERNODE : MonoBehaviour
 {
-    public List<Vector3> ValidPositionFIRE = new List<Vector3>();
-    public List<Vector3> ValidPositionICE = new List<Vector3>();
-    public List<Vector3> ValidPositionNORMAL = new List<Vector3>();
-    public List<Vector3> InvalidPosition = new List<Vector3>();
+    public List<Vector4> ValidPositionFIRE = new List<Vector4>();
+    public List<Vector4> ValidPositionICE = new List<Vector4>();
+    public List<Vector4> ValidPositionNORMAL = new List<Vector4>();
+    public List<Vector4> InvalidPosition = new List<Vector4>();
 
     public Vector2 startXYpos;
     public Vector2 finXYpos;
@@ -58,23 +58,23 @@ public class LAZERNODE : MonoBehaviour
 
             GetComponent<LineRenderer>().SetPositions(points);
             GetComponent<LineRenderer>().enabled = true;
+
             if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity))
             {
 
                 if (hit.collider.tag == "FIRE")
                 {
-
-                    ValidPositionFIRE.Add(hit.transform.position);
+                    ValidPositionFIRE.Add(hit.point);
                 }
                 else if (hit.collider.tag == "ICE")
                 {
 
-                    ValidPositionICE.Add(hit.transform.position);
+                    ValidPositionICE.Add(hit.point);
                 }
                 else if (hit.collider.tag == "NORMAL")
                 {
 
-                    ValidPositionNORMAL.Add(hit.transform.position);
+                    ValidPositionNORMAL.Add(hit.point);
                 }
                 else
                 {
@@ -87,8 +87,6 @@ public class LAZERNODE : MonoBehaviour
             {
                 InvalidPosition.Add(new Vector3(this.gameObject.transform.position.x, 0.0f, this.gameObject.transform.position.z));
             }
-            //GetComponent<LineRenderer>().enabled = false;
-            //yield return null;
             yield return new WaitForSeconds(0.01f);
 
             transform.localPosition += new Vector3(LAZERNODEdetail.x, 0.0f, 0.0f);
