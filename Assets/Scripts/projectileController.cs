@@ -12,13 +12,12 @@ public class projectileController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag != "Player")
+        if (other.tag != "Player" && other.tag != "BULLETIGNORE")
         {
 
             if (other.tag == "Slime")
             {
-                other.GetComponent<slimeController>().DamageSlime(damage, travelDir);
-
+                other.transform.parent.GetComponent<slimeController>().DamageSlime(damage, travelDir);
             }
 
             Destroy(this.gameObject);

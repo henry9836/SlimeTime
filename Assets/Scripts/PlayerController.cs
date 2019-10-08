@@ -22,12 +22,16 @@ public class PlayerController : MonoBehaviour
     public float aimDistance = 1.0f;
     public float health = 100.0f;
 
+    public int pickupAmmoCount = 0;
+
     public GameObject baseProjectile;
-    public GameObject pickupSlot;
+    public GameObject playerMesh;
+
+    public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
 
     private bool canFire = true;
     private Vector3 aimVec;
-    private Vector3 lastAimVec;
+    public Vector3 lastAimVec;
     private GameObject aimIndicator;
 
     void Start()
@@ -52,74 +56,108 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //AIMMING
-        Vector3 aimVec = new Vector3(0, 0, 0);
-        aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
-
-        float x = Mathf.Sqrt((aimVec.x * aimVec.x) + (aimVec.z * aimVec.z));
-        x = 1 / x;
-        aimVec = new Vector3(aimVec.x * x, aimVec.y, aimVec.z * x);
-
-       // Debug.Log(aimVec);
-        
-        //Check for NaN
-        if (float.IsNaN(aimVec.x) || float.IsNaN(aimVec.z))
+        //ALIVE
+        if (health > 0)
         {
-            aimVec = Vector3.zero;
+            playerMesh.GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<CapsuleCollider>().enabled = true;
+            GetComponent<Rigidbody>().useGravity = true;
+            
+            //AIMMING
+            Vector3 aimVec = new Vector3(0, 0, 0);
+            aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
+
+            float x = Mathf.Sqrt((aimVec.x * aimVec.x) + (aimVec.z * aimVec.z));
+            x = 1 / x;
+            aimVec = new Vector3(aimVec.x * x, aimVec.y, aimVec.z * x);
+
+            // Debug.Log(aimVec);
+
+            //Check for NaN
+            if (float.IsNaN(aimVec.x) || float.IsNaN(aimVec.z))
+            {
+                aimVec = Vector3.zero;
+            }
+            else
+            {
+                lastAimVec = aimVec;
+            }
+
+            //aimIndicator.transform.localPosition = aimVec * aimDistance;
+            transform.LookAt(transform.position + (lastAimVec * 100.0f));
+            //SHOOTING
+
+            if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT"))
+            {
+
+                Debug.Log("Shoot");
+                //If we have a pickup (pickup does cooldown)
+                if (powerupType != Pickups.POWERUPS.NULL)
+                {
+                    if (pickupAmmoCount > 0)
+                    {
+                        GetComponent<PewPlayerMechanic>().pew(powerupType, gameObject);
+                    }
+                    else
+                    {
+                        powerupType = Pickups.POWERUPS.NULL; //Unassign powerup since we have run out of ammo and then use normal weapon
+                    }
+                }
+                if (canFire)
+                {
+                    StartCoroutine(coolDown());
+                    //If we do not have a pickup
+                    if (powerupType == Pickups.POWERUPS.NULL)
+                    {
+                        GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
+                        refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
+                        refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
+                        refer.GetComponent<projectileController>().travelDir = lastAimVec;
+                    }
+                    
+                }
+            }
+
+            //MOVEMENT
+
+            Vector3 movementVec = new Vector3(0, 0, 0);
+
+            if (Input.GetAxisRaw("P" + (int)playerType + "VERT") != 0)
+            {
+                //movementVec += transform.forward * -Input.GetAxisRaw("P" + (int)playerType + "VERT");
+                movementVec += Vector3.forward * -Input.GetAxisRaw("P" + (int)playerType + "VERT");
+            }
+
+            if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") != 0)
+            {
+                //movementVec += transform.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
+                movementVec += Vector3.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
+            }
+
+            if (GetComponent<Rigidbody>().velocity.magnitude < maxSpeed)
+            {
+                GetComponent<Rigidbody>().AddForce(movementVec * speed);
+            }
         }
         else
         {
-            lastAimVec = aimVec;
-        }
+            playerMesh.GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
-        //aimIndicator.transform.localPosition = aimVec * aimDistance;
-        transform.LookAt(transform.position + (aimVec * 100.0f));
-        //SHOOTING
-
-        if (Input.GetAxisRaw("P"+(int)playerType+"SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT"))
-        {
-
-            Debug.Log("Shoot");
-            if (canFire)
+            if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
             {
-                StartCoroutine(coolDown());
-                //If we do not have a pickup
-                if (pickupSlot == null)
-                {
-                    GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
-                    refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
-                    refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
-                    refer.GetComponent<projectileController>().travelDir = lastAimVec;
-                }
-                //If we have a pickup
-                else
-                {
-
-                }
+                health = 100;
+                transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
             }
         }
 
-        //MOVEMENT
-
-        Vector3 movementVec = new Vector3(0, 0, 0);
-
-        if (Input.GetAxisRaw("P" + (int)playerType + "VERT") != 0)
+        if (transform.position.y <= -10)
         {
-            //movementVec += transform.forward * -Input.GetAxisRaw("P" + (int)playerType + "VERT");
-            movementVec += Vector3.forward * -Input.GetAxisRaw("P" + (int)playerType + "VERT");
+            transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
         }
-
-        if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") != 0)
-        {
-            //movementVec += transform.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
-            movementVec += Vector3.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
-        }
-
-        if (GetComponent<Rigidbody>().velocity.magnitude < maxSpeed)
-        {
-            GetComponent<Rigidbody>().AddForce(movementVec * speed);
-        }
-
     }
 
     IEnumerator coolDown()
