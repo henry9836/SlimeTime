@@ -56,10 +56,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
+
         //ALIVE
         if (health > 0)
         {
-            playerMesh.GetComponent<MeshRenderer>().enabled = true;
+            playerMesh.SetActive(true);
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
             
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            playerMesh.GetComponent<MeshRenderer>().enabled = false;
+            playerMesh.SetActive(false);
             GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
