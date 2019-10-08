@@ -17,11 +17,13 @@ public class slimeController : MonoBehaviour
     public float damageEffectMultiplyer = 1.0f;
     public float attackDamage = 1.0f;
     public float attackCooldown = 3.0f;
-    public float attackRange = 1.0f;
     public float attackEffectMultiplyer = 100.0f;
+    public float jumpCooldown = 1.0f;
 
     private bool canAttack = true;
-    private bool tmpAttack = false;
+    private bool attacking = false;
+    private bool jumpLock = false;
+    private Collider detectionSphere;
 
     public void DamageSlime(float damage, Vector3 hitDir)
     {
@@ -31,7 +33,20 @@ public class slimeController : MonoBehaviour
 
     private void Start()
     {
+        jumpLock = false;
         canAttack = true;
+        detectionSphere = transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player" && GetComponent<Rigidbody>().velocity.y == 0 && !attacking && !jumpLock)
+        {
+            GetComponent<LaunchController>().Launch(other.transform.position);
+            StartCoroutine(Attack());
+            attacking = false;
+            StartCoroutine(JumpCooldown());
+        }
     }
 
     private void FixedUpdate()
@@ -42,9 +57,13 @@ public class slimeController : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (canAttack)
+        //Attacking Logic
+        if (attacking)
         {
-            StartCoroutine(SwingInTheAir());
+            if (GetComponent<Rigidbody>().velocity.y == 0)
+            {
+                attacking = false;
+            }
         }
 
         //Kill floor
@@ -56,30 +75,17 @@ public class slimeController : MonoBehaviour
 
     }
 
-    IEnumerator SwingInTheAir()
+    public IEnumerator Attack()
     {
-        canAttack = false;
-        tmpAttack = false;
-        //Check for player
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
-        for (int i =0; i < hitColliders.Length; i++)
-        {
-            if (hitColliders[i].gameObject.tag == "Player")
-            {
-                hitColliders[i].gameObject.GetComponent<PlayerController>().health -= attackDamage;
-                hitColliders[i].gameObject.GetComponent<Rigidbody>().AddForce(((hitColliders[i].gameObject.transform.position - this.transform.position).normalized * attackDamage) * attackEffectMultiplyer);
-                Debug.Log("HIT! " + hitColliders[i].gameObject.name);
-                tmpAttack = true;
-            }
-            i++;
-        }
-
-        if (tmpAttack)
-        {
-            yield return new WaitForSeconds(attackCooldown);
-        }
+        attacking = true;
         yield return null;
-        canAttack = true;
+    }
+    
+    IEnumerator JumpCooldown()
+    {
+        jumpLock = true;
+        yield return new WaitForSeconds(jumpCooldown);
+        jumpLock = false;
     }
 
 }
