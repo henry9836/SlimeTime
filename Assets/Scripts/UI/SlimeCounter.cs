@@ -17,6 +17,12 @@ public class SlimeCounter : MonoBehaviour
 
     void Start()
     {
+
+        if (gameManagerObject == null)
+        {
+            gameManagerObject = GameObject.Find("GameManager");
+        }
+
         if (gameManagerObject != null)
         {
             isNull = false;
