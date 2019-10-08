@@ -7,6 +7,7 @@ public class PewPlayerMechanic : MonoBehaviour
 
     private GameObject playerRef;
     private float burstCoolDownTime = 0.1f;
+    private float dashCoolDownTime = 0.5f;
 
     private bool canFire = true;
 
@@ -19,14 +20,18 @@ public class PewPlayerMechanic : MonoBehaviour
 
         if (powerup == Pickups.POWERUPS.DASH)
         {
-            playerRef.GetComponent<Rigidbody>().AddForce(playerRef.transform.forward * 1000);
-            playerRef.GetComponent<PlayerController>().pickupAmmoCount--;
+            if (canFire)
+            {
+                playerRef.GetComponent<Rigidbody>().AddForce(playerRef.transform.forward * 1000);
+                playerRef.GetComponent<PlayerController>().pickupAmmoCount--;
+
+                StartCoroutine(dashCoolDown());
+            }
         }
         else if (powerup == Pickups.POWERUPS.SPRAY)
         {
             if (canFire)
             {
-                Debug.Log("PEW2");
                 GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
                 refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
                 refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
@@ -39,6 +44,13 @@ public class PewPlayerMechanic : MonoBehaviour
     }
 
     IEnumerator burstCoolDown()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(burstCoolDownTime);
+        canFire = true;
+    }
+
+    IEnumerator dashCoolDown()
     {
         canFire = false;
         yield return new WaitForSeconds(burstCoolDownTime);
