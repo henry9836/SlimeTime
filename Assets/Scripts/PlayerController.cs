@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject baseProjectile;
     public GameObject pickupSlot;
+    public GameObject playerMesh;
 
     public Pickups.POWERUPS powerupType;
 
@@ -57,8 +58,8 @@ public class PlayerController : MonoBehaviour
         //ALIVE
         if (health > 0)
         {
-            GetComponent<MeshRenderer>().enabled = true;
-            GetComponent<BoxCollider>().enabled = true;
+            playerMesh.GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
             
             //AIMMING
@@ -131,8 +132,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            playerMesh.GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
