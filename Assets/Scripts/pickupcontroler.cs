@@ -10,11 +10,31 @@ public class pickupcontroler : MonoBehaviour
     public Pickups.POWERUPS type;
     public float amplitudeRate;
     private float landingypos;
-
+    private int ammoCount = 3;
 
     void Start()
     {
         lifetime = lifetimeStart;
+
+        //Set ammo counts
+        if (type == Pickups.POWERUPS.NULL)
+        {
+            Debug.LogWarning("Pickup has type NULL assigned: " + name);
+        }
+        else if (type == Pickups.POWERUPS.DASH)
+        {
+            ammoCount = 3;
+        }
+        else if (type == Pickups.POWERUPS.SPRAY)
+        {
+            ammoCount = 100;
+        }
+        else
+        {
+            Debug.LogWarning("Pickup has an unknown type assigned: " + type + " Object: " + name);
+        }
+
+
     }
     void FixedUpdate()
     {
@@ -28,12 +48,12 @@ public class pickupcontroler : MonoBehaviour
         }
     }
 
-
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerController>().powerupType = type;
+            collision.gameObject.GetComponent<PlayerController>().pickupAmmoCount = ammoCount;
             StartCoroutine(despawn());
 
         }
@@ -51,7 +71,6 @@ public class pickupcontroler : MonoBehaviour
 
     IEnumerator despawn()
     {
-
         Destroy(this.gameObject);
         yield return null;
     }

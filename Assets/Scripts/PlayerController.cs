@@ -22,15 +22,16 @@ public class PlayerController : MonoBehaviour
     public float aimDistance = 1.0f;
     public float health = 100.0f;
 
+    public int pickupAmmoCount = 0;
+
     public GameObject baseProjectile;
-    public GameObject pickupSlot;
     public GameObject playerMesh;
 
-    public Pickups.POWERUPS powerupType;
+    public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
 
     private bool canFire = true;
     private Vector3 aimVec;
-    private Vector3 lastAimVec;
+    public Vector3 lastAimVec;
     private GameObject aimIndicator;
 
     void Start()
@@ -90,22 +91,30 @@ public class PlayerController : MonoBehaviour
             {
 
                 Debug.Log("Shoot");
+                //If we have a pickup (pickup does cooldown)
+                if (powerupType != Pickups.POWERUPS.NULL)
+                {
+                    if (pickupAmmoCount > 0)
+                    {
+                        GetComponent<PewPlayerMechanic>().pew(powerupType, gameObject);
+                    }
+                    else
+                    {
+                        powerupType = Pickups.POWERUPS.NULL; //Unassign powerup since we have run out of ammo and then use normal weapon
+                    }
+                }
                 if (canFire)
                 {
                     StartCoroutine(coolDown());
                     //If we do not have a pickup
-                    if (pickupSlot == null)
+                    if (powerupType == Pickups.POWERUPS.NULL)
                     {
                         GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;
                     }
-                    //If we have a pickup
-                    else
-                    {
-                        GameObject.Find("GameManager").GetComponent<Pickups>().pew(powerupType);
-                    }
+                    
                 }
             }
 

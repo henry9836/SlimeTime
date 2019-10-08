@@ -15,9 +15,15 @@ public class Pickups : MonoBehaviour
 
     public enum POWERUPS
     {
-        test,
-        test2, 
-        pizzatime,
+        NULL,
+        HEAL,
+        FREEZE,
+        BOMB,
+        LASER,
+        SPRAY,
+        HOMING,
+        DASH,
+        TORNADO
 
     }
 
@@ -50,12 +56,4 @@ public class Pickups : MonoBehaviour
         }
     }
 
-
-    public void pew(POWERUPS temp)
-    {
-        if (temp == POWERUPS.test)
-        {
-            //put stuff here
-        }
-    }
 }
