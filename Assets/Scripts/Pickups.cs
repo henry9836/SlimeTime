@@ -15,9 +15,15 @@ public class Pickups : MonoBehaviour
 
     public enum POWERUPS
     {
-        test,
-        test2, 
-        pizzatime,
+        NULL,
+        HEAL,
+        FREEZE,
+        BOMB,
+        LASER,
+        SPRAY,
+        HOMING,
+        DASH,
+        TORNADO
 
     }
 
@@ -43,19 +49,10 @@ public class Pickups : MonoBehaviour
             }
             timer = 0.0f;
 
-            int tospawn = Random.Range(0, (sizeof(POWERUPS) - 1));
-
+            int tospawn = Random.Range(1, (sizeof(POWERUPS) - 1));
 
             StartCoroutine(GetComponent<slimeSpawner>().Spawnpowerup((POWERUPS)tospawn));
         }
     }
 
-
-    public void pew(POWERUPS temp)
-    {
-        if (temp == POWERUPS.test)
-        {
-            //put stuff here
-        }
-    }
 }

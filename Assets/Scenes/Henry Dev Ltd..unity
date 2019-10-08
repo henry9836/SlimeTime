@@ -856,6 +856,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2223859101471872379, guid: 1da96de4e1c32e94d876799d524fa1f4,
+        type: 3}
+      propertyPath: toSpawn
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525390337991096898, guid: 1da96de4e1c32e94d876799d524fa1f4,
+        type: 3}
+      propertyPath: currentWave
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1222309611, guid: 1da96de4e1c32e94d876799d524fa1f4, type: 3}
       propertyPath: fadePanel
       value: 

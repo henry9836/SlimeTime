@@ -34,8 +34,11 @@ public class SceneSwitcher : MonoBehaviour {
 
         }
 
-        
-
+        if (fadePanel == null)
+        {
+            fadePanel = GameObject.Find("SceneFader");
+        }
+            
         isFading = true;
         fadeTimeCur = fadeTime;
         fadePanel.SetActive(true);
