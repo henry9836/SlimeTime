@@ -13,6 +13,7 @@ public class SlimeCounter : MonoBehaviour
     private GameManager gameManager;
 
     private bool isNull = true;
+    private string textBefore = "00";
 
     void Start()
     {
@@ -28,12 +29,26 @@ public class SlimeCounter : MonoBehaviour
     {
         if (!isNull)
         {
-            countText.text = gameManager.remainingSpawn.ToString();
+            countText.text = gameManager.remainingSpawn.ToString("000");
         }
         else
         {
             Debug.Log("Game Manager not found. Cannot display slime count.");
-            countText.text = "00";
+            countText.text = "000";
         }
+
+        if (Input.GetKeyDown(KeyCode.T) || textBefore != countText.text)
+        {
+            Shake();
+        }
+
+
+        textBefore = countText.text;
+    }
+
+    public void Shake()
+    {
+        mainPanel.transform.DOKill(true);
+        mainPanel.transform.DOPunchPosition(new Vector3(0f, -12f, 0f), 0.25f, 3, 0.5f, false);
     }
 }
