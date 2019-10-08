@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //aimIndicator.transform.localPosition = aimVec * aimDistance;
-            transform.LookAt(transform.position + (aimVec * 100.0f));
+            transform.LookAt(transform.position + (lastAimVec * 100.0f));
             //SHOOTING
 
             if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT"))
