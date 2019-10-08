@@ -377,10 +377,11 @@ public class slimeSpawner : MonoBehaviour
 
         spawnPosRad = Random.Range(0.0f, spawnPosRad);
 
+       
         Debug.Log(GetComponent<Pickups>().powerups[0]);
         Debug.Log(GetComponent<Pickups>().powerups[(int)temp]);
 
-        for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+        for (int j = 0; j < ValidPositionsFIRE.Count - 1; j++)
         {
             spawnPosRad -= ValidPositionsFIRE[j].w;
             if (spawnPosRad <= 0.0f)
@@ -390,23 +391,23 @@ public class slimeSpawner : MonoBehaviour
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
-        for (int j = 0; j < ValidPositionsICE.Count; j++)
+        for (int j = 0; j < ValidPositionsICE.Count - 1; j++)
         {
             spawnPosRad -= ValidPositionsICE[j].w;
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
-        for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+        for (int j = 0; j < ValidPositionsNORMAL.Count - 1; j++)
         {
             spawnPosRad -= ValidPositionsNORMAL[j].w;
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
