@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public GameObject baseProjectile;
     public GameObject pickupSlot;
 
+    public Pickups.POWERUPS powerupType;
+
     private bool canFire = true;
     private Vector3 aimVec;
     private Vector3 lastAimVec;

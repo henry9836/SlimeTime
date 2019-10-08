@@ -129,7 +129,6 @@ public class slimeSpawner : MonoBehaviour
                 Vector3 position = players[i].gameObject.transform.localPosition;
                 Vector3 maxXY = position + (spawnSaftyXY / 2);
                 Vector3 minXY = position - (spawnSaftyXY / 2);
-                Debug.Log("max: " + maxXY + "min: " + minXY);
 
                 for (int j = 0; j < ValidPositionsFIRE.Count; j++)
                 {
@@ -262,10 +261,8 @@ public class slimeSpawner : MonoBehaviour
     }
 
 
-    IEnumerator Spawn()
+    public IEnumerator Spawn()
     {
-
-
         haveSpawn += 1;
         float spawnPosRad = 0.0f;
         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
@@ -299,7 +296,6 @@ public class slimeSpawner : MonoBehaviour
             {
                 spawnPosRad = Mathf.Infinity;
                 Instantiate(slimePrefab[1], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
-
             }
         }
         for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
@@ -309,6 +305,106 @@ public class slimeSpawner : MonoBehaviour
             {
                 spawnPosRad = Mathf.Infinity;
                 Instantiate(slimePrefab[2], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
+            }
+        }
+        yield return null;
+    }
+
+
+
+    public IEnumerator Spawnpowerup(Pickups.POWERUPS temp)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            Vector3 position = players[i].gameObject.transform.localPosition;
+            Vector3 maxXY = position + (spawnSaftyXY / 2);
+            Vector3 minXY = position - (spawnSaftyXY / 2);
+
+            for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+            {
+                if (ValidPositionsFIRE[j].x > minXY.x && ValidPositionsFIRE[j].x < maxXY.x)
+                {
+                    if (ValidPositionsFIRE[j].z > minXY.z && ValidPositionsFIRE[j].z < maxXY.z)
+                    {
+                        TempInvalidFIRE.Add(ValidPositionsFIRE[j]);
+                        ValidPositionsFIRE.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+            for (int j = 0; j < ValidPositionsICE.Count; j++)
+            {
+                if (ValidPositionsICE[j].x > minXY.x && ValidPositionsICE[j].x < maxXY.x)
+                {
+                    if (ValidPositionsICE[j].z > minXY.z && ValidPositionsICE[j].z < maxXY.z)
+                    {
+                        TempInvalidICE.Add(ValidPositionsICE[j]);
+                        ValidPositionsICE.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+            for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+            {
+                if (ValidPositionsNORMAL[j].x > minXY.x && ValidPositionsNORMAL[j].x < maxXY.x)
+                {
+                    if (ValidPositionsNORMAL[j].z > minXY.z && ValidPositionsNORMAL[j].z < maxXY.z)
+                    {
+                        TempInvalidNORMAL.Add(ValidPositionsNORMAL[j]);
+                        ValidPositionsNORMAL.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+        }
+
+
+        float spawnPosRad = 0.0f;
+        for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+        {
+            spawnPosRad += ValidPositionsFIRE[j].w;
+        }
+        for (int j = 0; j < ValidPositionsICE.Count; j++)
+        {
+            spawnPosRad += ValidPositionsICE[j].w;
+        }
+        for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+        {
+            spawnPosRad += ValidPositionsNORMAL[j].w;
+        }
+
+        spawnPosRad = Random.Range(0.0f, spawnPosRad);
+
+        for (int j = 0; j < ValidPositionsFIRE.Count; j++)
+        {
+            spawnPosRad -= ValidPositionsFIRE[j].w;
+            if (spawnPosRad <= 0.0f)
+            {
+                spawnPosRad = Mathf.Infinity;
+                GameObject power =  Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
+            }
+        }
+        for (int j = 0; j < ValidPositionsICE.Count; j++)
+        {
+            spawnPosRad -= ValidPositionsICE[j].w;
+            if (spawnPosRad <= 0.0f)
+            {
+                spawnPosRad = Mathf.Infinity;
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
+            }
+        }
+        for (int j = 0; j < ValidPositionsNORMAL.Count; j++)
+        {
+            spawnPosRad -= ValidPositionsNORMAL[j].w;
+            if (spawnPosRad <= 0.0f)
+            {
+                spawnPosRad = Mathf.Infinity;
+                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                power.GetComponent<pickupcontroler>().type = temp;
             }
         }
         yield return null;
