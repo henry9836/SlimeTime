@@ -377,6 +377,9 @@ public class slimeSpawner : MonoBehaviour
 
         spawnPosRad = Random.Range(0.0f, spawnPosRad);
 
+        Debug.Log(GetComponent<Pickups>().powerups[0]);
+        Debug.Log(GetComponent<Pickups>().powerups[(int)temp]);
+
         for (int j = 0; j < ValidPositionsFIRE.Count; j++)
         {
             spawnPosRad -= ValidPositionsFIRE[j].w;

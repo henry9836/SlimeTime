@@ -51,7 +51,6 @@ public class Pickups : MonoBehaviour
 
             int tospawn = Random.Range(0, (sizeof(POWERUPS) - 1));
 
-
             StartCoroutine(GetComponent<slimeSpawner>().Spawnpowerup((POWERUPS)tospawn));
         }
     }
