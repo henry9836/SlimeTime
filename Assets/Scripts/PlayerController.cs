@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<BoxCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
-            if (transform.position.y < -10) { health -= 9999; }
             
             //AIMMING
             Vector3 aimVec = new Vector3(0, 0, 0);
@@ -104,7 +103,7 @@ public class PlayerController : MonoBehaviour
                     //If we have a pickup
                     else
                     {
-
+                        GameObject.Find("GameManager").GetComponent<Pickups>().pew(powerupType);
                     }
                 }
             }
@@ -137,6 +136,17 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+            if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
+            {
+                health = 100;
+                transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
+            }
+        }
+
+        if (transform.position.y <= -10)
+        {
+            transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
         }
     }
 

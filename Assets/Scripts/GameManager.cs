@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public float gracetimer;
     public bool gameover;
     public int currentWave = 1;
+    public bool CanRespawn = false;
+    public Vector3 respawnpos; 
 
 
     GameObject[] players;
@@ -54,9 +56,11 @@ public class GameManager : MonoBehaviour
 
         if (remainingSpawn == 0 && !gameover) // no slimes left (need to manage that here)
         {
+            CanRespawn = true;
             gracetimer -= Time.deltaTime;
             if (gracetimer <= 0.0f)
             {
+                CanRespawn = false;
                 gracetimer = grace;
                 currentWave++;
                 GetComponent<slimeSpawner>().NextWave(currentWave);
