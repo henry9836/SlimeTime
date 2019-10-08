@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public GameObject baseProjectile;
     public GameObject pickupSlot;
 
+    public Pickups.POWERUPS powerupType;
+
     private bool canFire = true;
     private Vector3 aimVec;
     private Vector3 lastAimVec;
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<BoxCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
+            
             //AIMMING
             Vector3 aimVec = new Vector3(0, 0, 0);
             aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
                     //If we have a pickup
                     else
                     {
-
+                        GameObject.Find("GameManager").GetComponent<Pickups>().pew(powerupType);
                     }
                 }
             }
@@ -133,6 +136,17 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+            if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
+            {
+                health = 100;
+                transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
+            }
+        }
+
+        if (transform.position.y <= -10)
+        {
+            transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
         }
     }
 
