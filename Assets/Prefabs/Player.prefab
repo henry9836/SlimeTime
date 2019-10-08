@@ -181,7 +181,7 @@ MonoBehaviour:
   fireCoolDown: 0.2
   aimDistance: 1
   health: 100
-  baseProjectile: {fileID: 8350231639646546421, guid: 34961455c36424347bbf9643c2dbf146,
+  baseProjectile: {fileID: 6029714117361861025, guid: 8b029ddd391d88348a0b73bf25125063,
     type: 3}
   pickupSlot: {fileID: 0}
   playerMesh: {fileID: 4374058372926627561}
