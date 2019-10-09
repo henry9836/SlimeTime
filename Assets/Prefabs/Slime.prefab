@@ -186,6 +186,8 @@ MonoBehaviour:
   attackCooldown: 3
   attackEffectMultiplyer: 10
   jumpCooldown: 1
+  idleThresholdRange: {x: 2, y: 5}
+  wanderRange: 5
 --- !u!54 &8430009143113954221
 Rigidbody:
   m_ObjectHideFlags: 0
