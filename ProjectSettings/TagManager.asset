@@ -9,6 +9,7 @@ TagManager:
   - NORMAL
   - Slime
   - BULLETIGNORE
+  - DETECTIONCAST
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - RagdollIgnore
   - Ragdoll
   - Projectile
-  - 
+  - DETECTIONIDSAVULITMATE360.msi
   - 
   - 
   - 
