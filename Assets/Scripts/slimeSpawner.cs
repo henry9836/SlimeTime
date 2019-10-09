@@ -47,14 +47,33 @@ public class slimeSpawner : MonoBehaviour
 
     public void NextWave(int wave)
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        toSpawn = wave;
+        if (wave <= 4)
+        {
+            toSpawn = (24 + (6 * players.Length)) * wave / 5;
+        }
+        else if (wave <= 10)
+        {
+            toSpawn = (24 + (6 * players.Length));
+        }
+        else
+        {
+            toSpawn = Mathf.CeilToInt((wave * 0.15f) * (24 + (6 * players.Length)));
+        }
+
+
+
         onceSpawnng = true;
         timer = 0.0f;
         isSpawning = true;
-        toSpawn = wave;
         haveSpawn = 0;
         GameObject.Find("GameManager").GetComponent<GameManager>().remainingSpawn = toSpawn;
         stage1timer = 0.0f;
         stage2timer = 0.0f;
+
+
     }
 
 
