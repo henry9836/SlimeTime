@@ -655,7 +655,7 @@ MonoBehaviour:
   priority: -1
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 0904b06389a0ca142ae72fe1effad808, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 9417ddda106558844acdc3b3adb583e9, type: 2}
 --- !u!4 &917085797
 Transform:
   m_ObjectHideFlags: 0
@@ -1161,11 +1161,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
-        type: 3}
-      propertyPath: m_Name
-      value: Warrior
-      objectReference: {fileID: 0}
     - target: {fileID: 2517295350847322131, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1220,6 +1215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
+        type: 3}
+      propertyPath: m_Name
+      value: Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ae307ae345fe0a4b906a9f8cce548e6, type: 3}
@@ -1647,11 +1647,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
-        type: 3}
-      propertyPath: m_Name
-      value: Bard
-      objectReference: {fileID: 0}
     - target: {fileID: 5418757530091106217, guid: a50d191525e96044f96d263cf984e371,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1706,6 +1701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
+        type: 3}
+      propertyPath: m_Name
+      value: Bard
       objectReference: {fileID: 0}
     - target: {fileID: 1029634971493380555, guid: a50d191525e96044f96d263cf984e371,
         type: 3}
