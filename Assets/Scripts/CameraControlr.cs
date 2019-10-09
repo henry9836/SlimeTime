@@ -159,11 +159,11 @@ public class CameraControlr : MonoBehaviour
         {
             if (zoomIn && !zoomOut && !stay)
             {
-                zoom -= 0.5f;
+                zoom -= 5f * Time.deltaTime;
             }
             else if (zoomOut)
             {
-                zoom += 0.5f;
+                zoom += 5f * Time.deltaTime;
             }
         }
         

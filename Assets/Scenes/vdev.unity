@@ -279,6 +279,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4010629315631103521, guid: 39a184eee596f03448db1d71f54ab827,
+        type: 3}
+      propertyPath: playerType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1427245444034052748, guid: 39a184eee596f03448db1d71f54ab827,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -1334,7 +1339,7 @@ PrefabInstance:
     - target: {fileID: 4010629315631103549, guid: 39a184eee596f03448db1d71f54ab827,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.46
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4010629315631103549, guid: 39a184eee596f03448db1d71f54ab827,
         type: 3}
@@ -1384,7 +1389,12 @@ PrefabInstance:
     - target: {fileID: 4010629315631103521, guid: 39a184eee596f03448db1d71f54ab827,
         type: 3}
       propertyPath: playerType
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010629315631103521, guid: 39a184eee596f03448db1d71f54ab827,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 929782255738116714, guid: 39a184eee596f03448db1d71f54ab827,
         type: 3}
