@@ -186,6 +186,8 @@ MonoBehaviour:
   attackCooldown: 3
   attackEffectMultiplyer: 10
   jumpCooldown: 1
+  idleThresholdRange: {x: 2, y: 5}
+  wanderRange: 5
 --- !u!54 &8430009143113954221
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -256,11 +258,11 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -0.00000002980233, y: 0.29884782, z: 0}
   serializedVersion: 2
-  m_Spring: 5000
-  m_Damper: 10
+  m_Spring: 2500
+  m_Damper: 50
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 0.01
+  m_Tolerance: 0.1
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -308,11 +310,11 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -0.25945193, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 5000
-  m_Damper: 10
+  m_Spring: 2500
+  m_Damper: 50
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 0.01
+  m_Tolerance: 0.1
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -360,11 +362,11 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -7.1006806e-15, y: 0.24170077, z: 0}
   serializedVersion: 2
-  m_Spring: 5000
-  m_Damper: 10
+  m_Spring: 2500
+  m_Damper: 50
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 0.01
+  m_Tolerance: 0.1
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -422,16 +424,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: -6821811051993099369, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
+    - target: {fileID: -3948671608598916596, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
         type: 3}
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: -4254171621758483363, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
+    - target: {fileID: -1862705164064036011, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e559c6cfa46d82648abe1ff11c5006f7, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -487,17 +489,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -3948671608598916596, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -1862705164064036011, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3794736292945528075, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -4254171621758483363, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e559c6cfa46d82648abe1ff11c5006f7, type: 2}
+    - target: {fileID: -6821811051993099369, guid: 0b6eb73c51e782f4f8e4cd97a47219fd,
         type: 3}
       propertyPath: m_Layer
       value: 10
