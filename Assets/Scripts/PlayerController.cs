@@ -21,11 +21,13 @@ public class PlayerController : MonoBehaviour
     public float fireCoolDown = 0.2f;
     public float aimDistance = 1.0f;
     public float health = 100.0f;
-
     public int pickupAmmoCount = 0;
 
     public GameObject baseProjectile;
     public GameObject playerMesh;
+    public Vector2 ragEffectRange = new Vector2(-10.0f, 10.0f);
+    public List<GameObject> playerEffectBones = new List<GameObject>();
+
 
     public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
 
@@ -33,6 +35,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 aimVec;
     public Vector3 lastAimVec;
     private GameObject aimIndicator;
+
+    public void FlingYourArmsFromSideToSide()
+    {
+        for (int i = 0; i < playerEffectBones.Count; i++)
+        {
+            playerEffectBones[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+        }
+    }
 
     void Start()
     {
@@ -65,7 +75,7 @@ public class PlayerController : MonoBehaviour
             playerMesh.SetActive(true);
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
-            
+
             //AIMMING
             Vector3 aimVec = new Vector3(0, 0, 0);
             aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
@@ -116,8 +126,9 @@ public class PlayerController : MonoBehaviour
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;
+                        FlingYourArmsFromSideToSide();
                     }
-                    
+
                 }
             }
 
