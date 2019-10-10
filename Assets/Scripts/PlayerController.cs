@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
         PLAYER4
     }
 
+    public enum CHARACTER
+    {
+        ARCHER,
+        MAGE,
+        WARRIOR,
+        BARD
+    };
+
     public PLAYER playerType = PLAYER.UNASSIGNED;
 
     public float speed = 10.0f;
@@ -26,9 +34,13 @@ public class PlayerController : MonoBehaviour
     public GameObject baseProjectile;
     public GameObject playerMesh;
     public Vector2 ragEffectRange = new Vector2(-10.0f, 10.0f);
-    public List<GameObject> playerEffectBones = new List<GameObject>();
+    public List<GameObject> playerEffectBonesARCHER = new List<GameObject>();
+    public List<GameObject> playerEffectBonesMAGE = new List<GameObject>();
+    public List<GameObject> playerEffectBonesWARRIOR = new List<GameObject>();
+    public List<GameObject> playerEffectBonesBARB = new List<GameObject>();
+    public List<GameObject> playerRagdolls = new List<GameObject>();
 
-
+    public CHARACTER charcterType = CHARACTER.ARCHER;
     public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
 
     private bool canFire = true;
@@ -38,9 +50,33 @@ public class PlayerController : MonoBehaviour
 
     public void FlingYourArmsFromSideToSide()
     {
-        for (int i = 0; i < playerEffectBones.Count; i++)
+        if (charcterType == CHARACTER.ARCHER)
         {
-            playerEffectBones[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            for (int i = 0; i < playerEffectBonesARCHER.Count; i++)
+            {
+                playerEffectBonesARCHER[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.MAGE)
+        {
+            for (int i = 0; i < playerEffectBonesMAGE.Count; i++)
+            {
+                playerEffectBonesMAGE[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.WARRIOR)
+        {
+            for (int i = 0; i < playerEffectBonesWARRIOR.Count; i++)
+            {
+                playerEffectBonesWARRIOR[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.BARD)
+        {
+            for (int i = 0; i < playerEffectBonesBARB.Count; i++)
+            {
+                playerEffectBonesBARB[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
         }
     }
 
@@ -56,6 +92,19 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Base Projectile not set on player: " + name);
         }
 
+        if (playerRagdolls[(int)charcterType] != null)
+        {
+            playerRagdolls[(int)charcterType].SetActive(true);
+            playerMesh = playerRagdolls[(int)charcterType];
+            Debug.Log(charcterType);
+        }
+        else
+        {
+            Debug.LogWarning("Could not find a gameobject for character on player: " + name);
+            playerRagdolls[0].SetActive(true);
+            playerMesh = playerRagdolls[0];
+        }
+
         aimIndicator = transform.GetChild(0).gameObject;
 
         //Reset vars
@@ -67,7 +116,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
+        //playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
 
         //ALIVE
         if (health > 0)
