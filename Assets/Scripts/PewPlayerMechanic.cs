@@ -24,7 +24,7 @@ public class PewPlayerMechanic : MonoBehaviour
             {
                 playerRef.GetComponent<Rigidbody>().AddForce(playerRef.transform.forward * 1000);
                 playerRef.GetComponent<PlayerController>().pickupAmmoCount--;
-
+                playerRef.GetComponent<PlayerController>().FlingYourArmsFromSideToSide();
                 StartCoroutine(dashCoolDown());
             }
         }
