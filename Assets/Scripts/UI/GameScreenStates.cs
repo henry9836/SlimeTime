@@ -9,10 +9,6 @@ public class GameScreenStates : MonoBehaviour
     public int screenState = -1;
     private int screenStateCur = -1;
 
-    public GameObject screensPlay;
-    public GameObject screensGrace;
-    public GameObject screensWave;
-
     public GameObject[] screens;
 
     void Start()
@@ -25,7 +21,12 @@ public class GameScreenStates : MonoBehaviour
     {
         if (screenState != screenStateCur)
         {
-            screens[screenStateCur].SetActive(false);
+            if (screenStateCur >= 0)
+            { // Do not allow array index out of range. Deactivate old screen
+                screens[screenStateCur].SetActive(false);
+            }
+
+            // Activate new screen
             screens[screenState].SetActive(true);
 
             screenStateCur = screenState;
