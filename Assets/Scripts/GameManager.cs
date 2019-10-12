@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameManager Cannot Find Any Players!");
         }
 
+        DyanmicControllers.FindControllers();
+
+        Debug.Log("There are " + DyanmicControllers.controlNum + " Controllers");
+
+
+
         StartCoroutine(checkPlayers());
 
     }
