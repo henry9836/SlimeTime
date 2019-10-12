@@ -6,10 +6,10 @@ using UnityEngine;
 public class CharacterSelection : MonoBehaviour
 {
 
-    public bool amvalid;
+    public bool amvalid = true;
 
     public int currentSelection = 0;
-    public bool isselected = false;
+    public bool isselected = true;
     public bool moveable = true;
     public bool selectable = true;
 
@@ -29,24 +29,33 @@ public class CharacterSelection : MonoBehaviour
     {
         if (amvalid == true)
         {
+            this.gameObject.SetActive(true);
+
             if (isselected == true)
             {
                 if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") > 0 && moveable == true)
                 {
                     moveable = false;
                     currentSelection++;
+                    gameObject.transform.localPosition += new Vector3(466.0f, 0.0f, 0.0f);
+
                     if (currentSelection == 4)
                     {
                         currentSelection = 0;
+                        gameObject.transform.localPosition = new Vector3(-736.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z); 
                     }
                 }
                 if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") < 0 && moveable == true)
                 {
                     moveable = false;
                     currentSelection--;
-                    if (currentSelection == 0)
+                    gameObject.transform.localPosition -= new Vector3(466.0f, 0.0f, 0.0f);
+
+                    if (currentSelection == -1)
                     {
-                        currentSelection = 4;
+                        currentSelection = 3;
+                        gameObject.transform.localPosition = new Vector3(736.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
+
                     }
                 }
                 if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") == 0)
@@ -68,7 +77,7 @@ public class CharacterSelection : MonoBehaviour
         }
         else
         {
-            this.gameObject.GetComponent<MeshRenderer>().
+            this.gameObject.SetActive(false);
         }
 
     }
