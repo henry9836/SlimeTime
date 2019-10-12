@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 7683191616259353525}
   - component: {fileID: 7683191616259353526}
   - component: {fileID: 7683191616259353524}
+  - component: {fileID: 2146555994405947750}
   m_Layer: 5
   m_Name: slimeCounter
   m_TagString: Untagged
@@ -282,6 +283,18 @@ MonoBehaviour:
   mainPanel: {fileID: 7683191616259353520}
   countText: {fileID: 7683191615601013428}
   gameManagerObject: {fileID: 0}
+--- !u!225 &2146555994405947750
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683191616259353520}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8435970035435207983
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1938693646959752393
 RectTransform:
   m_ObjectHideFlags: 0
