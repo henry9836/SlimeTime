@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            GetComponent<SceneSwitcher>().SceneSwitch("Game");
+            GetComponent<SceneSwitcher>().SceneSwitch("CharacterSelection");
         }
     }
 }
