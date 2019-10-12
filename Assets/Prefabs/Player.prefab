@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e49309771aa97409485383f592386b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 1
+  playerType: 0
   speed: 30
   maxSpeed: 30
   fireForce: 1000
@@ -1519,16 +1519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4010629315631103549}
     m_Modifications:
-    - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
-        type: 3}
-      propertyPath: m_Name
-      value: Mage
-      objectReference: {fileID: 0}
-    - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5723220375301890131, guid: 1184f0a9062926141a5d1dc69886076a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1582,6 +1572,16 @@ PrefabInstance:
     - target: {fileID: 5723220375301890131, guid: 1184f0a9062926141a5d1dc69886076a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
+        type: 3}
+      propertyPath: m_Name
+      value: Mage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 726841324755225757, guid: 1184f0a9062926141a5d1dc69886076a,

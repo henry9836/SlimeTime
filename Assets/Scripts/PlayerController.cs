@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     public CHARACTER charcterType = CHARACTER.ARCHER;
     public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
 
+    public bool controllerNotBound = false;
+
     private bool canFire = true;
     private Vector3 aimVec;
     public Vector3 lastAimVec;
@@ -220,6 +222,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y <= -10)
         {
             transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
+        }
+
+        if (controllerNotBound) {
+            health = -9999;
         }
     }
 
