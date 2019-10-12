@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 301851952}
   fadeTime: 2
-  targetScene: 
+  targetScene: 1
   curScene: 
   isFading: 0
   isSwitching: 0

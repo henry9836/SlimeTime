@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class CharacterSelection : MonoBehaviour
     {
         if (amvalid == true)
         {
-            this.gameObject.SetActive(true);
+            this.gameObject.GetComponent<Image>().enabled = true;
 
             if (isselected == true)
             {
@@ -77,7 +77,7 @@ public class CharacterSelection : MonoBehaviour
         }
         else
         {
-            this.gameObject.SetActive(false);
+            this.gameObject.GetComponent<Image>().enabled = false;
         }
 
     }

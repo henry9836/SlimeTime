@@ -11,15 +11,17 @@ public class CharacterSelectionmanager : MonoBehaviour
     public bool countdown = false;
     public float countdowntimer = 0.0f;
     public float fadetime = 3.0f;
+
     void Update()
     {
         playercount = DyanmicControllers.FindControllers();
         readycount = 0;
 
+
         for (int i = 0; i < playercount; i++)
         {
-            GameObject.Find("Canvas").transform.GetChild(0).transform.GetChild(i).GetComponent<CharacterSelection>().amvalid = true;
-            if (GameObject.Find("Canvas").transform.GetChild(0).transform.GetChild(i).GetComponent<CharacterSelection>().isselected == false)
+            GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().amvalid = true;
+            if (GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().isselected == false)
             {
                 readycount += 1;
             }
@@ -34,19 +36,37 @@ public class CharacterSelectionmanager : MonoBehaviour
             {
                 countdowntimer = 0.0f;
             }
-            countdowntimer -= Time.deltaTime;
+            else
+            {
+                countdowntimer -= Time.deltaTime;
+
+            }
             countdown = false;
-            GameObject.Find("timer").GetComponent<Text>().text = "";
+
+
         }
 
         if (countdown == true)
         {
             countdowntimer += Time.deltaTime;
-            GameObject.Find("timer").GetComponent<Text>().text = (((fadetime) - countdowntimer) + 1).ToString("0");
             if (countdowntimer >= fadetime)
             {
+                for (int i = 0; i < playercount; i++)
+                {
+                   characterSetter.playerSelections.Add(GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().currentSelection);
+                }
                 SceneManager.LoadScene(2);
             }
+        }
+
+        if (countdowntimer != 0.0f)
+        {
+            GameObject.Find("timer").GetComponent<Text>().text = Mathf.CeilToInt(((fadetime) - countdowntimer)).ToString("0");
+        }
+        else
+        {
+            GameObject.Find("timer").GetComponent<Text>().text = "";
+
         }
 
         GameObject.Find("FADE").GetComponent<Image>().color = new Color(GameObject.Find("FADE").GetComponent<Image>().color.r, GameObject.Find("FADE").GetComponent<Image>().color.g, GameObject.Find("FADE").GetComponent<Image>().color.b, Mathf.Pow(Mathf.Sin((countdowntimer / fadetime) * (Mathf.PI / 2)), 2));
