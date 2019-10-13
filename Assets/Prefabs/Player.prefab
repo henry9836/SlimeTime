@@ -193,7 +193,7 @@ MonoBehaviour:
   playerType: 0
   speed: 30
   maxSpeed: 10
-  fireForce: 1000
+  fireForce: 2500
   fireCoolDown: 0.4
   aimDistance: 1
   health: 100
