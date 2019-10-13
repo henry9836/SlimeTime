@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     public int pickupAmmoCount = 0;
 
+    public AudioClip hurtSound;
     public GameObject baseProjectile;
     public GameObject playerMesh;
     public Vector2 ragEffectRange = new Vector2(-10.0f, 10.0f);
@@ -49,7 +50,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 aimVec;
     public Vector3 lastAimVec;
     private GameObject aimIndicator;
+    private float lastHealth;
+    private projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
 
+    //Ragdoll Effects
     public void FlingYourArmsFromSideToSide()
     {
         if (charcterType == CHARACTER.ARCHER)
@@ -89,6 +93,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("playerType of " + name + " is unassigned!");
         }
 
+
         if (baseProjectile == null)
         {
             Debug.LogWarning("Base Projectile not set on player: " + name);
@@ -114,13 +119,28 @@ public class PlayerController : MonoBehaviour
 
         lastAimVec = transform.forward;
 
+        //set projType
+        if (charcterType == CHARACTER.ARCHER)
+        {
+            projType = projectileController.PROJTYPES.ARROW;
+        }
+        else if (charcterType == CHARACTER.BARD)
+        {
+            projType = projectileController.PROJTYPES.NOTE;
+        }
+        else if (charcterType == CHARACTER.MAGE)
+        {
+            projType = projectileController.PROJTYPES.FIREBALL;
+        }
+        else if (charcterType == CHARACTER.WARRIOR)
+        {
+            projType = projectileController.PROJTYPES.AXE;
+        }
     }
 
 
     void Update()
     {
-
-        //playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
 
         //ALIVE
         if (health > 0)
@@ -129,7 +149,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
 
-            //AIMMING
+            //AIM
             Vector3 aimVec = new Vector3(0, 0, 0);
             aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
 
@@ -176,6 +196,7 @@ public class PlayerController : MonoBehaviour
                     if (powerupType == Pickups.POWERUPS.NULL)
                     {
                         GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
+                        refer.GetComponent<projectileController>().type = projType;
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;
@@ -205,6 +226,16 @@ public class PlayerController : MonoBehaviour
             {
                 GetComponent<Rigidbody>().AddForce(movementVec * speed);
             }
+
+            //Hurt Sound
+
+            if (health < lastHealth)
+            {
+                GetComponent<AudioSource>().clip = hurtSound;
+                GetComponent<AudioSource>().Play();
+            }
+
+            lastHealth = health;
         }
         else
         {

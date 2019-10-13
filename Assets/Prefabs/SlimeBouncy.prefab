@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 2914529089325305511}
   - component: {fileID: 5113977025573659613}
   m_Layer: 0
-  m_Name: skSlime
+  m_Name: SlimeBouncy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
