@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour
         //Reset vars
         canFire = true;
 
+        lastAimVec = transform.forward;
+
     }
 
 
