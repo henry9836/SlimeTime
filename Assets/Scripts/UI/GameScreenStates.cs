@@ -59,7 +59,7 @@ public class GameScreenStates : MonoBehaviour
                 screenState = 1;
             }
 
-            if (screenState == 1 && gameManager.gracetimer <= 5.0f)
+            if (screenState == 1 && gameManager.gracetimer <= gameManager.grace - 3f)
             {
                 screenState = 2;
             }

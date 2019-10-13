@@ -10,7 +10,7 @@ public class WaveCountdown : MonoBehaviour
     private GameManager gameManager;
     private bool isNull = true;
 
-    private float startTimerValue = 5.0f;
+    private float startTimerValue = 7.0f;
     private GameObject countdownTimer;
     private Image countdownFill;
 
@@ -29,11 +29,23 @@ public class WaveCountdown : MonoBehaviour
 
         countdownTimer = transform.Find("graceTime").gameObject;
         countdownFill = transform.Find("timerImage").GetComponent<Image>();
+
+        transform.DOScale(new Vector3(0, 0, 0), 0f);
     }
 
     void Update()
     {
         countdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameManager.gracetimer).ToString();
         countdownFill.fillAmount = gameManager.gracetimer / startTimerValue;
+    }
+
+    private void OnEnable()
+    {
+        transform.DOScale(new Vector3(1f, 1f, 1f), 1f).SetEase(Ease.OutQuint);
+    }
+
+    private void OnDisable()
+    {
+        transform.DOScale(new Vector3(0, 0, 0), 0f);
     }
 }
