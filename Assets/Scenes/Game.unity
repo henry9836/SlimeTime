@@ -20503,6 +20503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn
       objectReference: {fileID: 0}
+    - target: {fileID: -8793393034597121952, guid: cc7f4f7094054c14ebf38e09b92e296a,
+        type: 3}
+      propertyPath: m_TagString
+      value: NORMAL
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cc7f4f7094054c14ebf38e09b92e296a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23481,6 +23486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Island 1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344579039881486443, guid: 2b85633bece24eb46acc0073eac1748a,
+        type: 3}
+      propertyPath: m_TagString
+      value: NORMAL
       objectReference: {fileID: 0}
     - target: {fileID: 5014406015204495992, guid: 2b85633bece24eb46acc0073eac1748a,
         type: 3}
