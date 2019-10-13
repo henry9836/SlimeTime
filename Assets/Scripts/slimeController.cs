@@ -39,17 +39,6 @@ public class slimeController : MonoBehaviour
 
     private void Start()
     {
-
-        //for (int i = 0; i < slimeObjects.Count; i++)
-        //{
-        //    if (i != (int)type)
-        //    {
-        //        slimeObjects[i].SetActive(false);
-        //    }
-        //}
-
-        slimeObjects[(int)type].SetActive(true);
-
         jumpLock = false;
         canAttack = true;
         detectionSphere = transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
@@ -70,6 +59,9 @@ public class slimeController : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        slimeObjects[(int)type].SetActive(true);
+
         if (health <= 0)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().SlimeKilled();
