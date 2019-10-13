@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
         PLAYER4
     }
 
+    public enum CHARACTER
+    {
+        ARCHER,
+        MAGE,
+        WARRIOR,
+        BARD
+    };
+
     public PLAYER playerType = PLAYER.UNASSIGNED;
 
     public float speed = 10.0f;
@@ -21,18 +29,58 @@ public class PlayerController : MonoBehaviour
     public float fireCoolDown = 0.2f;
     public float aimDistance = 1.0f;
     public float health = 100.0f;
-
     public int pickupAmmoCount = 0;
 
     public GameObject baseProjectile;
     public GameObject playerMesh;
+    public Vector2 ragEffectRange = new Vector2(-10.0f, 10.0f);
+    public List<GameObject> playerEffectBonesARCHER = new List<GameObject>();
+    public List<GameObject> playerEffectBonesMAGE = new List<GameObject>();
+    public List<GameObject> playerEffectBonesWARRIOR = new List<GameObject>();
+    public List<GameObject> playerEffectBonesBARB = new List<GameObject>();
+    public List<GameObject> playerRagdolls = new List<GameObject>();
 
+    public CHARACTER charcterType = CHARACTER.ARCHER;
     public Pickups.POWERUPS powerupType = Pickups.POWERUPS.NULL;
+
+    public bool controllerNotBound = false;
 
     private bool canFire = true;
     private Vector3 aimVec;
     public Vector3 lastAimVec;
     private GameObject aimIndicator;
+
+    public void FlingYourArmsFromSideToSide()
+    {
+        if (charcterType == CHARACTER.ARCHER)
+        {
+            for (int i = 0; i < playerEffectBonesARCHER.Count; i++)
+            {
+                playerEffectBonesARCHER[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.MAGE)
+        {
+            for (int i = 0; i < playerEffectBonesMAGE.Count; i++)
+            {
+                playerEffectBonesMAGE[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.WARRIOR)
+        {
+            for (int i = 0; i < playerEffectBonesWARRIOR.Count; i++)
+            {
+                playerEffectBonesWARRIOR[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+        else if (charcterType == CHARACTER.BARD)
+        {
+            for (int i = 0; i < playerEffectBonesBARB.Count; i++)
+            {
+                playerEffectBonesBARB[i].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y), Random.Range(ragEffectRange.x, ragEffectRange.y));
+            }
+        }
+    }
 
     void Start()
     {
@@ -46,6 +94,19 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Base Projectile not set on player: " + name);
         }
 
+        if (playerRagdolls[(int)charcterType] != null)
+        {
+            playerRagdolls[(int)charcterType].SetActive(true);
+            playerMesh = playerRagdolls[(int)charcterType];
+            Debug.Log(charcterType);
+        }
+        else
+        {
+            Debug.LogWarning("Could not find a gameobject for character on player: " + name);
+            playerRagdolls[0].SetActive(true);
+            playerMesh = playerRagdolls[0];
+        }
+
         aimIndicator = transform.GetChild(0).gameObject;
 
         //Reset vars
@@ -57,7 +118,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
+        //playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
 
         //ALIVE
         if (health > 0)
@@ -65,7 +126,7 @@ public class PlayerController : MonoBehaviour
             playerMesh.SetActive(true);
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
-            
+
             //AIMMING
             Vector3 aimVec = new Vector3(0, 0, 0);
             aimVec = new Vector3(Input.GetAxisRaw("P" + (int)playerType + "AIMHOZ"), 0, -Input.GetAxisRaw("P" + (int)playerType + "AIMVERT"));
@@ -116,8 +177,9 @@ public class PlayerController : MonoBehaviour
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;
+                        FlingYourArmsFromSideToSide();
                     }
-                    
+
                 }
             }
 
@@ -160,6 +222,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y <= -10)
         {
             transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
+        }
+
+        if (controllerNotBound) {
+            health = -9999;
         }
     }
 
