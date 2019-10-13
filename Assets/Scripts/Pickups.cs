@@ -16,14 +16,12 @@ public class Pickups : MonoBehaviour
     public enum POWERUPS
     {
         NULL,
+        RAPIDFIRE,
+        MULTISHOTT1,
+        MULTISHOTT2,
+        SPREAD,
         HEAL,
-        FREEZE,
-        BOMB,
-        LASER,
-        SPRAY,
-        HOMING,
-        DASH,
-        TORNADO
+        WALLOFDEATH
 
     }
 

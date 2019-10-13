@@ -10,6 +10,7 @@ TagManager:
   - Slime
   - BULLETIGNORE
   - DETECTIONCAST
+  - BULLETIGNORESLIME
   layers:
   - Default
   - TransparentFX

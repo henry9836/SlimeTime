@@ -5,12 +5,13 @@ using UnityEngine;
 public class pickupcontroler : MonoBehaviour
 {
     public float lifetimeStart = 30.0f;
-    private float lifetime = 30.0f;
-    private bool once = true;
     public Pickups.POWERUPS type;
     public float amplitudeRate;
+
+    private int ammoCount = 0;
+    private float lifetime = 30.0f;
     private float landingypos;
-    private int ammoCount = 3;
+    private bool once = true;
 
     void Start()
     {
@@ -21,11 +22,28 @@ public class pickupcontroler : MonoBehaviour
         {
             Debug.LogWarning("Pickup has type NULL assigned: " + name);
         }
-        else if (type == Pickups.POWERUPS.DASH)
+        else if (type == Pickups.POWERUPS.RAPIDFIRE)
         {
-            ammoCount = 3;
+            ammoCount = 150;
         }
-        else if (type == Pickups.POWERUPS.SPRAY)
+        else if (type == Pickups.POWERUPS.MULTISHOTT1 || type == Pickups.POWERUPS.MULTISHOTT2)
+        {
+            ammoCount = 150;
+        }
+        else if (type == Pickups.POWERUPS.SPREAD)
+        {
+            ammoCount = 150;
+        }
+        else if (type == Pickups.POWERUPS.HEAL)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].GetComponent<PlayerController>().health = 100;
+            }
+            ammoCount = 0;
+        }
+        else if (type == Pickups.POWERUPS.WALLOFDEATH)
         {
             ammoCount = 100;
         }
@@ -52,6 +70,7 @@ public class pickupcontroler : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Ammo count should be: " + ammoCount);
             collision.gameObject.GetComponent<PlayerController>().powerupType = type;
             collision.gameObject.GetComponent<PlayerController>().pickupAmmoCount = ammoCount;
             StartCoroutine(despawn());
