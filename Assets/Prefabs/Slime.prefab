@@ -68,10 +68,10 @@ GameObject:
   - component: {fileID: 248048381494170173}
   - component: {fileID: 248048381494170170}
   - component: {fileID: 7654654920578653118}
-  - component: {fileID: 248048381494170168}
   - component: {fileID: 6894205541877738872}
   - component: {fileID: 8430009143113954221}
   - component: {fileID: 3349188229910259026}
+  - component: {fileID: 3188455919807928642}
   m_Layer: 9
   m_Name: Slime
   m_TagString: BULLETIGNORE
@@ -117,19 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75856733f57eb9542b47663319cbffa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &248048381494170168
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248048381494170169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6894205541877738872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +170,19 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &3188455919807928642
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248048381494170169}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &248167136005366087
 GameObject:
