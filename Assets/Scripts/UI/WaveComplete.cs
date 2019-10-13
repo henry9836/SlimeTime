@@ -11,10 +11,10 @@ public class WaveComplete : MonoBehaviour
     private GameManager gameManager;
     private bool isNull = true;
 
+    private CanvasGroup canvas;
     private Text waveCompleteText;
     private GameObject backPanel;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (gameManagerObject == null)
@@ -28,13 +28,13 @@ public class WaveComplete : MonoBehaviour
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
 
+        canvas = GetComponent<CanvasGroup>();
         waveCompleteText = transform.Find("endOfWave").GetComponent<Text>();
         backPanel = transform.Find("backPanel").gameObject;
 
         backPanel.transform.DOScaleX(0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isNull)
@@ -47,13 +47,16 @@ public class WaveComplete : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void Begin()
     {
-        backPanel.transform.DOScaleX(1.0f, 1.0f).SetEase(Ease.OutQuint);
+        canvas.DOFade(1f, 0.25f);
+        waveCompleteText.gameObject.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.4f, 3, 0.5f);
+        backPanel.transform.DOScaleX(1.0f, 1.0f).SetEase(Ease.InOutQuart);
     }
 
-    private void OnDisable()
+    public void End()
     {
-        backPanel.transform.DOScaleX(0, 0);
+        canvas.DOFade(0f, 0.25f);
+        backPanel.transform.DOScaleX(0, 1.0f).SetEase(Ease.OutQuint);
     }
 }
