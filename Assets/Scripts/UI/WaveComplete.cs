@@ -41,10 +41,6 @@ public class WaveComplete : MonoBehaviour
         {
             waveCompleteText.text = "wave " + gameManager.currentWave.ToString() + " complete";
         }
-        else
-        {
-            Debug.Log("Game Manager not found. Cannot display slime count.");
-        }
     }
 
     public void Begin()
