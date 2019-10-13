@@ -44,24 +44,23 @@ public class slimeSpawner : MonoBehaviour
     public List<Vector4> TempInvalidICE;
     public List<Vector4> TempInvalidNORMAL;
 
+    public List<GameObject> players = new List<GameObject>();
+    public GameObject[] playerList;
+
 
     public void NextWave(int wave)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        playerList = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < playerList.Length; i++)
+        {
+            if (playerList[i].GetComponent<PlayerController>().controllerNotBound == false)
+            {
+                players.Add(playerList[i]);
+            }
+        }
 
-        toSpawn = wave;
-        if (wave <= 4)
-        {
-            toSpawn = (24 + (6 * players.Length)) * wave / 5;
-        }
-        else if (wave <= 10)
-        {
-            toSpawn = (24 + (6 * players.Length));
-        }
-        else
-        {
-            toSpawn = Mathf.CeilToInt((wave * 0.15f) * (24 + (6 * players.Length)));
-        }
+        toSpawn = wavetospawnammount(wave, players.Count);
+
 
 
 
@@ -141,9 +140,8 @@ public class slimeSpawner : MonoBehaviour
                 }
             }
 
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < players.Count; i++)
             {
                 Vector3 position = players[i].gameObject.transform.localPosition;
                 Vector3 maxXY = position + (spawnSaftyXY / 2);
@@ -333,9 +331,8 @@ public class slimeSpawner : MonoBehaviour
 
     public IEnumerator Spawnpowerup(Pickups.POWERUPS temp)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             Vector3 position = players[i].gameObject.transform.localPosition;
             Vector3 maxXY = position + (spawnSaftyXY / 2);
@@ -427,5 +424,51 @@ public class slimeSpawner : MonoBehaviour
             }
         }
         yield return null;
+    }
+
+    public int wavetospawnammount(int round, int players)
+    {
+         int tospawn = 0;
+
+         if (players == 1)
+         {
+             if (round <= 9)
+             {
+                int[] zombs = new int[10] { 0, 6, 8, 13, 18, 24, 27, 28, 28, 29 };
+                 tospawn = zombs[round];
+             }
+             if (round >= 10)
+             {
+                  tospawn = Mathf.FloorToInt(24 + (3 * ((round / 5) * (round * 0.15f))));
+             }                   
+         }
+         else
+         {
+             if (round <= 9)
+             {
+                 if (players == 2)
+                 {
+                     int[] zombs = new int[10] { 0, 7, 9, 15, 21, 27, 31, 32, 33, 34 };
+                     tospawn = zombs[round];
+                 }
+             
+                 if (players == 3)
+                 {
+                    int[] zombs = new int[10] { 0, 9, 10, 18, 25, 32, 38, 40, 43, 45 };
+                     tospawn = zombs[round];
+                 }
+                 if (players == 4)
+                 {
+                    int[] zombs = new int[10] { 0, 10, 12, 21, 29, 37, 45, 49, 52, 56 };
+                     tospawn = zombs[round];
+                 }
+             }
+             if (round >= 10)
+             {
+                 tospawn = Mathf.FloorToInt(24 + ((players - 1) * 6) * ((round / 5) * (round * 0.15f)));
+             }
+         }
+                    
+        return (tospawn);
     }
 }
