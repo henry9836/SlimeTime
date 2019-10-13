@@ -11,6 +11,7 @@ public class WaveComplete : MonoBehaviour
     private GameManager gameManager;
     private bool isNull = true;
 
+    private CanvasGroup canvas;
     private Text waveCompleteText;
     private GameObject backPanel;
 
@@ -28,6 +29,7 @@ public class WaveComplete : MonoBehaviour
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
 
+        canvas = GetComponent<CanvasGroup>();
         waveCompleteText = transform.Find("endOfWave").GetComponent<Text>();
         backPanel = transform.Find("backPanel").gameObject;
 
@@ -47,13 +49,15 @@ public class WaveComplete : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void Begin()
     {
+        canvas.DOFade(1f, 0.25f);
         backPanel.transform.DOScaleX(1.0f, 1.0f).SetEase(Ease.OutQuint);
     }
 
-    private void OnDisable()
+    public void End()
     {
-        backPanel.transform.DOScaleX(0, 0);
+        canvas.DOFade(0f, 0.25f);
+        backPanel.transform.DOScaleX(0, 1.0f).SetEase(Ease.OutQuint);
     }
 }
