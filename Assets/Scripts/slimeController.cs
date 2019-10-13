@@ -22,6 +22,7 @@ public class slimeController : MonoBehaviour
     public Vector2 idleThresholdRange = new Vector2(1.0f, 5.0f);
     public float wanderRange = 5.0f;
     public List<GameObject> slimeObjects = new List<GameObject>();
+    public List<AudioClip> slimeHurtSounds = new List<AudioClip>();
 
     private float idleThreshold = 3.0f;
     private bool canAttack = true;
@@ -35,6 +36,8 @@ public class slimeController : MonoBehaviour
     {
         health -= damage;
         GetComponent<Rigidbody>().AddForce((hitDir * damage)* damageEffectMultiplyer);
+        GetComponent<AudioSource>().clip = slimeHurtSounds[Random.Range(0, slimeHurtSounds.Count - 1)];
+        GetComponent<AudioSource>().Play();
     }
 
     private void Start()

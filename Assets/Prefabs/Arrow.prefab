@@ -353,4 +353,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  type: 0
+  fireSounds:
+  - {fileID: 8300000, guid: 033cb5dff3e02b64ea576573bb167d09, type: 3}
+  - {fileID: 8300000, guid: 7158a04964343cf439017f18de43a85a, type: 3}
+  - {fileID: 8300000, guid: fd26a45dc1b148b4895540bf701d2099, type: 3}
+  - {fileID: 8300000, guid: cb9ea90abc348c74dbe676c5487d6f4d, type: 3}
   travelDir: {x: 0, y: 0, z: 0}
