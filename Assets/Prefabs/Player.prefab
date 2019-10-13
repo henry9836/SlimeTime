@@ -198,6 +198,7 @@ MonoBehaviour:
   aimDistance: 1
   health: 100
   pickupAmmoCount: 0
+  hurtSound: {fileID: 8300000, guid: 86db4251bdd469a449d8806dc55d68ba, type: 3}
   baseProjectile: {fileID: 6029714117361861025, guid: 8b029ddd391d88348a0b73bf25125063,
     type: 3}
   playerMesh: {fileID: 6962419215981226570}
@@ -338,21 +339,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4010629315631103549}
     m_Modifications:
-    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
-        type: 3}
-      propertyPath: m_Name
-      value: Warrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2517295350847322131, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,6 +393,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
+        type: 3}
+      propertyPath: m_Name
+      value: Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491926297514461696, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 865827669613046417, guid: 5ae307ae345fe0a4b906a9f8cce548e6,
         type: 3}
@@ -731,21 +732,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4010629315631103549}
     m_Modifications:
-    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
-        type: 3}
-      propertyPath: m_Name
-      value: Bard
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6621119590560105331, guid: a50d191525e96044f96d263cf984e371,
         type: 3}
       propertyPath: m_Layer
@@ -805,6 +791,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
+        type: 3}
+      propertyPath: m_Name
+      value: Bard
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036493110969589178, guid: a50d191525e96044f96d263cf984e371,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 654828423798954485, guid: a50d191525e96044f96d263cf984e371,
         type: 3}
@@ -1099,21 +1100,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4010629315631103549}
     m_Modifications:
-    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
-        type: 3}
-      propertyPath: m_Name
-      value: Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8984014837449993451, guid: 08665f158b20c9441ac7d56091757a69,
         type: 3}
       propertyPath: m_Layer
@@ -1172,6 +1158,21 @@ PrefabInstance:
     - target: {fileID: 3244983209073958751, guid: 08665f158b20c9441ac7d56091757a69,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
+        type: 3}
+      propertyPath: m_Name
+      value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968960144828214604, guid: 08665f158b20c9441ac7d56091757a69,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 330964652793189138, guid: 08665f158b20c9441ac7d56091757a69,
@@ -1522,6 +1523,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4010629315631103549}
     m_Modifications:
+    - target: {fileID: 8912428049664133018, guid: 1184f0a9062926141a5d1dc69886076a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
         type: 3}
       propertyPath: m_Name
@@ -1533,11 +1539,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8734642705389539904, guid: 1184f0a9062926141a5d1dc69886076a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8912428049664133018, guid: 1184f0a9062926141a5d1dc69886076a,
         type: 3}
       propertyPath: m_Layer
       value: 10
