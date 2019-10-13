@@ -42,13 +42,43 @@ public class GameScreenStates : MonoBehaviour
         if (screenState != screenStateCur)
         {
             // Deactivate old screen
-            if (screenStateCur >= 0)
+            switch (screenStateCur)
             {
-                screens[screenStateCur].SetActive(false);
+                case 0:
+                    screens[0].SetActive(false);
+                    break;
+
+                case 1:
+                    screens[1].GetComponent<WaveComplete>().End();
+                    break;
+
+                case 2:
+                    screens[2].GetComponent<WaveCountdown>().End();
+                    break;
+
             }
 
+            //if (screenStateCur >= 0)
+            //{
+            //    screens[screenStateCur].SetActive(false);
+            //}
+
             // Activate new screen
-            screens[screenState].SetActive(true);
+            //screens[screenState].SetActive(true);
+            switch (screenState)
+            {
+                case 0:
+                    screens[0].SetActive(true);
+                    break;
+
+                case 1:
+                    screens[1].GetComponent<WaveComplete>().Begin();
+                    break;
+
+                case 2:
+                    screens[2].GetComponent<WaveCountdown>().Begin();
+                    break;
+            }
 
             screenStateCur = screenState;
         }

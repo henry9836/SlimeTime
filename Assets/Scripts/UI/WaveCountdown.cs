@@ -9,9 +9,11 @@ public class WaveCountdown : MonoBehaviour
     private GameObject gameManagerObject;
     private GameManager gameManager;
     private bool isNull = true;
-
     private float startTimerValue = 7.0f;
-    private GameObject countdownTimer;
+    private bool isActive;
+
+    private CanvasGroup canvas;
+    private Text countdownTimer;
     private Image countdownFill;
 
     void Awake()
@@ -27,7 +29,8 @@ public class WaveCountdown : MonoBehaviour
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
 
-        countdownTimer = transform.Find("graceTime").gameObject;
+        canvas = GetComponent<CanvasGroup>();
+        countdownTimer = transform.Find("graceTime").GetComponent<Text>();
         countdownFill = transform.Find("timerImage").GetComponent<Image>();
 
         transform.DOScale(new Vector3(0, 0, 0), 0f);
@@ -35,17 +38,39 @@ public class WaveCountdown : MonoBehaviour
 
     void Update()
     {
-        countdownTimer.GetComponent<Text>().text = Mathf.Ceil(gameManager.gracetimer).ToString();
-        countdownFill.fillAmount = gameManager.gracetimer / startTimerValue;
+        if (isActive)
+        {
+            countdownTimer.text = Mathf.Ceil(gameManager.gracetimer).ToString();
+            countdownFill.fillAmount = gameManager.gracetimer / startTimerValue;
+        }
+        else
+        {
+            countdownTimer.text = "0";
+            countdownFill.fillAmount = 0;
+        }
     }
 
-    private void OnEnable()
+    //private void OnEnable()
+    //{
+    //    transform.DOScale(new Vector3(1f, 1f, 1f), 1f).SetEase(Ease.OutQuint);
+    //}
+
+    //private void OnDisable()
+    //{
+    //    transform.DOScale(new Vector3(0, 0, 0), 0f);
+    //}
+
+    public void Begin()
     {
-        transform.DOScale(new Vector3(1f, 1f, 1f), 1f).SetEase(Ease.OutQuint);
+        isActive = true;
+        canvas.DOFade(1f, 0.25f);
+        transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f).SetEase(Ease.OutQuint);
     }
 
-    private void OnDisable()
+    public void End()
     {
-        transform.DOScale(new Vector3(0, 0, 0), 0f);
+        isActive = false;
+        canvas.DOFade(0f, 0.25f);
+        transform.DOScale(new Vector3(0, 0, 0), 0.4f);
     }
 }
