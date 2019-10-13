@@ -9,7 +9,7 @@ public class projectileController : MonoBehaviour
 
     public Vector3 travelDir;
 
-    private float safeTime = 0.1f;
+    private float safeTime = 0.01f;
     private bool colLock = true;
 
     private void Start()

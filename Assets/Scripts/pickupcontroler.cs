@@ -34,6 +34,19 @@ public class pickupcontroler : MonoBehaviour
         {
             ammoCount = 150;
         }
+        else if (type == Pickups.POWERUPS.HEAL)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].GetComponent<PlayerController>().health = 100;
+            }
+            ammoCount = 0;
+        }
+        else if (type == Pickups.POWERUPS.WALLOFDEATH)
+        {
+            ammoCount = 100;
+        }
         else
         {
             Debug.LogWarning("Pickup has an unknown type assigned: " + type + " Object: " + name);

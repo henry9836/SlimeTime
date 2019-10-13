@@ -9,6 +9,7 @@ public class PewPlayerMechanic : MonoBehaviour
     private float burstCoolDownTime = 0.1f;
     private float multicoolDownTime = 0.3f;
     private float spreadcoolDownTime = 0.3f;
+    private float wallcoolDownTime = 0.3f;
 
     private bool canFire = true;
 
@@ -17,6 +18,7 @@ public class PewPlayerMechanic : MonoBehaviour
         //Set anything to correct values that need to
         multicoolDownTime = GetComponent<PlayerController>().fireCoolDown - 0.1f;
         spreadcoolDownTime = GetComponent<PlayerController>().fireCoolDown - 0.1f;
+        wallcoolDownTime = GetComponent<PlayerController>().fireCoolDown - 0.1f;
     }
 
     public void pew(Pickups.POWERUPS powerup, GameObject _playerRef)
@@ -149,32 +151,57 @@ public class PewPlayerMechanic : MonoBehaviour
 
                 //UL
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
-                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right)) * playerRef.GetComponent<PlayerController>().fireForce);
-                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right)) * 100.0f));
-                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right));
+                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.13f)) * playerRef.GetComponent<PlayerController>().fireForce);
+                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.13f)) * 100.0f));
+                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.13f));
 
                 //UR
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
-                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right) * playerRef.GetComponent<PlayerController>().fireForce));
-                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right) * 100.0f)));
-                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right));
+                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.13f)) * playerRef.GetComponent<PlayerController>().fireForce);
+                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.13f)) * 100.0f));
+                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.13f));
 
-                //DL
+                //UL2
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
-                refer.GetComponent<Rigidbody>().AddForce((-playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right) * playerRef.GetComponent<PlayerController>().fireForce));
-                refer.transform.LookAt(transform.position + ((-playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right) * 100.0f)));
-                refer.GetComponent<projectileController>().travelDir = (-playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right));
+                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.25f)) * playerRef.GetComponent<PlayerController>().fireForce);
+                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.25f)) * 100.0f));
+                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (-playerRef.transform.right * 0.25f));
 
-                //DR
+                //UR2
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
-                refer.GetComponent<Rigidbody>().AddForce((-playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right)) * playerRef.GetComponent<PlayerController>().fireForce);
-                refer.transform.LookAt(transform.position + ((-playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right)) * 100.0f));
-                refer.GetComponent<projectileController>().travelDir = (-playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right));
+                refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.25f)) * playerRef.GetComponent<PlayerController>().fireForce);
+                refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.25f)) * 100.0f));
+                refer.GetComponent<projectileController>().travelDir = (playerRef.GetComponent<PlayerController>().lastAimVec + (playerRef.transform.right * 0.25f));
 
                 playerRef.GetComponent<PlayerController>().pickupAmmoCount--;
 
 
                 StartCoroutine(spreadCoolDown());
+            }
+        }
+        if (powerup == Pickups.POWERUPS.WALLOFDEATH)
+        {
+            if (canFire)
+            {
+                int amountToSpawn = 30;
+
+                for (int i = 0; i < amountToSpawn/2; i++)
+                {
+                    GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position + (playerRef.transform.right * i/2), Quaternion.identity);
+                    refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
+                    refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
+                    refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;
+                }
+                for (int i = 0; i < amountToSpawn / 2; i++)
+                {
+                    GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position + (-playerRef.transform.right * i/2), Quaternion.identity);
+                    refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
+                    refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
+                    refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;
+                }
+
+                playerRef.GetComponent<PlayerController>().pickupAmmoCount--;
+                StartCoroutine(wallCoolDown());
             }
         }
     }
@@ -197,6 +224,13 @@ public class PewPlayerMechanic : MonoBehaviour
     {
         canFire = false;
         yield return new WaitForSeconds(spreadcoolDownTime);
+        canFire = true;
+    }
+
+    IEnumerator wallCoolDown()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(wallcoolDownTime);
         canFire = true;
     }
 }
