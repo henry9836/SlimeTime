@@ -1497,7 +1497,7 @@ GameObject:
   - component: {fileID: 1520855432}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: ICE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1645,7 +1645,7 @@ PrefabInstance:
     - target: {fileID: 6525390337991096898, guid: 1da96de4e1c32e94d876799d524fa1f4,
         type: 3}
       propertyPath: currentWave
-      value: 3
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 6525390337991096898, guid: 1da96de4e1c32e94d876799d524fa1f4,
         type: 3}
