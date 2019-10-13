@@ -5,8 +5,17 @@ using UnityEngine;
 public class projectileController : MonoBehaviour
 {
 
-    public float damage = 1.0f;
+    public enum PROJTYPES
+    {
+        ARROW,
+        AXE,
+        FIREBALL,
+        NOTE,
+    };
 
+    public float damage = 1.0f;
+    public PROJTYPES type = PROJTYPES.ARROW;
+    public List<AudioClip> fireSounds = new List<AudioClip>();
     public Vector3 travelDir;
 
     private float safeTime = 0.001f;
@@ -16,6 +25,11 @@ public class projectileController : MonoBehaviour
     {
         colLock = true;
         StartCoroutine(Activate());
+
+        //Play fire sound according to proj type
+
+        GetComponent<AudioSource>().clip = fireSounds[(int)type];
+        GetComponent<AudioSource>().Play();
     }
 
     private void OnTriggerEnter(Collider other)
