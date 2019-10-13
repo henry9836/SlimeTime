@@ -21,6 +21,7 @@ public class slimeController : MonoBehaviour
     public float jumpCooldown = 1.0f;
     public Vector2 idleThresholdRange = new Vector2(1.0f, 5.0f);
     public float wanderRange = 5.0f;
+    public List<GameObject> slimeObjects = new List<GameObject>();
 
     private float idleThreshold = 3.0f;
     private bool canAttack = true;
@@ -58,6 +59,9 @@ public class slimeController : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        slimeObjects[(int)type].SetActive(true);
+
         if (health <= 0)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().SlimeKilled();
