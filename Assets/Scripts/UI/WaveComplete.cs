@@ -15,7 +15,6 @@ public class WaveComplete : MonoBehaviour
     private Text waveCompleteText;
     private GameObject backPanel;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (gameManagerObject == null)
@@ -36,7 +35,6 @@ public class WaveComplete : MonoBehaviour
         backPanel.transform.DOScaleX(0, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isNull)
@@ -52,7 +50,8 @@ public class WaveComplete : MonoBehaviour
     public void Begin()
     {
         canvas.DOFade(1f, 0.25f);
-        backPanel.transform.DOScaleX(1.0f, 1.0f).SetEase(Ease.OutQuint);
+        waveCompleteText.gameObject.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.4f, 3, 0.5f);
+        backPanel.transform.DOScaleX(1.0f, 1.0f).SetEase(Ease.InOutQuart);
     }
 
     public void End()

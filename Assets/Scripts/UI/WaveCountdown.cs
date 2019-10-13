@@ -9,10 +9,11 @@ public class WaveCountdown : MonoBehaviour
     private GameObject gameManagerObject;
     private GameManager gameManager;
     private bool isNull = true;
-    private float startTimerValue = 7.0f;
+    private float startTimerValue;
     private bool isActive;
 
     private CanvasGroup canvas;
+    private Vector3 endTransform;
     private Text countdownTimer;
     private Image countdownFill;
 
@@ -50,27 +51,18 @@ public class WaveCountdown : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-    //    transform.DOScale(new Vector3(1f, 1f, 1f), 1f).SetEase(Ease.OutQuint);
-    //}
-
-    //private void OnDisable()
-    //{
-    //    transform.DOScale(new Vector3(0, 0, 0), 0f);
-    //}
-
     public void Begin()
     {
         isActive = true;
+        startTimerValue = gameManager.gracetimer;
         canvas.DOFade(1f, 0.25f);
-        transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f).SetEase(Ease.OutQuint);
+        transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f).SetEase(Ease.OutBack);
     }
 
     public void End()
     {
         isActive = false;
-        canvas.DOFade(0f, 0.25f);
+        canvas.DOFade(0f, 0.2f);
         transform.DOScale(new Vector3(0, 0, 0), 0.4f);
     }
 }
