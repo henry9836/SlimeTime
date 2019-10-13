@@ -77,7 +77,10 @@ public class GameManager : MonoBehaviour
 
     public void SlimeKilled()
     {
-        remainingSpawn--;
+        if (remainingSpawn > 0)
+        {
+            remainingSpawn--;
+        }
     }
 
     // Update is called once per frame
