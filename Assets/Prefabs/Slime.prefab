@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 3188455919807928642}
   m_Layer: 9
   m_Name: Slime
-  m_TagString: BULLETIGNORE
+  m_TagString: BULLETIGNORESLIME
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -120,8 +120,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        //playerMesh.transform.GetChild(0).transform.GetChild(1).transform.localPosition = Vector3.zero;
-
         //ALIVE
         if (health > 0)
         {

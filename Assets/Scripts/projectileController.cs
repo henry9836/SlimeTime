@@ -9,19 +9,36 @@ public class projectileController : MonoBehaviour
 
     public Vector3 travelDir;
 
+    private float safeTime = 0.1f;
+    private bool colLock = true;
+
+    private void Start()
+    {
+        colLock = true;
+        StartCoroutine(Activate());
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag != "Player" && other.tag != "BULLETIGNORE")
+        if (!colLock)
         {
-
-            if (other.tag == "Slime")
+            if (other.tag != "Player" && other.tag != "BULLETIGNORE" && other.tag != "BULLETIGNORESLIME")
             {
-                other.transform.parent.GetComponent<slimeController>().DamageSlime(damage, travelDir);
+
+                if (other.tag == "Slime")
+                {
+                    other.transform.parent.GetComponent<slimeController>().DamageSlime(damage, travelDir);
+                }
+
+                Destroy(this.gameObject);
             }
-
-            Destroy(this.gameObject);
         }
-
     }
+
+    IEnumerator Activate()
+    {
+        yield return new WaitForSeconds(safeTime);
+        colLock = false;
+    }
+
 }
