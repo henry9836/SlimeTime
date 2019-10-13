@@ -39,7 +39,6 @@ public class SlimeCounter : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Manager not found. Cannot display slime count.");
             countText.text = "000";
         }
 
