@@ -61,6 +61,8 @@ public class slimeSpawner : MonoBehaviour
 
         toSpawn = wavetospawnammount(wave, players.Count);
 
+        stage1time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f) / 2.0f;
+        stage2time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f);
 
 
 
