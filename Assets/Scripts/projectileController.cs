@@ -22,7 +22,7 @@ public class projectileController : MonoBehaviour
     {
         if (!colLock)
         {
-            if (other.tag != "Player" && other.tag != "BULLETIGNORE" && other.tag != "BULLETIGNORESLIME")
+            if (other.tag != "Player" && other.tag != "BULLETIGNORE" && other.tag != "BULLETIGNORESLIME" && other.tag != "NORMAL" && other.tag != "ICE" && other.tag != "FIRE")
             {
 
                 if (other.tag == "Slime")
