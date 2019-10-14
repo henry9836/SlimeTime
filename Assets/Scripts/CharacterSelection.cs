@@ -64,7 +64,7 @@ public class CharacterSelection : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 && selectable == true)
+            if ((Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT")) && selectable == true)
             {
                 selectable = false;
                 isselected = !isselected;

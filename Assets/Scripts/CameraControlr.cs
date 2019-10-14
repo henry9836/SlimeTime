@@ -44,9 +44,9 @@ public class CameraControlr : MonoBehaviour
 
         //Smooth out the camera FOV with Lerp
 
-        //gameObject.GetComponent<Camera>().orthographicSize = camFOV;
+        gameObject.GetComponent<Camera>().orthographicSize = camFOV;
 
-        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, camFOV, Time.deltaTime * transitionSpeed);
+        //gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, camFOV, Time.deltaTime * transitionSpeed);
 
     }
 
