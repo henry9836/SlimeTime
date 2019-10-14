@@ -13,12 +13,12 @@ public class slimeController : MonoBehaviour
 
     public slimeTypes type = slimeTypes.NORMAL;
 
-    public float health = 1.0f;
+    public float health = 0;
     public float damageEffectMultiplyer = 1.0f;
     public float attackDamage = 1.0f;
     public float attackCooldown = 3.0f;
     public float attackEffectMultiplyer = 100.0f;
-    public float jumpCooldown = 1.0f;
+    public Vector2 jumpCooldown = new Vector2(0.0f, 0.0f);
     public Vector2 idleThresholdRange = new Vector2(1.0f, 5.0f);
     public float wanderRange = 5.0f;
     public List<GameObject> slimeObjects = new List<GameObject>();
@@ -44,6 +44,8 @@ public class slimeController : MonoBehaviour
     {
         jumpLock = false;
         canAttack = true;
+        jumpCooldown = GameObject.Find("GameManager").GetComponent<slimeSpawner>().jumpCooldown;
+        health = GameObject.Find("GameManager").GetComponent<slimeSpawner>().health;
         detectionSphere = transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
         idleThreshold = Random.Range(idleThresholdRange.x, idleThresholdRange.y);
     }
@@ -111,7 +113,8 @@ public class slimeController : MonoBehaviour
     IEnumerator JumpCooldown()
     {
         jumpLock = true;
-        yield return new WaitForSeconds(jumpCooldown);
+        
+        yield return new WaitForSeconds(Random.Range(jumpCooldown.x, jumpCooldown.y));
         jumpLock = false;
     }
 
