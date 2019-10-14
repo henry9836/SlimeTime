@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private GameObject aimIndicator;
     private float lastHealth;
     private projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
-    private Material initalMaterial;
+    public Material initalMaterial;
 
     //Ragdoll Effects
     public void FlingYourArmsFromSideToSide()
@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
+       
         if (playerType == PLAYER.UNASSIGNED)
         {
             Debug.LogWarning("playerType of " + name + " is unassigned!");
@@ -102,8 +103,8 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Base Projectile not set on player: " + name);
         }
 
-        charcterType = (CHARACTER)characterSetter.playerSelections[((int)playerType) - 1];
 
+        charcterType = (CHARACTER)characterSetter.playerSelections[((int)playerType) - 1];
 
         if (playerRagdolls[(int)charcterType] != null)
         {
@@ -126,7 +127,7 @@ public class PlayerController : MonoBehaviour
         lastAimVec = transform.forward;
 
 
-
+       
 
         //set projType
         if (charcterType == CHARACTER.ARCHER)
@@ -164,17 +165,19 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity, layerMask);
+        if (Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity, layerMask))
+        {
 
-        if (hit.collider.gameObject.tag == "MainCamera")
-        {
-            Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.green);
-            playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = initalMaterial;
-        }
-        else
-        {
-            Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.red);
-            playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = wallMaterial;
+            if (hit.collider.gameObject.tag == "MainCamera")
+            {
+                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.green);
+                playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = initalMaterial;
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.red);
+                playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = wallMaterial;
+            }
         }
 
         //ALIVE
