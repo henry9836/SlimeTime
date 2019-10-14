@@ -7,7 +7,7 @@ public class CameraControlr : MonoBehaviour
 
     private float safezone = 5.0f;
     private float maxZoonOut = 1.0f;
-
+    private Vector3 velocity = Vector3.zero;
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -30,13 +30,21 @@ public class CameraControlr : MonoBehaviour
 
         transform.LookAt(playersCOM);
 
-        transform.position = new Vector3(playersCOM.x, camY, camZ);
+        float transitionSpeed = 0.2f;
+
+        //Smooth out the camera movement with Lerp
+
+        //transform.position = new Vector3(playersCOM.x, camY, camZ);
+
+        //transform.position = Vector3.Lerp(transform.position, new Vector3(playersCOM.x, camY, camZ), Time.deltaTime * transitionSpeed); 
+
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(playersCOM.x, camY, camZ), ref velocity, transitionSpeed);
 
         float camFOV = FOV(validPlayers);
 
-        //gameObject.GetComponent<Camera>().orthographicSize = camFOV;
+        //Smooth out the camera FOV with Lerp
 
-        float transitionSpeed = 0.5f;
+        //gameObject.GetComponent<Camera>().orthographicSize = camFOV;
 
         gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, camFOV, Time.deltaTime * transitionSpeed);
 
