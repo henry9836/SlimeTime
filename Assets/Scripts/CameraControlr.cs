@@ -7,6 +7,7 @@ public class CameraControlr : MonoBehaviour
 
     private float safezone = 5.0f;
     private float maxZoonOut = 1.0f;
+
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -33,9 +34,11 @@ public class CameraControlr : MonoBehaviour
 
         float camFOV = FOV(validPlayers);
 
-        gameObject.GetComponent<Camera>().orthographicSize = camFOV;
+        //gameObject.GetComponent<Camera>().orthographicSize = camFOV;
 
-       
+        float transitionSpeed = 0.5f;
+
+        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, camFOV, Time.deltaTime * transitionSpeed);
 
     }
 
