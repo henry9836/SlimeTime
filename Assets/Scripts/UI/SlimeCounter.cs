@@ -39,7 +39,6 @@ public class SlimeCounter : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Manager not found. Cannot display slime count.");
             countText.text = "000";
         }
 
@@ -55,6 +54,6 @@ public class SlimeCounter : MonoBehaviour
     public void Shake()
     {
         mainPanel.transform.DOKill(true);
-        mainPanel.transform.DOPunchPosition(new Vector3(0f, -12f, 0f), 0.25f, 3, 0.5f, false);
+        mainPanel.transform.DOPunchPosition(new Vector3(0f, -16f, 0f), 0.25f, 3, 0.5f, false);
     }
 }

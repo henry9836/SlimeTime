@@ -10,8 +10,16 @@ public class CameraControlr : MonoBehaviour
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        List<GameObject> validPlayers = new List<GameObject>();
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<PlayerController>().health > 0)
+            {
+                validPlayers.Add(players[i]);
+            }
+        }
 
-        Vector3 playersCOM = COM(players);
+        Vector3 playersCOM = COM(validPlayers);
 
         Debug.DrawLine(playersCOM, new Vector3(playersCOM.x, playersCOM.y + 50, playersCOM.z));
 
@@ -23,7 +31,7 @@ public class CameraControlr : MonoBehaviour
 
         transform.position = new Vector3(playersCOM.x, camY, camZ);
 
-        float camFOV = FOV(players);
+        float camFOV = FOV(validPlayers);
 
         gameObject.GetComponent<Camera>().orthographicSize = camFOV;
 
@@ -31,34 +39,34 @@ public class CameraControlr : MonoBehaviour
 
     }
 
-    Vector3 COM(GameObject[] players)
+    Vector3 COM(List<GameObject> players)
     {
         float xpos = 0.0f;
         float ypos = 0.0f;
         float zpos = 0.0f;
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             xpos += players[i].transform.position.x;
         }
-        xpos /= players.Length;
+        xpos /= players.Count;
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             ypos += players[i].transform.position.y;
         }
-        ypos /= players.Length;
+        ypos /= players.Count;
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             zpos += players[i].transform.position.z;
         }
-        zpos /= players.Length;
+        zpos /= players.Count;
 
         return (new Vector3(xpos, ypos, zpos));
     }
 
-    float FOV(GameObject[] players)
+    float FOV(List<GameObject> players)
     {
         return (playertoposition(players));
     }
@@ -71,7 +79,7 @@ public class CameraControlr : MonoBehaviour
         return (origin + direction * dotP);
     }
 
-    public float playertoposition(GameObject[] players)
+    public float playertoposition(List<GameObject> players)
     {
 
         int layerMask = 1 << 12;
@@ -96,7 +104,7 @@ public class CameraControlr : MonoBehaviour
         Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITbl, Mathf.Infinity, layerMask);
         Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITbl.distance, Color.yellow);
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             if (players[i].GetComponent<PlayerController>().health > 0)
             {

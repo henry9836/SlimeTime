@@ -10,6 +10,7 @@ TagManager:
   - Slime
   - BULLETIGNORE
   - DETECTIONCAST
+  - BULLETIGNORESLIME
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: selection
+    uniqueID: 4174269169
     locked: 0
