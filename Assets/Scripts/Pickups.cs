@@ -8,7 +8,7 @@ public class Pickups : MonoBehaviour
     public float spanwRate;
     public float spawnRateModifier;
     public float maxSpawnRate;
-    public List<GameObject> powerups;
+    public GameObject powerup;
     public bool startdelay = false;
     public float startdelaytime;
 
@@ -47,9 +47,11 @@ public class Pickups : MonoBehaviour
             }
             timer = 0.0f;
 
-            int tospawn = Random.Range(1, (sizeof(POWERUPS) - 1));
+
+            int tospawn = Random.Range(1, (System.Enum.GetValues(typeof(POWERUPS)).Length));
 
             StartCoroutine(GetComponent<slimeSpawner>().Spawnpowerup((POWERUPS)tospawn));
+
         }
     }
 
