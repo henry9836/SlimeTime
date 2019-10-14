@@ -14,8 +14,10 @@ public class projectileController : MonoBehaviour
     };
 
     public float damage = 1.0f;
+    public GameObject destroyParticle;
     public PROJTYPES type = PROJTYPES.ARROW;
     public List<AudioClip> fireSounds = new List<AudioClip>();
+    public List<GameObject> projObjects = new List<GameObject>();
     public Vector3 travelDir;
 
     private float safeTime = 0.001f;
@@ -30,6 +32,13 @@ public class projectileController : MonoBehaviour
 
         GetComponent<AudioSource>().clip = fireSounds[(int)type];
         GetComponent<AudioSource>().Play();
+
+        if (type != PROJTYPES.ARROW)
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        projObjects[(int)type].SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +52,10 @@ public class projectileController : MonoBehaviour
                 {
                     other.transform.parent.GetComponent<slimeController>().DamageSlime(damage, travelDir);
                 }
+
+                Vector3 hitPos = other.ClosestPoint(transform.position);
+
+                Instantiate(destroyParticle, hitPos + (Vector3.forward), Quaternion.identity);
 
                 Destroy(this.gameObject);
             }
