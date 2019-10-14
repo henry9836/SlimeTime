@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     public int pickupAmmoCount = 0;
 
+    public Material wallMaterial;
     public AudioClip hurtSound;
     public GameObject baseProjectile;
     public GameObject playerMesh;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private GameObject aimIndicator;
     private float lastHealth;
     private projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
+    private Material initalMaterial;
 
     //Ragdoll Effects
     public void FlingYourArmsFromSideToSide()
@@ -136,11 +138,34 @@ public class PlayerController : MonoBehaviour
         {
             projType = projectileController.PROJTYPES.AXE;
         }
+
+        initalMaterial = playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material;
     }
 
 
     void Update()
     {
+
+        //Set material based on if we can find a camera
+
+        GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+
+        Vector3 camDir = new Vector3(cam.transform.position.x - transform.position.x, cam.transform.position.y - transform.position.y, cam.transform.position.z - transform.position.z).normalized;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity);
+
+        if (hit.collider.gameObject.tag == "MainCamera")
+        {
+            Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.green);
+            playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = initalMaterial;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.red);
+            playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = wallMaterial;
+        }
 
         //ALIVE
         if (health > 0)
