@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public float health = 100.0f;
     public int pickupAmmoCount = 0;
 
+    public Material wallMaterial;
     public AudioClip hurtSound;
     public GameObject baseProjectile;
     public GameObject playerMesh;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private GameObject aimIndicator;
     private float lastHealth;
     private projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
+    public Material initalMaterial;
 
     //Ragdoll Effects
     public void FlingYourArmsFromSideToSide()
@@ -88,6 +90,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+       
         if (playerType == PLAYER.UNASSIGNED)
         {
             Debug.LogWarning("playerType of " + name + " is unassigned!");
@@ -98,6 +102,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("Base Projectile not set on player: " + name);
         }
+
+
+        charcterType = (CHARACTER)characterSetter.playerSelections[((int)playerType) - 1];
 
         if (playerRagdolls[(int)charcterType] != null)
         {
@@ -119,6 +126,9 @@ public class PlayerController : MonoBehaviour
 
         lastAimVec = transform.forward;
 
+
+       
+
         //set projType
         if (charcterType == CHARACTER.ARCHER)
         {
@@ -136,11 +146,39 @@ public class PlayerController : MonoBehaviour
         {
             projType = projectileController.PROJTYPES.AXE;
         }
+
+        initalMaterial = playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material;
     }
 
 
     void Update()
     {
+
+        //Set material based on if we can find a camera
+
+        GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+
+        Vector3 camDir = new Vector3(cam.transform.position.x - transform.position.x, cam.transform.position.y - transform.position.y, cam.transform.position.z - transform.position.z).normalized;
+
+        // Bit shift the index of the layer (8) to get a bit mask
+        int layerMask = 1 << 0;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity, layerMask))
+        {
+
+            if (hit.collider.gameObject.tag == "MainCamera")
+            {
+                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.green);
+                playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = initalMaterial;
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.red);
+                playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = wallMaterial;
+            }
+        }
 
         //ALIVE
         if (health > 0)
@@ -148,6 +186,7 @@ public class PlayerController : MonoBehaviour
             playerMesh.SetActive(true);
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
+            transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             //AIM
             Vector3 aimVec = new Vector3(0, 0, 0);
@@ -244,6 +283,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().enabled = false;
 
             if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
             {

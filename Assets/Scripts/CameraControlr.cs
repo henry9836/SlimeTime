@@ -179,29 +179,6 @@ public class CameraControlr : MonoBehaviour
         return (zoom);
     }
 
-    ///// code for raycasting off FOV lines 
-
-
-
-
-    //RaycastHit straightHITtl;
-    //position = new Vector3(transform.localPosition.x - xdiff, transform.localPosition.y + ydiff, transform.localPosition.z + zdiff);
-    //Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITtl, Mathf.Infinity);
-    //    Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITtl.distance, Color.green);
-
-
-
-    //RaycastHit straightHITbr;
-    //position = new Vector3(transform.localPosition.x + xdiff, transform.localPosition.y - ydiff, transform.localPosition.z - zdiff);
-    //Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITbr, Mathf.Infinity);
-    //    Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITbr.distance, Color.blue);
-
-
-
- 
-
-
-
 
     //Vector3 temp = FindNearestPointOnLine(lineposition, transform.TransformDirection(Vector3.forward), players[i].transform.position);
     //Debug.DrawLine(temp, players[i].transform.position);

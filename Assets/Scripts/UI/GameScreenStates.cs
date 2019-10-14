@@ -39,65 +39,62 @@ public class GameScreenStates : MonoBehaviour
 
     void Update()
     {
-        if (screenState != screenStateCur)
+        if (!isNull)
         {
-            // Deactivate old screen
-            switch (screenStateCur)
+            if (screenState != screenStateCur)
             {
-                case 0:
-                    screens[0].SetActive(false);
-                    break;
+                // Deactivate old screen
+                switch (screenStateCur)
+                {
+                    case 0:
+                        screens[0].SetActive(false);
+                        break;
 
-                case 1:
-                    screens[1].GetComponent<WaveComplete>().End();
-                    break;
+                    case 1:
+                        screens[1].GetComponent<WaveComplete>().End();
+                        break;
 
-                case 2:
-                    screens[2].GetComponent<WaveCountdown>().End();
-                    break;
+                    case 2:
+                        screens[2].GetComponent<WaveCountdown>().End();
+                        break;
 
+                }
+
+                switch (screenState)
+                {
+                    case 0:
+                        screens[0].SetActive(true);
+                        break;
+
+                    case 1:
+                        screens[1].GetComponent<WaveComplete>().Begin();
+                        break;
+
+                    case 2:
+                        screens[2].GetComponent<WaveCountdown>().Begin();
+                        break;
+                }
+
+                screenStateCur = screenState;
             }
-
-            //if (screenStateCur >= 0)
-            //{
-            //    screens[screenStateCur].SetActive(false);
-            //}
-
-            // Activate new screen
-            //screens[screenState].SetActive(true);
-            switch (screenState)
+            else
             {
-                case 0:
-                    screens[0].SetActive(true);
-                    break;
+                if (screenState == 0 && gameManager.remainingSpawn <= 0)
+                {
+                    screenState = 1;
+                }
 
-                case 1:
-                    screens[1].GetComponent<WaveComplete>().Begin();
-                    break;
+                if (screenState == 1 && gameManager.gracetimer <= gameManager.grace - 3f)
+                {
+                    screenState = 2;
+                }
 
-                case 2:
-                    screens[2].GetComponent<WaveCountdown>().Begin();
-                    break;
-            }
-
-            screenStateCur = screenState;
-        }
-        else
-        {
-            if (screenState == 0 && gameManager.remainingSpawn <= 0)
-            {
-                screenState = 1;
-            }
-
-            if (screenState == 1 && gameManager.gracetimer <= gameManager.grace - 3f)
-            {
-                screenState = 2;
-            }
-
-            if (screenState == 2 && gameManager.gracetimer <= 0.1f)
-            {
-                screenState = 0;
+                if (screenState == 2 && gameManager.gracetimer <= 0.1f)
+                {
+                    screenState = 0;
+                }
             }
         }
+       
     }
 }

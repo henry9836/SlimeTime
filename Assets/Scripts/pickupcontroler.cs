@@ -36,11 +36,6 @@ public class pickupcontroler : MonoBehaviour
         }
         else if (type == Pickups.POWERUPS.HEAL)
         {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i].GetComponent<PlayerController>().health = 100;
-            }
             ammoCount = 0;
         }
         else if (type == Pickups.POWERUPS.WALLOFDEATH)
@@ -70,11 +65,23 @@ public class pickupcontroler : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Ammo count should be: " + ammoCount);
-            collision.gameObject.GetComponent<PlayerController>().powerupType = type;
-            collision.gameObject.GetComponent<PlayerController>().pickupAmmoCount = ammoCount;
-            StartCoroutine(despawn());
-
+            if (type == Pickups.POWERUPS.HEAL)
+            {
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for (int i = 0; i < players.Length; i++)
+                {
+                    if (players[i].GetComponent<PlayerController>().health > 0)
+                    {
+                        players[i].GetComponent<PlayerController>().health = 100;
+                    }
+                }
+            }
+            else
+            {
+                collision.gameObject.GetComponent<PlayerController>().powerupType = type;
+                collision.gameObject.GetComponent<PlayerController>().pickupAmmoCount = ammoCount;
+                StartCoroutine(despawn());
+            }
         }
 
         if (once == true)
