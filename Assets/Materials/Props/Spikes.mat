@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Island Boss ICe
+  m_Name: Spikes
   m_Shader: {fileID: 4800000, guid: c4edd00ff2db5b24391a4fcb1762e459, type: 3}
-  m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -26,7 +26,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 281076fe84694e041bdae015fe430c88, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -106,7 +106,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UnlitColorMap:
-        m_Texture: {fileID: 2800000, guid: 9c7591ea4cfd16748b1c4ce8a3caf733, type: 3}
+        m_Texture: {fileID: 2800000, guid: 01146094f49e13748bf8860f9a0297a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -205,7 +205,7 @@ Material:
     - _StencilWriteMask: 3
     - _StencilWriteMaskDepth: 48
     - _StencilWriteMaskDistortionVec: 64
-    - _StencilWriteMaskGBuffer: 51
+    - _StencilWriteMaskGBuffer: 3
     - _StencilWriteMaskMV: 176
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
@@ -248,4 +248,4 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.6084906, g: 1, b: 0.91360354, a: 1}
+    - _UnlitColor: {r: 0.740566, g: 1, b: 1, a: 1}
