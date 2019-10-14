@@ -117,9 +117,32 @@ public class slimeController : MonoBehaviour
 
     IEnumerator Wander()
     {
-        idleTimer = 0;
         idleThreshold = Random.Range(idleThresholdRange.x, idleThresholdRange.y);
-        GetComponent<LaunchController>().Launch(new Vector3(Random.Range(transform.position.x-wanderRange, transform.position.x + wanderRange), Random.Range(transform.position.y - wanderRange, transform.position.y + wanderRange), Random.Range(transform.position.z - wanderRange, transform.position.z + wanderRange)));
+
+
+        //Generate a launch position
+        Vector3 launchPos = new Vector3(Random.Range(transform.position.x - wanderRange, transform.position.x + wanderRange), Random.Range(transform.position.y - wanderRange, transform.position.y + wanderRange), Random.Range(transform.position.z - wanderRange, transform.position.z + wanderRange));
+
+        //Check if position has ground
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(launchPos, Vector3.down, out hit, Mathf.Infinity))
+        {
+
+            if (hit.collider.gameObject.tag != "DETECTIONIDSAVULTIMATE360.msi")
+            {
+                //Launch if it does
+                Debug.Log("Jumping because " + hit.collider.gameObject.name + " is a floor");
+                GetComponent<LaunchController>().Launch(launchPos);
+                idleTimer = 0;
+            }
+        }
+
+
+
+        //Otherwise do not reset timer and let it loop
+
         yield return null;
     }
 
