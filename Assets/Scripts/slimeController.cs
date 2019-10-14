@@ -130,10 +130,9 @@ public class slimeController : MonoBehaviour
         if (Physics.Raycast(launchPos, Vector3.down, out hit, Mathf.Infinity))
         {
 
-            if (hit.collider.gameObject.tag != "DETECTIONIDSAVULTIMATE360.msi")
+            if (hit.collider.gameObject.layer != 12)
             {
                 //Launch if it does
-                Debug.Log("Jumping because " + hit.collider.gameObject.name + " is a floor");
                 GetComponent<LaunchController>().Launch(launchPos);
                 idleTimer = 0;
             }
