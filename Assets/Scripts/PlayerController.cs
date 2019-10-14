@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
         if (playerType == PLAYER.UNASSIGNED)
         {
             Debug.LogWarning("playerType of " + name + " is unassigned!");
@@ -98,6 +99,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("Base Projectile not set on player: " + name);
         }
+
+        charcterType = (CHARACTER)characterSetter.playerSelections[((int)playerType) - 1];
+
 
         if (playerRagdolls[(int)charcterType] != null)
         {
@@ -118,6 +122,9 @@ public class PlayerController : MonoBehaviour
         canFire = true;
 
         lastAimVec = transform.forward;
+
+
+
 
         //set projType
         if (charcterType == CHARACTER.ARCHER)

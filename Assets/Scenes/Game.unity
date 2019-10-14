@@ -25935,10 +25935,6 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1492874201, guid: 1da96de4e1c32e94d876799d524fa1f4, type: 3}
-      propertyPath: maxSpawnRate
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1492874201, guid: 1da96de4e1c32e94d876799d524fa1f4, type: 3}
       propertyPath: powerups.Array.data[3]
       value: 
       objectReference: {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239,
