@@ -152,9 +152,12 @@ public class PlayerController : MonoBehaviour
 
         Vector3 camDir = new Vector3(cam.transform.position.x - transform.position.x, cam.transform.position.y - transform.position.y, cam.transform.position.z - transform.position.z).normalized;
 
+        // Bit shift the index of the layer (8) to get a bit mask
+        int layerMask = 1 << 0;
+
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity);
+        Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity, layerMask);
 
         if (hit.collider.gameObject.tag == "MainCamera")
         {
