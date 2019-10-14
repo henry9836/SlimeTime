@@ -352,58 +352,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
         type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inSlope
-      value: -3.0184278
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outSlope
-      value: -3.0184278
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inWeight
-      value: 0.17393841
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
-      value: -2.3111386
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
-      value: -2.3111386
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
-      value: 0.14928295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: TrailModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8207465954581818131, guid: 6003ff1a8851b584c87504a2688761fe,
-        type: 3}
-      propertyPath: SizeBySpeedModule.enabled
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6003ff1a8851b584c87504a2688761fe, type: 3}
