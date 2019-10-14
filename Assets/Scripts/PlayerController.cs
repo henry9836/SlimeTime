@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
             playerMesh.SetActive(true);
             GetComponent<CapsuleCollider>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
+            transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().enabled = true;
 
             //AIM
             Vector3 aimVec = new Vector3(0, 0, 0);
@@ -251,6 +252,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            transform.GetChild(1).gameObject.GetComponent<MeshRenderer>().enabled = false;
 
             if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
             {
