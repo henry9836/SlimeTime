@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position , camDir, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position, camDir, out hit, Mathf.Infinity, layerMask))
         {
 
             if (hit.collider.gameObject.tag == "MainCamera")
