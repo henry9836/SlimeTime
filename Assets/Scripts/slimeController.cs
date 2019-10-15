@@ -65,14 +65,11 @@ public class slimeController : MonoBehaviour
         if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, layerMask))
         {
             //if we didn't hit the camera layer
-            if (hit.collider.gameObject.layer != 12 && hit.collider.gameObject.tag != "DONOTJUMPHERE")
-            {
-                Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
-                Debug.DrawLine(transform.position, pos, Color.white);
-                Debug.DrawLine(pos, hit.point, Color.white);
-                //We found a valid spot
-                return true;
-            }
+            Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
+            Debug.DrawLine(transform.position, pos, Color.red, 10);
+            Debug.DrawLine(pos, hit.point, Color.red, 10);
+            //We found a valid spot
+            return true;
         }
         return false;
     }
