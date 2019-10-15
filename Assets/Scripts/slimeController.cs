@@ -51,6 +51,7 @@ public class slimeController : MonoBehaviour
         health = GameObject.Find("GameManager").GetComponent<slimeSpawner>().health;
         detectionSphere = transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
         idleThreshold = Random.Range(idleThresholdRange.x, idleThresholdRange.y);
+        GetComponent<Rigidbody>().velocity = Vector3.down * 2;
     }
 
     bool CheckLaunchPos(Vector3 pos)
@@ -84,10 +85,34 @@ public class slimeController : MonoBehaviour
         //If we cannot go in a straight direction?
         else
         {
-            for (int i = 0; i < 180; i++)
+
+            //check positions in a circle and pick the shortest distance one
+            int spawnOnAngle = 1;
+
+            float shortest = Mathf.Infinity;
+
+            for (int i = 0; i < 360; i++)
             {
-                if (CheckLaunchPos(transform.position + (targetDir * maxJumpDistance)))
+                if (i % spawnOnAngle == 0)
                 {
+                    Vector3 tmpSpot;
+                    tmpSpot.x = (transform.position.x + maxJumpDistance) * Mathf.Sin(i * Mathf.Deg2Rad);
+                    tmpSpot.y = transform.position.y;
+                    tmpSpot.z = (transform.position.z + maxJumpDistance) * Mathf.Cos(i * Mathf.Deg2Rad);
+
+                    float dis = Vector3.Distance(tarPlayer.transform.position, tmpSpot);
+
+                    //If spot is valid
+                    if (CheckLaunchPos(tmpSpot))
+                    {
+                        //If the distance to the player is shorter than a previously found path
+                        if (dis < shortest)
+                        {
+                            //Set result to the new spot
+                            shortest = dis;
+                            result = tmpSpot;
+                        }
+                    }
 
                 }
             }
@@ -143,7 +168,7 @@ public class slimeController : MonoBehaviour
                 closestDistance = Mathf.Infinity;
                 tarPlayer = null;
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                for (int i = 0; i < players.Length-1; i++)
+                for (int i = 0; i < players.Length; i++)
                 {
                     //Check health
                     if (players[i].GetComponent<PlayerController>().health > 0)
@@ -151,6 +176,7 @@ public class slimeController : MonoBehaviour
                         //Check distance
                         if (Vector3.Distance(players[i].transform.position, transform.position) < closestDistance)
                         {
+                            
                             //Set player to target
                             tarPlayer = players[i];
                             closestDistance = Vector3.Distance(players[i].transform.position, transform.position);
@@ -168,7 +194,7 @@ public class slimeController : MonoBehaviour
         }
 
     }
-    
+
     IEnumerator JumpCooldown()
     {
         jumpLock = true;
