@@ -8,7 +8,10 @@ public class CharacterSelection : MonoBehaviour
     public float holdTimer = 0.0f;
     public float holdlengh = 3.0f;
     public bool lockedIn = false;
+    public AudioClip lockSound;
+    private bool lockSoundPlayed;
     public int currentSelection = 10;
+    public GameObject attachedPlayer;
 
     public enum PLAYERin
     {
@@ -42,7 +45,24 @@ public class CharacterSelection : MonoBehaviour
             }
         }
 
+       switch (currentSelection)
+        {
+            case 0:
+                transform.localPosition = new Vector3(-556f, 0, 0);
+                break;
 
+            case 1:
+                transform.localPosition = new Vector3(-185f, 0, 0);
+                break;
+
+            case 2:
+                transform.localPosition = new Vector3(185f, 0, 0);
+                break;
+
+            case 3:
+                transform.localPosition = new Vector3(556f, 0, 0);
+                break;
+        }
 
         //currentSelection = (int)playerType - 1;
     }
@@ -82,6 +102,14 @@ public class CharacterSelection : MonoBehaviour
         if (lockedIn)
         {
             GetComponent<Image>().color = new Color(0.67f, 1.0f, 0.8f, 0.2f);
+
+            if (!lockSoundPlayed)
+            {
+                GetComponent<AudioSource>().clip = lockSound;
+                GetComponent<AudioSource>().Play();
+
+                lockSoundPlayed = true;
+            }
         }
     }
 }
