@@ -19,6 +19,7 @@ public class projectileController : MonoBehaviour
     public List<AudioClip> fireSounds = new List<AudioClip>();
     public List<GameObject> projObjects = new List<GameObject>();
     public Vector3 travelDir;
+    public GameObject playerRef;
 
     private float safeTime = 0.001f;
     private bool colLock = true;
@@ -28,10 +29,6 @@ public class projectileController : MonoBehaviour
         colLock = true;
         StartCoroutine(Activate());
 
-        //Play fire sound according to proj type
-
-        GetComponent<AudioSource>().clip = fireSounds[(int)type];
-        GetComponent<AudioSource>().Play();
 
         if (type != PROJTYPES.ARROW)
         {
@@ -39,6 +36,12 @@ public class projectileController : MonoBehaviour
         }
 
         projObjects[(int)type].SetActive(true);
+
+
+        //Play fire sound according to proj type
+
+        playerRef.GetComponent<AudioSource>().clip = fireSounds[(int)type];
+        playerRef.GetComponent<AudioSource>().Play();
     }
 
     private void OnTriggerEnter(Collider other)

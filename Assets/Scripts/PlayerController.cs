@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
                     {
                         GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
                         refer.GetComponent<projectileController>().type = projType;
+                        refer.GetComponent<projectileController>().playerRef = gameObject;
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;
