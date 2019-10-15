@@ -24,8 +24,13 @@ public class CameraControlr : MonoBehaviour
 
         Debug.DrawLine(playersCOM, new Vector3(playersCOM.x, playersCOM.y + 50, playersCOM.z));
 
-        float camY = 88.6f;
-        float camZ = -87.4f;
+        //float camY = 88.6f;
+        //float camZ = -87.4f;
+
+        float camY = 170f;
+        float camZ = -190f;
+
+
         //float camZ = Mathf.Sqrt(Mathf.Abs(((Mathf.Abs(transform.position.z - playersCOM.z))*(Mathf.Abs(transform.position.z - playersCOM.z)))-(camY * camY)));
 
         transform.LookAt(playersCOM);
