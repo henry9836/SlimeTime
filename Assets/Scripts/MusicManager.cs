@@ -1,20 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
-
-    private SceneSwitcher scene;
+    private string sceneCur;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        scene = FindObjectOfType<SceneSwitcher>();
+        sceneCur = SceneManager.GetActiveScene().name;
 
-        if (scene.curScene == "MainMenu" || scene.curScene == "CharacterSelection")
+        if (sceneCur == "MainMenu")
         {
             DontDestroyOnLoad(this.gameObject);
+
+        }
+
+        if (sceneCur == "Game")
+        {
+            Destroy(this.gameObject);
         }
 
     }
@@ -22,6 +28,12 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        sceneCur = SceneManager.GetActiveScene().name;
 
+        if (sceneCur == "Game")
+        {
+            Destroy(this.gameObject);
+            Debug.Log("jldlsad");
+        }
     }
 }

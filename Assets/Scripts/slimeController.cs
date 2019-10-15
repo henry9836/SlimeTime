@@ -65,14 +65,11 @@ public class slimeController : MonoBehaviour
         if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, layerMask))
         {
             //if we didn't hit the camera layer
-            if (hit.collider.gameObject.layer != 12 && hit.collider.gameObject.tag != "DONOTJUMPHERE")
-            {
-                Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
-                Debug.DrawLine(transform.position, pos, Color.white);
-                Debug.DrawLine(pos, hit.point, Color.white);
-                //We found a valid spot
-                return true;
-            }
+            Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
+            Debug.DrawLine(transform.position, pos, Color.red, 10);
+            Debug.DrawLine(pos, hit.point, Color.red, 10);
+            //We found a valid spot
+            return true;
         }
         return false;
     }
@@ -248,9 +245,12 @@ public class slimeController : MonoBehaviour
     public void dropshadow()
     {
         RaycastHit shadowH;
-        Physics.Raycast(transform.position + (Vector3.down * 1.1f), Vector3.down, out shadowH, Mathf.Infinity);
 
-        this.gameObject.transform.GetChild(4).transform.position = new Vector3(this.transform.position.x, shadowH.point.y, this.transform.position.z); 
+        int layerMask = ~(1 << 10);
+
+        Physics.Raycast(transform.position , Vector3.down, out shadowH, Mathf.Infinity, layerMask);
+
+        this.gameObject.transform.GetChild(4).transform.position = new Vector3(this.transform.position.x, shadowH.point.y + 0.5f, this.transform.position.z); 
     }
 
 }
