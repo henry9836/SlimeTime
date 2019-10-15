@@ -151,7 +151,7 @@ public class slimeController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        dropshadow();
         slimeObjects[(int)type].SetActive(true);
 
         //Health Logic
@@ -243,6 +243,14 @@ public class slimeController : MonoBehaviour
         //Otherwise do not reset timer and let it loop
 
         yield return null;
+    }
+
+    public void dropshadow()
+    {
+        RaycastHit shadowH;
+        Physics.Raycast(transform.position + (Vector3.down * 1.1f), Vector3.down, out shadowH, Mathf.Infinity);
+
+        this.gameObject.transform.GetChild(4).transform.position = new Vector3(this.transform.position.x, shadowH.point.y, this.transform.position.z); 
     }
 
 }
