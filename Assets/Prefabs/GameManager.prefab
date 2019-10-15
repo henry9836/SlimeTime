@@ -50,7 +50,9 @@ MonoBehaviour:
   grace: 10
   gracetimer: 0
   gameover: 0
-  currentWave: 1
+  currentWave: 0
+  CanRespawn: 0
+  respawnpos: {x: 0, y: 1.2, z: 0}
 --- !u!114 &2223859101471872379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +96,10 @@ MonoBehaviour:
   TempInvalidFIRE: []
   TempInvalidICE: []
   TempInvalidNORMAL: []
+  players: []
+  playerList: []
+  jumpCooldown: {x: 2, y: 3}
+  health: 0
 --- !u!114 &1222309611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +135,7 @@ MonoBehaviour:
   timer: 0
   spanwRate: 5
   spawnRateModifier: 0.95
-  powerups:
-  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
-  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
-  - {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
+  maxSpawnRate: 2
+  powerup: {fileID: 508214740726348025, guid: f5207137d38e80644ac16e96afe53239, type: 3}
+  startdelay: 0
+  startdelaytime: 0
