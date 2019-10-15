@@ -47,10 +47,16 @@ public class slimeSpawner : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public GameObject[] playerList;
 
+    public Vector2 jumpCooldown = new Vector2(2.0f, 3.0f);
+    public float health = 0;
+
+    public float MAXslimes = 50;
 
     public void NextWave(int wave)
     {
         playerList = GameObject.FindGameObjectsWithTag("Player");
+        players.Clear();
+
         for (int i = 0; i < playerList.Length; i++)
         {
             if (playerList[i].GetComponent<PlayerController>().controllerNotBound == false)
@@ -64,6 +70,17 @@ public class slimeSpawner : MonoBehaviour
         stage1time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f) / 2.0f;
         stage2time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f);
 
+        //untested
+        jumpCooldown = new Vector2(Mathf.Exp(-(wave + 1 / 6)) * 5 , Mathf.Exp(-(wave / 6)) * 5);
+
+        if (wave <= 4)
+        {
+            health = wave;
+        }
+        else
+        {
+            health += Mathf.CeilToInt(Mathf.Pow(wave , 2) * 0.12f) + 2;
+        }
 
 
         onceSpawnng = true;
@@ -81,7 +98,6 @@ public class slimeSpawner : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
 
         if (onceLAZER == true)
         {
@@ -202,7 +218,20 @@ public class slimeSpawner : MonoBehaviour
                     onceSpawnng = false;
                 }
 
-                if (timer <= stage1time)
+                GameObject[] slimes = GameObject.FindGameObjectsWithTag("BULLETIGNORESLIME");
+                Debug.Log(slimes.Length);
+                bool spawn = true;
+                if (slimes.Length > MAXslimes)
+                {
+                    Debug.Log("max reached");
+                    spawn = false;
+                }
+                else
+                {
+                    timer += Time.deltaTime;
+                }
+
+                if (timer <= stage1time && spawn ==true)
                 {
                     //spawn 75%
                     stage1timer += Time.deltaTime;
@@ -214,7 +243,7 @@ public class slimeSpawner : MonoBehaviour
                     }
 
                 }
-                else
+                else if (spawn == true)
                 {
                     //Spawn 25%
                     stage2timer += Time.deltaTime;
@@ -404,7 +433,7 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                GameObject power =  Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
+                GameObject power =  Instantiate(GetComponent<Pickups>().powerup, new Vector3(ValidPositionsFIRE[j].x, ValidPositionsFIRE[j].y + 100, ValidPositionsFIRE[j].z), Quaternion.identity);
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
@@ -414,7 +443,7 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerup, new Vector3(ValidPositionsICE[j].x, ValidPositionsICE[j].y + 100, ValidPositionsICE[j].z), Quaternion.identity);
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
@@ -424,7 +453,7 @@ public class slimeSpawner : MonoBehaviour
             if (spawnPosRad <= 0.0f)
             {
                 spawnPosRad = Mathf.Infinity;
-                GameObject power = Instantiate(GetComponent<Pickups>().powerups[(int)temp], new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
+                GameObject power = Instantiate(GetComponent<Pickups>().powerup, new Vector3(ValidPositionsNORMAL[j].x, ValidPositionsNORMAL[j].y + 100, ValidPositionsNORMAL[j].z), Quaternion.identity);
                 power.GetComponent<pickupcontroler>().type = temp;
             }
         }
@@ -444,7 +473,7 @@ public class slimeSpawner : MonoBehaviour
              }
              if (round >= 10)
              {
-                  tospawn = Mathf.FloorToInt(24 + (3 * ((round / 5) * (round * 0.15f))));
+                  tospawn = Mathf.FloorToInt(24 + ((3 * ((round / 5) * (round * 0.15f)))));
              }                   
          }
          else
@@ -470,8 +499,9 @@ public class slimeSpawner : MonoBehaviour
              }
              if (round >= 10)
              {
-                 tospawn = Mathf.FloorToInt(24 + ((players - 1) * 6) * ((round / 5) * (round * 0.15f)));
+                 tospawn = Mathf.FloorToInt(24 + (((players - 1) * 6) * ((round / 5) * (round * 0.15f))));
              }
+
          }
                     
         return (tospawn);

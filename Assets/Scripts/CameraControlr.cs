@@ -7,6 +7,7 @@ public class CameraControlr : MonoBehaviour
 
     private float safezone = 5.0f;
     private float maxZoonOut = 1.0f;
+    private Vector3 velocity = Vector3.zero;
     void Update()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -29,13 +30,23 @@ public class CameraControlr : MonoBehaviour
 
         transform.LookAt(playersCOM);
 
-        transform.position = new Vector3(playersCOM.x, camY, camZ);
+        float transitionSpeed = 0.2f;
+
+        //Smooth out the camera movement with Lerp
+
+        //transform.position = new Vector3(playersCOM.x, camY, camZ);
+
+        //transform.position = Vector3.Lerp(transform.position, new Vector3(playersCOM.x, camY, camZ), Time.deltaTime * transitionSpeed); 
+
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(playersCOM.x, camY, camZ), ref velocity, transitionSpeed);
 
         float camFOV = FOV(validPlayers);
 
+        //Smooth out the camera FOV with Lerp
+
         gameObject.GetComponent<Camera>().orthographicSize = camFOV;
 
-       
+        //gameObject.GetComponent<Camera>().orthographicSize = Mathf.Lerp(gameObject.GetComponent<Camera>().orthographicSize, camFOV, Time.deltaTime * transitionSpeed);
 
     }
 
@@ -178,29 +189,6 @@ public class CameraControlr : MonoBehaviour
 
         return (zoom);
     }
-
-    ///// code for raycasting off FOV lines 
-
-
-
-
-    //RaycastHit straightHITtl;
-    //position = new Vector3(transform.localPosition.x - xdiff, transform.localPosition.y + ydiff, transform.localPosition.z + zdiff);
-    //Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITtl, Mathf.Infinity);
-    //    Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITtl.distance, Color.green);
-
-
-
-    //RaycastHit straightHITbr;
-    //position = new Vector3(transform.localPosition.x + xdiff, transform.localPosition.y - ydiff, transform.localPosition.z - zdiff);
-    //Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITbr, Mathf.Infinity);
-    //    Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITbr.distance, Color.blue);
-
-
-
- 
-
-
 
 
     //Vector3 temp = FindNearestPointOnLine(lineposition, transform.TransformDirection(Vector3.forward), players[i].transform.position);

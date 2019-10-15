@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2998
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -220,7 +220,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: 0
+    - _TransparentSortPriority: -2
     - _TransparentWritingMotionVec: 0
     - _UVBase: 0
     - _UVDetail: 0
@@ -249,4 +249,4 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.5613208, g: 1, b: 0.9009434, a: 1}
+    - _UnlitColor: {r: 0.7989943, g: 0.8962264, b: 0.8745228, a: 1}
