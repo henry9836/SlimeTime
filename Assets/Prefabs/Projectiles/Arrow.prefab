@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotDir: {x: 1, y: 0, z: 0}
-  rotSpeed: 750
+  rotSpeed: 1200
 --- !u!1 &6029714117361861025
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +417,7 @@ MonoBehaviour:
   - {fileID: 6005307663117946317}
   - {fileID: 8869370206360989726}
   travelDir: {x: 0, y: 0, z: 0}
+  playerRef: {fileID: 0}
 --- !u!82 &-7334613986376810169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -429,7 +430,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
