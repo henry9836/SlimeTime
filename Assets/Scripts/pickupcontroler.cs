@@ -62,11 +62,6 @@ public class pickupcontroler : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        dropshadow();
-    }
-
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -127,16 +122,6 @@ public class pickupcontroler : MonoBehaviour
         StartCoroutine(bob());
     }
 
-    public void dropshadow()
-    {
-        RaycastHit shadowH;
 
-        int layerMask = ~(1 << 15);
-
-        Physics.Raycast(transform.position, Vector3.down, out shadowH, Mathf.Infinity, layerMask);
-        Debug.DrawLine(transform.position, shadowH.point);
-
-        this.gameObject.transform.GetChild(2).transform.position = new Vector3(this.transform.position.x, shadowH.point.y + 0.5f, this.transform.position.z);
-    }
 
 }
