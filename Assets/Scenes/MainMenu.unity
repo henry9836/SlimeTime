@@ -3686,12 +3686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadePanel: {fileID: 301851952}
-  fadeTime: 2
-  targetScene: 1
+  fadeTime: 1
   curScene: 
-  isFading: 0
-  isSwitching: 0
-  fadeTimeCur: 0
 --- !u!114 &1489597049
 MonoBehaviour:
   m_ObjectHideFlags: 0
