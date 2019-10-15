@@ -57,11 +57,11 @@ public class GameScreenStates : MonoBehaviour
             switch (tutorialState)
             {
                 case 1:
-                    tutorial.DOFade(1f, 0.3f);
+                    tutorial.DOFade(1f, 1.0f);
                     break;
 
                 case 2:
-                    tutorial.DOFade(0f, 0.3f);
+                    tutorial.DOFade(0f, 1.0f);
                     break;
             }
 

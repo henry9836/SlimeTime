@@ -7,6 +7,7 @@ public class CharacterSelection : MonoBehaviour
 {
     public float holdTimer = 0.0f;
     public float holdlengh = 3.0f;
+    public bool lockedIn = false;
     public int currentSelection;
 
     public enum PLAYERin
@@ -42,11 +43,25 @@ public class CharacterSelection : MonoBehaviour
 
         if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") == 0)
         {
+            if (!lockedIn)
+            {
             holdTimer -= Time.deltaTime;
+            }
+
             if (holdTimer <= 0.0f)
             {
                 holdTimer = 0.0f;
             }
+        }
+
+        if (holdTimer >= holdlengh)
+        {
+            lockedIn = true;
+        }
+
+        if (lockedIn)
+        {
+            GetComponent<Image>().color = new Color(0.67f, 1.0f, 0.8f, 0.2f);
         }
     }
 }
