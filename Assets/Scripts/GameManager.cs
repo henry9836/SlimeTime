@@ -77,9 +77,12 @@ public class GameManager : MonoBehaviour
 
     public void SlimeKilled()
     {
-        if (remainingSpawn > 0)
-        {
-            remainingSpawn--;
+        if (remainingSpawn > 0)
+
+        {
+
+            remainingSpawn--;
+
         }
     }
 
