@@ -8620,6 +8620,7 @@ MonoBehaviour:
   countdown: 0
   countdowntimer: 500
   fadetime: 3
+  disabledCount: 4
 --- !u!4 &1782171789
 Transform:
   m_ObjectHideFlags: 0
