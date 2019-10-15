@@ -245,9 +245,12 @@ public class slimeController : MonoBehaviour
     public void dropshadow()
     {
         RaycastHit shadowH;
-        Physics.Raycast(transform.position + (Vector3.down * 1.1f), Vector3.down, out shadowH, Mathf.Infinity);
 
-        this.gameObject.transform.GetChild(4).transform.position = new Vector3(this.transform.position.x, shadowH.point.y, this.transform.position.z); 
+        int layerMask = ~(1 << 10);
+
+        Physics.Raycast(transform.position , Vector3.down, out shadowH, Mathf.Infinity, layerMask);
+
+        this.gameObject.transform.GetChild(4).transform.position = new Vector3(this.transform.position.x, shadowH.point.y + 0.5f, this.transform.position.z); 
     }
 
 }
