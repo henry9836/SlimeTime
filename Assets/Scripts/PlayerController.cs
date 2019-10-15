@@ -165,17 +165,17 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position + (camDir * 2), camDir, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(transform.position, camDir, out hit, Mathf.Infinity, layerMask))
         {
 
             if (hit.collider.gameObject.tag == "MainCamera")
             {
-                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.green);
+                Debug.DrawRay(transform.position, camDir * hit.distance, Color.green);
                 playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = initalMaterial;
             }
             else
             {
-                Debug.DrawRay(transform.position + (camDir * 2), camDir * hit.distance, Color.red);
+                Debug.DrawRay(transform.position, camDir * hit.distance, Color.red);
                 playerMesh.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material = wallMaterial;
             }
         }
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
 
             //MOVEMENT
 
-            Vector3 movementVec = new Vector3(0, 0, 0);
+            Vector3 movementVec = Vector3.zero;
 
             if (Input.GetAxisRaw("P" + (int)playerType + "VERT") != 0)
             {
@@ -261,9 +261,36 @@ public class PlayerController : MonoBehaviour
                 movementVec += Vector3.right * Input.GetAxisRaw("P" + (int)playerType + "HOZ");
             }
 
+            if ( movementVec == Vector3.zero)
+            {
+                //stop
+                GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity / 1.2f;
+            }
+
             if (GetComponent<Rigidbody>().velocity.magnitude < maxSpeed)
             {
-                GetComponent<Rigidbody>().AddForce(movementVec * speed);
+
+                if (float.IsNaN((Mathf.Log(GetComponent<Rigidbody>().velocity.magnitude) + speed)) || float.IsInfinity((Mathf.Log(GetComponent<Rigidbody>().velocity.magnitude) + speed)))
+                {
+                    Debug.Log(" waoha you did a funky wunky");
+                    GetComponent<Rigidbody>().AddForce(movementVec * speed);
+
+                }
+                else
+                {
+                    float dot = Vector3.Dot(GetComponent<Rigidbody>().velocity.normalized, movementVec.normalized);
+                    if (dot > 0)
+                    {
+                        GetComponent<Rigidbody>().AddForce(movementVec * (5 * (Mathf.Exp(-(GetComponent<Rigidbody>().velocity.magnitude)) + 10)));
+                    }
+                    else
+                    {
+                        GetComponent<Rigidbody>().AddForce(movementVec * (((1 + (-dot))) * 5 * (Mathf.Exp(-(GetComponent<Rigidbody>().velocity.magnitude)) + 10)));
+                    }
+
+
+                }
+
             }
 
             //Hurt Sound
