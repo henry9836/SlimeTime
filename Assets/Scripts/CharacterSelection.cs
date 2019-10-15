@@ -9,6 +9,7 @@ public class CharacterSelection : MonoBehaviour
     public float holdlengh = 3.0f;
     public bool lockedIn = false;
     public int currentSelection = 10;
+    public GameObject attachedPlayer;
 
     public enum PLAYERin
     {
@@ -42,7 +43,24 @@ public class CharacterSelection : MonoBehaviour
             }
         }
 
+       switch (currentSelection)
+        {
+            case 0:
+                transform.localPosition = new Vector3(-556f, 0, 0);
+                break;
 
+            case 1:
+                transform.localPosition = new Vector3(-185f, 0, 0);
+                break;
+
+            case 2:
+                transform.localPosition = new Vector3(185f, 0, 0);
+                break;
+
+            case 3:
+                transform.localPosition = new Vector3(556f, 0, 0);
+                break;
+        }
 
         //currentSelection = (int)playerType - 1;
     }

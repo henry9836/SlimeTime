@@ -1197,6 +1197,7 @@ MonoBehaviour:
   holdlengh: 1.5
   lockedIn: 0
   currentSelection: -10
+  attachedPlayer: {fileID: 0}
   playerType: 3
 --- !u!114 &461474306
 MonoBehaviour:
@@ -2621,6 +2622,7 @@ MonoBehaviour:
   holdlengh: 1.5
   lockedIn: 0
   currentSelection: -10
+  attachedPlayer: {fileID: 0}
   playerType: 1
 --- !u!114 &1311392123
 MonoBehaviour:
@@ -2705,7 +2707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -183.7, y: 0}
+  m_AnchoredPosition: {x: -185, y: 0}
   m_SizeDelta: {x: 350, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1351706092
@@ -2724,6 +2726,7 @@ MonoBehaviour:
   holdlengh: 1.5
   lockedIn: 0
   currentSelection: -10
+  attachedPlayer: {fileID: 0}
   playerType: 2
 --- !u!114 &1351706093
 MonoBehaviour:
@@ -9055,6 +9058,7 @@ MonoBehaviour:
   holdlengh: 1.5
   lockedIn: 0
   currentSelection: -10
+  attachedPlayer: {fileID: 0}
   playerType: 4
 --- !u!114 &1818337500
 MonoBehaviour:
