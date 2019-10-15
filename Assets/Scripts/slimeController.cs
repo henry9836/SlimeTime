@@ -58,11 +58,18 @@ public class slimeController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity))
+        int layerMask = 1 << 12;
+
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, layerMask))
         {
             //if we didn't hit the camera layer
-            if (hit.collider.gameObject.layer != 12)
+            if (hit.collider.gameObject.layer != 12 && hit.collider.gameObject.tag != "DONOTJUMPHERE")
             {
+                Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
+                Debug.DrawLine(transform.position, pos, Color.white);
+                Debug.DrawLine(pos, hit.point, Color.white);
                 //We found a valid spot
                 return true;
             }
@@ -76,7 +83,7 @@ public class slimeController : MonoBehaviour
 
         Vector3 targetDir = new Vector3(tarPlayer.transform.position.x - transform.position.x, tarPlayer.transform.position.y - transform.position.y, tarPlayer.transform.position.z - transform.position.z).normalized;
 
-        //Can we go straight in player direction?
+        //Can we go straight in player direction? 
 
         if (CheckLaunchPos(transform.position + (targetDir * maxJumpDistance)))
         {
@@ -87,7 +94,7 @@ public class slimeController : MonoBehaviour
         {
 
             //check positions in a circle and pick the shortest distance one
-            int spawnOnAngle = 1;
+            int spawnOnAngle = 10;
 
             float shortest = Mathf.Infinity;
 
@@ -96,12 +103,14 @@ public class slimeController : MonoBehaviour
                 if (i % spawnOnAngle == 0)
                 {
                     Vector3 tmpSpot;
-                    tmpSpot.x = (transform.position.x + maxJumpDistance) * Mathf.Sin(i * Mathf.Deg2Rad);
+                    tmpSpot.x = (transform.position.x + ((maxJumpDistance/2)) * Mathf.Sin(i * Mathf.Deg2Rad));
                     tmpSpot.y = transform.position.y;
-                    tmpSpot.z = (transform.position.z + maxJumpDistance) * Mathf.Cos(i * Mathf.Deg2Rad);
+                    tmpSpot.z = (transform.position.z + ((maxJumpDistance/2)) * Mathf.Cos(i * Mathf.Deg2Rad));
 
                     float dis = Vector3.Distance(tarPlayer.transform.position, tmpSpot);
 
+                    Debug.DrawLine(transform.position, tmpSpot, Color.magenta);
+                    
                     //If spot is valid
                     if (CheckLaunchPos(tmpSpot))
                     {
@@ -116,7 +125,11 @@ public class slimeController : MonoBehaviour
 
                 }
             }
+            if (Vector3.Distance(result, transform.position) > maxJumpDistance) {
+                Debug.Log("Circle Jump Had A BIG BAD JUMP ASSIGNED|| J:" + result + " O:" + transform.position + " D:" + Vector3.Distance(result, transform.position));
+            }
         }
+        
         return result;
     }
 
