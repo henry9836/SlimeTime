@@ -36,7 +36,7 @@ public class CharacterSelectionmanager : MonoBehaviour
 
         for (int i = 0; i < disabledCount; i++)
         {
-            GameObject.Find("players").transform.GetChild(3 - i).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.75f);
+            GameObject.Find("players").transform.GetChild(3 - i).GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
             GameObject.Find("players").transform.GetChild(3 - i).GetComponent<CharacterSelection>().holdTimer = 3.0f;
 
         }
@@ -56,12 +56,13 @@ public class CharacterSelectionmanager : MonoBehaviour
                 {
                    characterSetter.playerSelections.Add(GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().currentSelection);
                 }
-                SceneManager.LoadScene(2);
+                //SceneManager.LoadScene(2);
+                FindObjectOfType<SceneSwitcher>().SceneSwitch("Game");
             }
         }
 
         //fade
-        GameObject.Find("FADE").GetComponent<Image>().color = new Color(GameObject.Find("FADE").GetComponent<Image>().color.r, GameObject.Find("FADE").GetComponent<Image>().color.g, GameObject.Find("FADE").GetComponent<Image>().color.b, Mathf.Pow(Mathf.Sin((countdowntimer / fadetime) * (Mathf.PI / 2)), 2));
+        //GameObject.Find("FADE").GetComponent<Image>().color = new Color(GameObject.Find("FADE").GetComponent<Image>().color.r, GameObject.Find("FADE").GetComponent<Image>().color.g, GameObject.Find("FADE").GetComponent<Image>().color.b, Mathf.Pow(Mathf.Sin((countdowntimer / fadetime) * (Mathf.PI / 2)), 2));
 
     }
 }
