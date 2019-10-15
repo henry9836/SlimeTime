@@ -1196,7 +1196,7 @@ MonoBehaviour:
   holdTimer: 0
   holdlengh: 1.5
   lockedIn: 0
-  currentSelection: 0
+  currentSelection: -10
   playerType: 3
 --- !u!114 &461474306
 MonoBehaviour:
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   holdTimer: 0
   holdlengh: 1.5
   lockedIn: 0
-  currentSelection: 0
+  currentSelection: -10
   playerType: 1
 --- !u!114 &1311392123
 MonoBehaviour:
@@ -2723,7 +2723,7 @@ MonoBehaviour:
   holdTimer: 0
   holdlengh: 1.5
   lockedIn: 0
-  currentSelection: 0
+  currentSelection: -10
   playerType: 2
 --- !u!114 &1351706093
 MonoBehaviour:
@@ -9054,7 +9054,7 @@ MonoBehaviour:
   holdTimer: 0
   holdlengh: 1.5
   lockedIn: 0
-  currentSelection: 0
+  currentSelection: -10
   playerType: 4
 --- !u!114 &1818337500
 MonoBehaviour:
