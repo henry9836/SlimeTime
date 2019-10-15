@@ -219,7 +219,7 @@ public class slimeSpawner : MonoBehaviour
                 }
 
                 GameObject[] slimes = GameObject.FindGameObjectsWithTag("BULLETIGNORESLIME");
-                Debug.Log(slimes.Length);
+
                 bool spawn = true;
                 if (slimes.Length > MAXslimes)
                 {
