@@ -9,6 +9,7 @@ public class GameScreenStates : MonoBehaviour
 
     private GameObject gameManagerObject;
     private GameManager gameManager;
+    public AudioClip winSound;
 
     private bool isNull = true;
 
@@ -111,6 +112,8 @@ public class GameScreenStates : MonoBehaviour
 
                     case 1:
                         screens[1].GetComponent<WaveComplete>().Begin();
+                        GetComponent<AudioSource>().clip = winSound;
+                        GetComponent<AudioSource>().Play();
                         break;
 
                     case 2:
