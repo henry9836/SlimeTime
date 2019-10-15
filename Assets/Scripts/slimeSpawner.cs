@@ -504,6 +504,6 @@ public class slimeSpawner : MonoBehaviour
 
          }
                     
-        return (tospawn);
+        return (tospawn * 2);
     }
 }
