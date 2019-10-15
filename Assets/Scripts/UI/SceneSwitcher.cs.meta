@@ -3,7 +3,9 @@ guid: f697a48ee5b0e8849827572ee4d09b00
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fadePanel: {instanceID: 0}
+  - clickSound: {fileID: 8300000, guid: 67cb775afec0d074dbc5ce259fd5942c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
