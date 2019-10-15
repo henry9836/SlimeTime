@@ -17,6 +17,8 @@ public class SceneSwitcher : MonoBehaviour {
     private bool isSwitching;
     private float fadeTimeCur;
 
+    public AudioClip clickSound;
+
     void Awake()
     {
         //fadePanel = GameObject.Find("fadePanel");
@@ -92,6 +94,9 @@ public class SceneSwitcher : MonoBehaviour {
             fadeTimeCur = fadeTime;
             targetScene = scene;
             isSwitching = true;
+
+            GetComponent<AudioSource>().clip = clickSound;
+            GetComponent<AudioSource>().Play();
         }
     }
 
