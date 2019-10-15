@@ -779,7 +779,6 @@ GameObject:
   - component: {fileID: 271792532}
   - component: {fileID: 271792531}
   - component: {fileID: 271792530}
-  - component: {fileID: 271792529}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -787,30 +786,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &271792529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271792528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ca903492af328b46b147b3ce15f8b2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  stayTimer: 7
-  fadeTimer: 3
-  Splashes:
-  - {fileID: 21300000, guid: 287165c379a7ec44ea05675d37a9da5f, type: 3}
-  - {fileID: 21300000, guid: c07216db3b42ad749aeb518e8da8f80f, type: 3}
-  SplashPOS:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  SplashNo: 0
 --- !u!114 &271792530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,11 +1227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27abc47ee25e244fb3cc237dddd481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amvalid: 0
+  holdTimer: 0
+  holdlengh: 3
   currentSelection: 0
-  isselected: 1
-  moveable: 1
-  selectable: 1
   playerType: 3
 --- !u!114 &461474306
 MonoBehaviour:
@@ -1277,7 +1250,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 13d2537a8b1e6b749bdd206df27025c3, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2807,11 +2780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27abc47ee25e244fb3cc237dddd481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amvalid: 0
+  holdTimer: 0
+  holdlengh: 3
   currentSelection: 0
-  isselected: 1
-  moveable: 1
-  selectable: 1
   playerType: 1
 --- !u!114 &1311392123
 MonoBehaviour:
@@ -2832,7 +2803,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 42bae6263fc94bb48ba396981309e45f, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2911,11 +2882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27abc47ee25e244fb3cc237dddd481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amvalid: 0
+  holdTimer: 0
+  holdlengh: 3
   currentSelection: 0
-  isselected: 1
-  moveable: 1
-  selectable: 1
   playerType: 2
 --- !u!114 &1351706093
 MonoBehaviour:
@@ -2936,7 +2905,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 59892d6dc050be04e8ad7c2cadff1372, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8887,6 +8856,7 @@ MonoBehaviour:
   countdown: 0
   countdowntimer: 500
   fadetime: 3
+  disabledCount: 4
 --- !u!4 &1782171789
 Transform:
   m_ObjectHideFlags: 0
@@ -9133,11 +9103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27abc47ee25e244fb3cc237dddd481c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amvalid: 0
+  holdTimer: 0
+  holdlengh: 3
   currentSelection: 0
-  isselected: 1
-  moveable: 1
-  selectable: 1
   playerType: 4
 --- !u!114 &1818337500
 MonoBehaviour:
@@ -9158,7 +9126,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8493123648a8c3e49a517699814e82d7, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
