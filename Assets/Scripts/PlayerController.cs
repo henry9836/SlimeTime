@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 lastAimVec;
     private GameObject aimIndicator;
     private float lastHealth;
-    private projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
-    public Material initalMaterial;
+    public projectileController.PROJTYPES projType = projectileController.PROJTYPES.ARROW;
+    private Material initalMaterial;
 
     //Ragdoll Effects
     public void FlingYourArmsFromSideToSide()
@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour
 
             //aimIndicator.transform.localPosition = aimVec * aimDistance;
             transform.LookAt(transform.position + (lastAimVec * 100.0f));
+
             //SHOOTING
 
             if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT"))
@@ -236,6 +237,7 @@ public class PlayerController : MonoBehaviour
                     {
                         GameObject refer = Instantiate(baseProjectile, transform.position, Quaternion.identity);
                         refer.GetComponent<projectileController>().type = projType;
+                        refer.GetComponent<projectileController>().playerRef = gameObject;
                         refer.GetComponent<Rigidbody>().AddForce(lastAimVec * fireForce);
                         refer.transform.LookAt(transform.position + (lastAimVec * 100.0f));
                         refer.GetComponent<projectileController>().travelDir = lastAimVec;

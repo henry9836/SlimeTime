@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdTimer: 0
-  holdlengh: 3
+  holdlengh: 1.5
   currentSelection: 0
   playerType: 3
 --- !u!114 &461474306
@@ -2526,7 +2526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdTimer: 0
-  holdlengh: 3
+  holdlengh: 1.5
   currentSelection: 0
   playerType: 1
 --- !u!114 &1311392123
@@ -2628,7 +2628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdTimer: 0
-  holdlengh: 3
+  holdlengh: 1.5
   currentSelection: 0
   playerType: 2
 --- !u!114 &1351706093
@@ -8963,7 +8963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdTimer: 0
-  holdlengh: 3
+  holdlengh: 1.5
   currentSelection: 0
   playerType: 4
 --- !u!114 &1818337500
