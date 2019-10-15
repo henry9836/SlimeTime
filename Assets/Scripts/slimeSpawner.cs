@@ -47,6 +47,8 @@ public class slimeSpawner : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public GameObject[] playerList;
 
+    public Vector2 jumpCooldown = new Vector2(2.0f, 3.0f);
+    public float health = 0;
 
     public void NextWave(int wave)
     {
@@ -64,6 +66,17 @@ public class slimeSpawner : MonoBehaviour
         stage1time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f) / 2.0f;
         stage2time = (0.05f * (float)Mathf.Pow(wave, 2) + 10f);
 
+        //untested
+        jumpCooldown = new Vector2(Mathf.Exp(-(wave + 1 / 6)) * 5 , Mathf.Exp(-(wave / 6)) * 5);
+
+        if (wave <= 4)
+        {
+            health = wave;
+        }
+        else
+        {
+            health += Mathf.CeilToInt(Mathf.Pow(wave , 2) * 0.12f) + 2;
+        }
 
 
         onceSpawnng = true;
