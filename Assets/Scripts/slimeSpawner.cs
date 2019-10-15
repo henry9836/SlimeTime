@@ -50,9 +50,13 @@ public class slimeSpawner : MonoBehaviour
     public Vector2 jumpCooldown = new Vector2(2.0f, 3.0f);
     public float health = 0;
 
+    public float MAXslimes = 50;
+
     public void NextWave(int wave)
     {
         playerList = GameObject.FindGameObjectsWithTag("Player");
+        players.Clear();
+
         for (int i = 0; i < playerList.Length; i++)
         {
             if (playerList[i].GetComponent<PlayerController>().controllerNotBound == false)
@@ -94,7 +98,6 @@ public class slimeSpawner : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
 
         if (onceLAZER == true)
         {
@@ -215,7 +218,20 @@ public class slimeSpawner : MonoBehaviour
                     onceSpawnng = false;
                 }
 
-                if (timer <= stage1time)
+                GameObject[] slimes = GameObject.FindGameObjectsWithTag("BULLETIGNORESLIME");
+                Debug.Log(slimes.Length);
+                bool spawn = true;
+                if (slimes.Length > MAXslimes)
+                {
+                    Debug.Log("max reached");
+                    spawn = false;
+                }
+                else
+                {
+                    timer += Time.deltaTime;
+                }
+
+                if (timer <= stage1time && spawn ==true)
                 {
                     //spawn 75%
                     stage1timer += Time.deltaTime;
@@ -227,7 +243,7 @@ public class slimeSpawner : MonoBehaviour
                     }
 
                 }
-                else
+                else if (spawn == true)
                 {
                     //Spawn 25%
                     stage2timer += Time.deltaTime;
@@ -457,7 +473,7 @@ public class slimeSpawner : MonoBehaviour
              }
              if (round >= 10)
              {
-                  tospawn = Mathf.FloorToInt(24 + (3 * ((round / 5) * (round * 0.15f))));
+                  tospawn = Mathf.FloorToInt(24 + ((3 * ((round / 5) * (round * 0.15f)))));
              }                   
          }
          else
@@ -483,8 +499,9 @@ public class slimeSpawner : MonoBehaviour
              }
              if (round >= 10)
              {
-                 tospawn = Mathf.FloorToInt(24 + ((players - 1) * 6) * ((round / 5) * (round * 0.15f)));
+                 tospawn = Mathf.FloorToInt(24 + (((players - 1) * 6) * ((round / 5) * (round * 0.15f))));
              }
+
          }
                     
         return (tospawn);
