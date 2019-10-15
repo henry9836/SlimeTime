@@ -8,6 +8,8 @@ public class CharacterSelection : MonoBehaviour
     public float holdTimer = 0.0f;
     public float holdlengh = 3.0f;
     public bool lockedIn = false;
+    public AudioClip lockSound;
+    private bool lockSoundPlayed;
     public int currentSelection = 10;
     public GameObject attachedPlayer;
 
@@ -100,6 +102,14 @@ public class CharacterSelection : MonoBehaviour
         if (lockedIn)
         {
             GetComponent<Image>().color = new Color(0.67f, 1.0f, 0.8f, 0.2f);
+
+            if (!lockSoundPlayed)
+            {
+                GetComponent<AudioSource>().clip = lockSound;
+                GetComponent<AudioSource>().Play();
+
+                lockSoundPlayed = true;
+            }
         }
     }
 }
