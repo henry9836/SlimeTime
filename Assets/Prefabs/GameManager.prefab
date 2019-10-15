@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209072563657535714}
   - component: {fileID: 6525390337991096898}
+  - component: {fileID: 204563232621545251}
   - component: {fileID: 2223859101471872379}
   - component: {fileID: 1222309611}
   - component: {fileID: 1492874201}
@@ -53,6 +54,25 @@ MonoBehaviour:
   currentWave: 0
   CanRespawn: 0
   respawnpos: {x: 0, y: 1.2, z: 0}
+--- !u!114 &204563232621545251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999512730116933380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a5e4ab409361e42b32307373fbd4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrows:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  radius: 450
 --- !u!114 &2223859101471872379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +120,7 @@ MonoBehaviour:
   playerList: []
   jumpCooldown: {x: 2, y: 3}
   health: 0
+  MAXslimes: 50
 --- !u!114 &1222309611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +139,6 @@ MonoBehaviour:
   curScene: 
   isFading: 0
   isSwitching: 0
-  isRespawning: 0
   fadeTimeCur: 0
 --- !u!114 &1492874201
 MonoBehaviour:
