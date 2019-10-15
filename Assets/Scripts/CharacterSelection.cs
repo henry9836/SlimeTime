@@ -8,7 +8,7 @@ public class CharacterSelection : MonoBehaviour
     public float holdTimer = 0.0f;
     public float holdlengh = 3.0f;
     public bool lockedIn = false;
-    public int currentSelection;
+    public int currentSelection = 10;
 
     public enum PLAYERin
     {
@@ -23,8 +23,28 @@ public class CharacterSelection : MonoBehaviour
 
     void Start()
     {
+        bool playable = false;
         //0-3
-        currentSelection = (int)playerType - 1;
+        while (playable == false)
+        {
+            playable = true;
+            currentSelection = Random.Range(0,4);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (GameObject.Find("Canvas").transform.GetChild(1).GetChild(i).GetComponent<CharacterSelection>().playerType != this.playerType)
+                {
+                    if (GameObject.Find("Canvas").transform.GetChild(1).GetChild(i).GetComponent<CharacterSelection>().currentSelection == currentSelection)
+                    {
+                        playable = false;
+                    }
+                }
+            }
+        }
+
+
+
+        //currentSelection = (int)playerType - 1;
     }
 
     void Update()
