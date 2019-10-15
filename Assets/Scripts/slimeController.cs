@@ -13,6 +13,7 @@ public class slimeController : MonoBehaviour
 
     public slimeTypes type = slimeTypes.NORMAL;
 
+    public float maxJumpDistance = 10.0f;
     public float health = 0;
     public float damageEffectMultiplyer = 1.0f;
     public float attackDamage = 1.0f;
@@ -31,6 +32,8 @@ public class slimeController : MonoBehaviour
     private bool dectLock = false;
     private float idleTimer = 0.0f;
     private Collider detectionSphere;
+    private GameObject tarPlayer;
+    private float closestDistance;
 
     public void DamageSlime(float damage, Vector3 hitDir)
     {
@@ -48,17 +51,101 @@ public class slimeController : MonoBehaviour
         health = GameObject.Find("GameManager").GetComponent<slimeSpawner>().health;
         detectionSphere = transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
         idleThreshold = Random.Range(idleThresholdRange.x, idleThresholdRange.y);
+        GetComponent<Rigidbody>().velocity = Vector3.down * 2;
     }
 
-    private void OnTriggerStay(Collider other)
+    bool CheckLaunchPos(Vector3 pos)
     {
-        if (other.tag == "Player" && GetComponent<Rigidbody>().velocity.y == 0 && !attacking && !jumpLock)
+        RaycastHit hit;
+
+        int layerMask = 1 << 12;
+
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, layerMask))
         {
-            GetComponent<LaunchController>().Launch(other.transform.position);
-            StartCoroutine(Attack());
-            StartCoroutine(JumpCooldown());
-            dectLock = true;
-            idleTimer = 0;
+            //if we didn't hit the camera layer
+            if (hit.collider.gameObject.layer != 12 && hit.collider.gameObject.tag != "DONOTJUMPHERE")
+            {
+                Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
+                Debug.DrawLine(transform.position, pos, Color.white);
+                Debug.DrawLine(pos, hit.point, Color.white);
+                //We found a valid spot
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Vector3 FindValidTargetPosition()
+    {
+        Vector3 result = Vector3.zero;
+
+        Vector3 targetDir = new Vector3(tarPlayer.transform.position.x - transform.position.x, tarPlayer.transform.position.y - transform.position.y, tarPlayer.transform.position.z - transform.position.z).normalized;
+
+        //Can we go straight in player direction? 
+
+        if (CheckLaunchPos(transform.position + (targetDir * maxJumpDistance)))
+        {
+            result = transform.position + (targetDir * maxJumpDistance);
+        }
+        //If we cannot go in a straight direction?
+        else
+        {
+
+            //check positions in a circle and pick the shortest distance one
+            int spawnOnAngle = 10;
+
+            float shortest = Mathf.Infinity;
+
+            for (int i = 0; i < 360; i++)
+            {
+                if (i % spawnOnAngle == 0)
+                {
+                    Vector3 tmpSpot;
+                    tmpSpot.x = (transform.position.x + ((maxJumpDistance/2)) * Mathf.Sin(i * Mathf.Deg2Rad));
+                    tmpSpot.y = transform.position.y;
+                    tmpSpot.z = (transform.position.z + ((maxJumpDistance/2)) * Mathf.Cos(i * Mathf.Deg2Rad));
+
+                    float dis = Vector3.Distance(tarPlayer.transform.position, tmpSpot);
+
+                    Debug.DrawLine(transform.position, tmpSpot, Color.magenta);
+                    
+                    //If spot is valid
+                    if (CheckLaunchPos(tmpSpot))
+                    {
+                        //If the distance to the player is shorter than a previously found path
+                        if (dis < shortest)
+                        {
+                            //Set result to the new spot
+                            shortest = dis;
+                            result = tmpSpot;
+                        }
+                    }
+
+                }
+            }
+            if (Vector3.Distance(result, transform.position) > maxJumpDistance) {
+                Debug.Log("Circle Jump Had A BIG BAD JUMP ASSIGNED|| J:" + result + " O:" + transform.position + " D:" + Vector3.Distance(result, transform.position));
+            }
+        }
+        
+        return result;
+    }
+
+    void Attack()
+    {
+        attacking = true;
+
+        if (Vector3.Distance(tarPlayer.transform.position, transform.position) > maxJumpDistance)
+        {
+            //Player is too far away find a nearby position that is safe to get closer to player
+            GetComponent<LaunchController>().Launch(FindValidTargetPosition());
+        }
+        else
+        {
+            //Player is here so floor is also present we are safe to jump
+            GetComponent<LaunchController>().Launch(tarPlayer.transform.position);
         }
     }
 
@@ -67,32 +154,11 @@ public class slimeController : MonoBehaviour
 
         slimeObjects[(int)type].SetActive(true);
 
+        //Health Logic
         if (health <= 0)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().SlimeKilled();
             Destroy(this.gameObject);
-        }
-
-        //Attacking Logic
-        if (attacking)
-        {
-            if (GetComponent<Rigidbody>().velocity.y == 0)
-            {
-                attacking = false;
-                dectLock = false;
-            }
-        }
-        //Wander Logic
-        else
-        {
-            if (dectLock != true && GetComponent<Rigidbody>().velocity.y == 0)
-            {
-                idleTimer += Time.deltaTime;
-                if (idleTimer > idleThreshold)
-                {
-                    StartCoroutine(Wander());
-                }
-            }
         }
 
         //Kill floor
@@ -102,18 +168,49 @@ public class slimeController : MonoBehaviour
             health -= 999.0f;
         }
 
+        //Are we on the ground?
+        if (GetComponent<Rigidbody>().velocity.y == 0)
+        {
+            attacking = false;
+            //Is the jump cooldown over?
+            if (!jumpLock)
+            {
+                //restart the jumpcooldown
+                StartCoroutine(JumpCooldown());
+                //Find the closest player
+                closestDistance = Mathf.Infinity;
+                tarPlayer = null;
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for (int i = 0; i < players.Length; i++)
+                {
+                    //Check health
+                    if (players[i].GetComponent<PlayerController>().health > 0)
+                    {
+                        //Check distance
+                        if (Vector3.Distance(players[i].transform.position, transform.position) < closestDistance)
+                        {
+                            
+                            //Set player to target
+                            tarPlayer = players[i];
+                            closestDistance = Vector3.Distance(players[i].transform.position, transform.position);
+                        }
+                    }
+                }
+
+                //Launch at closest player
+                if (tarPlayer != null)
+                {
+                    Attack();
+                }
+
+            }
+        }
+
     }
 
-    public IEnumerator Attack()
-    {
-        attacking = true;
-        yield return null;
-    }
-    
     IEnumerator JumpCooldown()
     {
         jumpLock = true;
-        
         yield return new WaitForSeconds(Random.Range(jumpCooldown.x, jumpCooldown.y));
         jumpLock = false;
     }

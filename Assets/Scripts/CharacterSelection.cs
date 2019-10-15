@@ -5,13 +5,9 @@ using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
-
-    public bool amvalid = true;
-
-    public int currentSelection = 0;
-    public bool isselected = true;
-    public bool moveable = true;
-    public bool selectable = true;
+    public float holdTimer = 0.0f;
+    public float holdlengh = 3.0f;
+    public int currentSelection;
 
     public enum PLAYERin
     {
@@ -24,61 +20,33 @@ public class CharacterSelection : MonoBehaviour
 
     public PLAYERin playerType = PLAYERin.UNASSIGNED;
 
+    void Start()
+    {
+        //0-3
+        currentSelection = (int)playerType - 1;
+    }
 
     void Update()
     {
-        if (amvalid == true)
+        GameObject.Find("Canvas").transform.GetChild(1).GetChild((int)playerType - 1).gameObject.GetComponent<Image>().fillAmount = holdTimer / holdlengh;
+
+
+        if ((Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT")))
         {
-            this.gameObject.GetComponent<Image>().enabled = true;
-
-            if (isselected == true)
+            holdTimer += Time.deltaTime;
+            if (holdTimer >= holdlengh)
             {
-                if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") > 0 && moveable == true)
-                {
-                    moveable = false;
-                    currentSelection++;
-                    gameObject.transform.localPosition += new Vector3(466.0f, 0.0f, 0.0f);
-
-                    if (currentSelection == 4)
-                    {
-                        currentSelection = 0;
-                        gameObject.transform.localPosition = new Vector3(-736.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z); 
-                    }
-                }
-                if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") < 0 && moveable == true)
-                {
-                    moveable = false;
-                    currentSelection--;
-                    gameObject.transform.localPosition -= new Vector3(466.0f, 0.0f, 0.0f);
-
-                    if (currentSelection == -1)
-                    {
-                        currentSelection = 3;
-                        gameObject.transform.localPosition = new Vector3(736.0f, gameObject.transform.localPosition.y, gameObject.transform.localPosition.z);
-
-                    }
-                }
-                if (Input.GetAxisRaw("P" + (int)playerType + "HOZ") == 0)
-                {
-                    moveable = true;
-                }
-            }
-
-            if ((Input.GetAxisRaw("P" + (int)playerType + "SHOOT") != 0 || Input.GetButton("P" + (int)playerType + "SHOOTALT")) && selectable == true)
-            {
-                selectable = false;
-                isselected = !isselected;
-            }
-
-            if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") == 0)
-            {
-                selectable = true;
+                holdTimer = holdlengh;
             }
         }
-        else
-        {
-            this.gameObject.GetComponent<Image>().enabled = false;
-        }
 
+        if (Input.GetAxisRaw("P" + (int)playerType + "SHOOT") == 0)
+        {
+            holdTimer -= Time.deltaTime;
+            if (holdTimer <= 0.0f)
+            {
+                holdTimer = 0.0f;
+            }
+        }
     }
 }

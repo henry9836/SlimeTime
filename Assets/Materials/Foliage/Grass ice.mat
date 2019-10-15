@@ -108,7 +108,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UnlitColorMap:
-        m_Texture: {fileID: 2800000, guid: e18d473339874414799df4500bb41db2, type: 3}
+        m_Texture: {fileID: 2800000, guid: eb13c0c0fc2d4b24c862a9a7f1066711, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -250,4 +250,4 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.34420612, g: 0.40820554, b: 0.8018868, a: 1}
+    - _UnlitColor: {r: 0.6239765, g: 0.7441558, b: 0.7735849, a: 1}

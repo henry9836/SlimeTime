@@ -11,6 +11,9 @@ TagManager:
   - BULLETIGNORE
   - DETECTIONCAST
   - BULLETIGNORESLIME
+  - P2
+  - Wall
+  - DONOTJUMPHERE
   layers:
   - Default
   - TransparentFX
@@ -25,8 +28,8 @@ TagManager:
   - Ragdoll
   - Projectile
   - DETECTIONIDSAVULITMATE360.msi
-  - 
-  - 
+  - Floor
+  - Obstacle
   - 
   - 
   - 
