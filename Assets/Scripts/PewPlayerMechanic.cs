@@ -33,6 +33,8 @@ public class PewPlayerMechanic : MonoBehaviour
             if (canFire)
             {
                 GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                refer.GetComponent<projectileController>().playerRef = _playerRef;
                 refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
                 refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
                 refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;
@@ -50,6 +52,8 @@ public class PewPlayerMechanic : MonoBehaviour
                 //Middle
 
                 GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                refer.GetComponent<projectileController>().playerRef = _playerRef;
                 refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
                 refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
                 refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;
@@ -57,6 +61,8 @@ public class PewPlayerMechanic : MonoBehaviour
                 //Right
 
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                refer.GetComponent<projectileController>().playerRef = _playerRef;
                 refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.13f)) * playerRef.GetComponent<PlayerController>().fireForce);
                 refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.13f)) * 100.0f));
                 refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.13f);
@@ -64,6 +70,8 @@ public class PewPlayerMechanic : MonoBehaviour
                 //Left
 
                 refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                refer.GetComponent<projectileController>().playerRef = _playerRef;
                 refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.13f)) * playerRef.GetComponent<PlayerController>().fireForce);
                 refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.13f)) * 100.0f));
                 refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.13f);
@@ -73,6 +81,8 @@ public class PewPlayerMechanic : MonoBehaviour
                     //RightT2
 
                     refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                    refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                    refer.GetComponent<projectileController>().playerRef = _playerRef;
                     refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.25f)) * playerRef.GetComponent<PlayerController>().fireForce);
                     refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.25f)) * 100.0f));
                     refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec + (transform.right * 0.25f);
@@ -80,6 +90,8 @@ public class PewPlayerMechanic : MonoBehaviour
                     //LeftT2
 
                     refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                    refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                    refer.GetComponent<projectileController>().playerRef = _playerRef;
                     refer.GetComponent<Rigidbody>().AddForce((playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.25f)) * playerRef.GetComponent<PlayerController>().fireForce);
                     refer.transform.LookAt(transform.position + ((playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.25f)) * 100.0f));
                     refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec + (-transform.right * 0.25f);
@@ -110,6 +122,8 @@ public class PewPlayerMechanic : MonoBehaviour
                         directionVec.z = (playerRef.transform.position.z + directionOffset) * Mathf.Cos(i * Mathf.Deg2Rad);
 
                         GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position, Quaternion.identity);
+                        refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                        refer.GetComponent<projectileController>().playerRef = _playerRef;
                         refer.GetComponent<Rigidbody>().AddForce(directionVec.normalized * playerRef.GetComponent<PlayerController>().fireForce);
                         refer.transform.LookAt(directionVec);
                         refer.GetComponent<projectileController>().travelDir = directionVec.normalized;
@@ -132,6 +146,8 @@ public class PewPlayerMechanic : MonoBehaviour
                 for (int i = 0; i < amountToSpawn/2; i++)
                 {
                     GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position + (playerRef.transform.right * i/2), Quaternion.identity);
+                    refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                    refer.GetComponent<projectileController>().playerRef = _playerRef;
                     refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
                     refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
                     refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;
@@ -139,6 +155,8 @@ public class PewPlayerMechanic : MonoBehaviour
                 for (int i = 0; i < amountToSpawn / 2; i++)
                 {
                     GameObject refer = Instantiate(playerRef.GetComponent<PlayerController>().baseProjectile, transform.position + (-playerRef.transform.right * i/2), Quaternion.identity);
+                    refer.GetComponent<projectileController>().type = _playerRef.GetComponent<PlayerController>().projType;
+                    refer.GetComponent<projectileController>().playerRef = _playerRef;
                     refer.GetComponent<Rigidbody>().AddForce(playerRef.GetComponent<PlayerController>().lastAimVec * playerRef.GetComponent<PlayerController>().fireForce);
                     refer.transform.LookAt(transform.position + (playerRef.GetComponent<PlayerController>().lastAimVec * 100.0f));
                     refer.GetComponent<projectileController>().travelDir = playerRef.GetComponent<PlayerController>().lastAimVec;

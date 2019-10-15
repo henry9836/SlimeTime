@@ -9,7 +9,14 @@ public class GameScreenStates : MonoBehaviour
 
     private GameObject gameManagerObject;
     private GameManager gameManager;
+    public AudioClip winSound;
+
     private bool isNull = true;
+
+    public CanvasGroup tutorial;
+    public int tutorialState = 0;
+    public int tutorialStateCur = 0;
+    public float tutorialTimer = 13.0f;
 
     public int screenState = -1;
     private int screenStateCur = -1;
@@ -33,12 +40,49 @@ public class GameScreenStates : MonoBehaviour
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
 
+        tutorial = transform.Find("Tutorials").GetComponent<CanvasGroup>();
+
         screenState = 0;
         screenStateCur = 0;
     }
 
     void Update()
     {
+        // Tutorials
+        tutorialTimer -= Time.deltaTime;
+        tutorialTimer = Mathf.Clamp(tutorialTimer, 0, 13.0f);
+
+
+        if (tutorialState != tutorialStateCur)
+        {
+            switch (tutorialState)
+            {
+                case 1:
+                    tutorial.DOFade(1f, 1.0f);
+                    break;
+
+                case 2:
+                    tutorial.DOFade(0f, 1.0f);
+                    break;
+            }
+
+            tutorialStateCur = tutorialState;
+        }
+        else
+        {
+            if (tutorialTimer <= 10 && tutorialState == 0)
+            {
+                tutorialState = 1;
+            }
+
+            if (tutorialTimer <= 0 && tutorialState == 1)
+            {
+                tutorialState = 2;
+            }
+        }
+
+
+        // Game screens
         if (!isNull)
         {
             if (screenState != screenStateCur)
@@ -68,6 +112,8 @@ public class GameScreenStates : MonoBehaviour
 
                     case 1:
                         screens[1].GetComponent<WaveComplete>().Begin();
+                        GetComponent<AudioSource>().clip = winSound;
+                        GetComponent<AudioSource>().Play();
                         break;
 
                     case 2:

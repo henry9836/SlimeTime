@@ -51,6 +51,7 @@ public class pickupcontroler : MonoBehaviour
     }
     void FixedUpdate()
     {
+
         this.gameObject.transform.Rotate(0.0f, 50 * Time.deltaTime,  0.0f);
         
         lifetime -= Time.deltaTime;
@@ -59,6 +60,11 @@ public class pickupcontroler : MonoBehaviour
         {
             StartCoroutine(despawn());
         }
+    }
+
+    void Update()
+    {
+        dropshadow();
     }
 
     void OnTriggerEnter(Collider collision)
@@ -105,20 +111,32 @@ public class pickupcontroler : MonoBehaviour
     {
         for (float timer = 0.0f; timer < amplitudeRate; timer += Time.deltaTime)
         {
-            float ypos = Mathf.Lerp(landingypos, landingypos + 1.0f, Mathf.Pow(Mathf.Sin((5 * (timer / amplitudeRate)) / Mathf.PI), 2));
+            float ypos = Mathf.Lerp(landingypos + 2.0f, landingypos + 1.0f, Mathf.Pow(Mathf.Sin((5 * (timer / amplitudeRate)) / Mathf.PI), 2));
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, ypos , gameObject.transform.localPosition.z);
             yield return null;
 
         }
         for (float timer = 0.0f; timer < amplitudeRate; timer += Time.deltaTime)
         {
-            float ypos = Mathf.Lerp(landingypos + 1.0f, landingypos, Mathf.Pow(Mathf.Sin((5 * (timer / amplitudeRate)) / Mathf.PI), 2)); 
+            float ypos = Mathf.Lerp(landingypos + 1.0f, landingypos + 2.0f, Mathf.Pow(Mathf.Sin((5 * (timer / amplitudeRate)) / Mathf.PI), 2)); 
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, ypos , gameObject.transform.localPosition.z);
             yield return null;
 
         }
 
         StartCoroutine(bob());
+    }
+
+    public void dropshadow()
+    {
+        RaycastHit shadowH;
+
+        int layerMask = ~(1 << 15);
+
+        Physics.Raycast(transform.position, Vector3.down, out shadowH, Mathf.Infinity, layerMask);
+        Debug.DrawLine(transform.position, shadowH.point);
+
+        this.gameObject.transform.GetChild(2).transform.position = new Vector3(this.transform.position.x, shadowH.point.y + 0.5f, this.transform.position.z);
     }
 
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraControlr : MonoBehaviour
 {
+    public Vector3 playersCOM;
+    public Vector3 tr;
+    public Vector3 bl;
 
     private float safezone = 5.0f;
     private float maxZoonOut = 1.0f;
@@ -20,12 +23,17 @@ public class CameraControlr : MonoBehaviour
             }
         }
 
-        Vector3 playersCOM = COM(validPlayers);
+        playersCOM = COM(validPlayers);
 
         Debug.DrawLine(playersCOM, new Vector3(playersCOM.x, playersCOM.y + 50, playersCOM.z));
 
-        float camY = 88.6f;
-        float camZ = -87.4f;
+        //float camY = 88.6f;
+        //float camZ = -87.4f;
+
+        float camY = 170f;
+        float camZ = -190f;
+
+
         //float camZ = Mathf.Sqrt(Mathf.Abs(((Mathf.Abs(transform.position.z - playersCOM.z))*(Mathf.Abs(transform.position.z - playersCOM.z)))-(camY * camY)));
 
         transform.LookAt(playersCOM);
@@ -108,11 +116,13 @@ public class CameraControlr : MonoBehaviour
         RaycastHit straightHITtr;
         Vector3 position = new Vector3(transform.localPosition.x + xdiff, transform.localPosition.y + ydiff, transform.localPosition.z + zdiff);
         Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITtr, Mathf.Infinity, layerMask);
+        tr = straightHITtr.point;
         Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITtr.distance, Color.red);
 
         RaycastHit straightHITbl;
         position = new Vector3(transform.localPosition.x - xdiff, transform.localPosition.y - ydiff, transform.localPosition.z - zdiff);
         Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out straightHITbl, Mathf.Infinity, layerMask);
+        bl = straightHITbl.point;
         Debug.DrawRay(position, transform.TransformDirection(Vector3.forward) * straightHITbl.distance, Color.yellow);
 
         for (int i = 0; i < players.Count; i++)

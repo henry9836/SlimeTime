@@ -9,48 +9,47 @@ public class SceneSwitcher : MonoBehaviour {
 
     public GameObject fadePanel;
     public float fadeTime;
+    private float fadeInDelay = 0.25f;
     private Image fadeImage;
-    public string targetScene;
+    private string targetScene;
     public string curScene;
-    public bool isFading;
-    public bool isSwitching;
-    public bool isRespawning;
-    public float fadeTimeCur;
+    private bool isFading;
+    private bool isSwitching;
+    private float fadeTimeCur;
+
+    public AudioClip clickSound;
 
     void Awake()
     {
         //fadePanel = GameObject.Find("fadePanel");
+
+        curScene = SceneManager.GetActiveScene().name;
+        Debug.Log(curScene);
     }
 
 	// Use this for initialization
 	void Start ()
     {
-
-        curScene = SceneManager.GetActiveScene().name;
-        Debug.Log(curScene);
         if (curScene == "MainMenu")
         {
             //GlobalData.LastScene = curScene;
-
         }
 
         if (fadePanel == null)
         {
             fadePanel = GameObject.Find("SceneFader");
         }
-            
-        isFading = true;
-        fadeTimeCur = fadeTime;
         fadePanel.SetActive(true);
         fadeImage = fadePanel.GetComponent<Image>();
-        Vector4 initialColor = fadeImage.color;
-        fadeImage.DOFade(0, fadeTime).SetEase(Ease.InOutSine);
+
+        Invoke("ExitFade", fadeInDelay);
+        //ExitFade();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        fadeTimeCur = Mathf.MoveTowards(fadeTimeCur, 0f, Time.unscaledDeltaTime);
+        fadeTimeCur = Mathf.MoveTowards(fadeTimeCur, 0f, Time.deltaTime);
         if (fadeTimeCur != 0)
         {
             isFading = true;
@@ -72,17 +71,32 @@ public class SceneSwitcher : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (curScene == "MainMenu")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                SceneSwitch("MainMenu");
+            }
+        }
+
     }
 
     public void SceneSwitch(string scene)
     {
-        if (!isSwitching)
+        if (!isSwitching && !isFading)
         {
             Vector4 initialColor = fadeImage.color;
-            fadeImage.DOFade(1, fadeTime / 1.5f).SetEase(Ease.InOutSine);
+            fadeImage.DOFade(1, fadeTime / 1.0f).SetEase(Ease.InOutSine);
             fadeTimeCur = fadeTime;
             targetScene = scene;
             isSwitching = true;
+
+            GetComponent<AudioSource>().clip = clickSound;
+            GetComponent<AudioSource>().Play();
         }
     }
 
@@ -92,7 +106,7 @@ public class SceneSwitcher : MonoBehaviour {
         if (!isSwitching)
         {
             Vector4 initialColor = fadeImage.color;
-            fadeImage.DOFade(1, fadeTime / 1.5f).SetEase(Ease.InOutSine);
+            fadeImage.DOFade(1, fadeTime / 1.0f).SetEase(Ease.InOutSine);
         }
         isSwitching = true;
         fadeTimeCur = fadeTime;

@@ -23,7 +23,8 @@ public class CharacterSelectionmanager : MonoBehaviour
 
         for (int i = 0; i < playercount; i++)
         {
-            if (GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().holdTimer >= 3.0)
+            CharacterSelection hold = GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>();
+            if (hold.holdTimer >= hold.holdlengh)
             {
                 readycount += 1;
             }
@@ -37,7 +38,8 @@ public class CharacterSelectionmanager : MonoBehaviour
         for (int i = 0; i < disabledCount; i++)
         {
             GameObject.Find("players").transform.GetChild(3 - i).GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, 0.5f);
-            GameObject.Find("players").transform.GetChild(3 - i).GetComponent<CharacterSelection>().holdTimer = 3.0f;
+            CharacterSelection charSelect1 = GameObject.Find("players").transform.GetChild(3 - i).GetComponent<CharacterSelection>();
+            charSelect1.holdTimer = charSelect1.holdlengh;
 
         }
 
@@ -45,7 +47,8 @@ public class CharacterSelectionmanager : MonoBehaviour
         {
             for (int i = 0; i < playercount; i++)
             {
-               GameObject.Find("players").transform.GetChild(i).GetComponent<CharacterSelection>().holdTimer = 3.0f;
+                CharacterSelection charSelect2 = GameObject.Find("players").transform.GetChild(3 - i).GetComponent<CharacterSelection>();
+                charSelect2.holdTimer = charSelect2.holdlengh;
  
             }
 
