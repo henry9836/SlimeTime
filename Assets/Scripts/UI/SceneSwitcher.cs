@@ -14,7 +14,6 @@ public class SceneSwitcher : MonoBehaviour {
     public string curScene;
     public bool isFading;
     public bool isSwitching;
-    public bool isRespawning;
     public float fadeTimeCur;
 
     void Awake()
@@ -69,6 +68,18 @@ public class SceneSwitcher : MonoBehaviour {
             else
             {
                 SceneManager.LoadScene(targetScene);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (curScene == "MainMenu")
+            {
+                Application.Quit();
+            }
+            else
+            {
+                SceneSwitch("MainMenu");
             }
         }
 

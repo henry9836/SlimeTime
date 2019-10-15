@@ -1195,6 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdTimer: 0
   holdlengh: 1.5
+  lockedIn: 0
   currentSelection: 0
   playerType: 3
 --- !u!114 &461474306
@@ -1210,7 +1211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6650944, g: 1, b: 0.7964117, a: 0.2}
+  m_Color: {r: 0.981075, g: 1, b: 0.65, a: 0.2}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2618,6 +2619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdTimer: 0
   holdlengh: 1.5
+  lockedIn: 0
   currentSelection: 0
   playerType: 1
 --- !u!114 &1311392123
@@ -2633,7 +2635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6650944, g: 1, b: 0.7964117, a: 0.2}
+  m_Color: {r: 0.981075, g: 1, b: 0.65, a: 0.2}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2720,6 +2722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdTimer: 0
   holdlengh: 1.5
+  lockedIn: 0
   currentSelection: 0
   playerType: 2
 --- !u!114 &1351706093
@@ -2735,7 +2738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6650944, g: 1, b: 0.7964117, a: 0.2}
+  m_Color: {r: 0.981075, g: 1, b: 0.65, a: 0.2}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9152,6 +9155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdTimer: 0
   holdlengh: 1.5
+  lockedIn: 0
   currentSelection: 0
   playerType: 4
 --- !u!114 &1818337500
@@ -9167,7 +9171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6650944, g: 1, b: 0.7964117, a: 0.2}
+  m_Color: {r: 0.981075, g: 1, b: 0.65, a: 0.2}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
