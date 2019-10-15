@@ -13,10 +13,12 @@ public class CharacterSelectionmanager : MonoBehaviour
     public bool countdown = false;
     public float countdowntimer = 0.0f;
     public float fadetime = 3.0f;
+    public int disabledCount = 4;
 
     void Update()
     {
         playercount = DyanmicControllers.FindControllers();
+        disabledCount = 4 - playercount;
         readycount = 0;
 
         for (int i = 0; i < playercount; i++)
@@ -32,6 +34,12 @@ public class CharacterSelectionmanager : MonoBehaviour
             countdown = true;
         }
 
+        for (int i = 0; i < disabledCount; i++)
+        {
+            GameObject.Find("players").transform.GetChild(3 - i).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.75f);
+            GameObject.Find("players").transform.GetChild(3 - i).GetComponent<CharacterSelection>().holdTimer = 3.0f;
+
+        }
 
         if (countdown == true)
         {
