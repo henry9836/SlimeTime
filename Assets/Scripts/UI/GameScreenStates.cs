@@ -9,7 +9,13 @@ public class GameScreenStates : MonoBehaviour
 
     private GameObject gameManagerObject;
     private GameManager gameManager;
+
     private bool isNull = true;
+
+    public CanvasGroup tutorial;
+    public int tutorialState = 0;
+    public int tutorialStateCur = 0;
+    public float tutorialTimer = 13.0f;
 
     public int screenState = -1;
     private int screenStateCur = -1;
@@ -33,12 +39,49 @@ public class GameScreenStates : MonoBehaviour
             gameManager = gameManagerObject.GetComponent<GameManager>();
         }
 
+        tutorial = transform.Find("Tutorials").GetComponent<CanvasGroup>();
+
         screenState = 0;
         screenStateCur = 0;
     }
 
     void Update()
     {
+        // Tutorials
+        tutorialTimer -= Time.deltaTime;
+        tutorialTimer = Mathf.Clamp(tutorialTimer, 0, 13.0f);
+
+
+        if (tutorialState != tutorialStateCur)
+        {
+            switch (tutorialState)
+            {
+                case 1:
+                    tutorial.DOFade(1f, 0.3f);
+                    break;
+
+                case 2:
+                    tutorial.DOFade(0f, 0.3f);
+                    break;
+            }
+
+            tutorialStateCur = tutorialState;
+        }
+        else
+        {
+            if (tutorialTimer <= 10 && tutorialState == 0)
+            {
+                tutorialState = 1;
+            }
+
+            if (tutorialTimer <= 0 && tutorialState == 1)
+            {
+                tutorialState = 2;
+            }
+        }
+
+
+        // Game screens
         if (!isNull)
         {
             if (screenState != screenStateCur)
