@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7223249728629228722}
   - component: {fileID: 6460232861358066268}
   - component: {fileID: 7317439312356309908}
+  - component: {fileID: -7243021551994952741}
   m_Layer: 5
-  m_Name: Healthbar-Player
+  m_Name: HealthBar-Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,13 +67,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 79aee4a530c470c49bb3bf46c443d8a5, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &7317439312356309908
@@ -90,6 +91,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.32941177}
   m_EffectDistance: {x: 0, y: -7}
   m_UseGraphicAlpha: 1
+--- !u!225 &-7243021551994952741
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775506380102417195}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2070950236342286275
 GameObject:
   m_ObjectHideFlags: 0
