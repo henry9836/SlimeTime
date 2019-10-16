@@ -1,53 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public GameObject mainCamera;
-    public GameObject bar;
-    public List<GameObject> barsList; 
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject player;
+
+
+    private void FixedUpdate()
     {
-        mainCamera = GameObject.Find("Main Camera");
+        float hp = player.GetComponent<PlayerController>().health;
+        this.gameObject.GetComponent<Image>().fillAmount = hp / 100.0f;
+
+        if (hp <= 0.0f)
+        {
+            this.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, gameObject.GetComponent<Image>().color.a);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    //public GameObject mainCamera;
+    //public GameObject bar;
+    //public List<GameObject> barsList;
+    //public int validPlayers;
+    //public List<GameObject> Players;
 
-        GameObject[] validPlayers = GameObject.FindGameObjectsWithTag("Player");
-        List<GameObject> Players = new List<GameObject>();
-        for (int i = 0; i < validPlayers.Length; i++)
-        {
-            if (validPlayers[i].GetComponent<PlayerController>().health > 0)
-            {
-                Players.Add(validPlayers[i]);
-                barsList.Add(bar);
-            }
-        }
+    //void Start()
+    //{
+    //    DyanmicControllers.FindControllers();
 
-        for (int i = 0; i < barsList.Count; i++)
-        {
-            gameObject.transform.GetChild(7).GetChild(i).gameObject.SetActive(true);
-        }
+    //    mainCamera = GameObject.Find("Main Camera");
 
+    //    validPlayers = DyanmicControllers.controlNum;
+    //    Players = new List<GameObject>();
 
-        for (int i = 0; i < Players.Count; i++)
-        {
-            int layerMask = 1 << 12;
-            RaycastHit playerpos;
-            Physics.Raycast(Players[i].gameObject.transform.position, GameObject.Find("Main Camera").transform.TransformDirection(Vector3.forward), out playerpos, Mathf.Infinity, layerMask);
-            Debug.DrawLine(Players[i].transform.position, playerpos.point, Color.cyan);
+    //    for (int i = 0; i < validPlayers; i++)
+    //    {
+    //        if (GameObject.Find("players").transform.GetChild(i).GetComponent<PlayerController>().health > 0)
+    //        {
+    //            Players.Add(GameObject.Find("players").transform.GetChild(i).gameObject);
+    //            barsList.Add(gameObject.transform.GetChild(7).GetChild(i).gameObject);
+    //            Debug.Log("hp added");
+    //        }
+    //    }
 
-            Vector3 dir = new Vector3(playerpos.point.x, playerpos.point.z, 0.0f);
+    //    for (int i = 0; i < barsList.Count; i++)
+    //    {
+    //        barsList[i].SetActive(true);
+    //    }
+    //}
 
-            barsList[i].GetComponent<RectTransform>().localPosition = dir;
-        }
+    //void Update()
+    //{
 
-        //transform.LookAt(mainCamera.transform.position);
+    //    for (int i = 0; i < Players.Count; i++)
+    //    {
+    //        int layerMask = 1 << 12;
+    //        RaycastHit playerpos;
+    //        Physics.Raycast(Players[i].gameObject.transform.position, GameObject.Find("Main Camera").transform.TransformDirection(Vector3.forward), out playerpos, Mathf.Infinity, layerMask);
+    //        Debug.DrawLine(Players[i].transform.position, playerpos.point, Color.cyan);
 
-    }
+    //        Vector3 position = new Vector3(playerpos.point.x, playerpos.point.z, 0.0f).normalized;
+
+    //        barsList[i].GetComponent<RectTransform>().localPosition = position * GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
+    //    }
+
+    //    //transform.LookAt(mainCamera.transform.position);
+
+    //}
 }
