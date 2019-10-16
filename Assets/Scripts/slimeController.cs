@@ -64,12 +64,15 @@ public class slimeController : MonoBehaviour
 
         if (Physics.Raycast(pos, Vector3.down, out hit, Mathf.Infinity, layerMask))
         {
-            //if we didn't hit the camera layer
-            Debug.Log("Hit layer: " + hit.collider.gameObject.layer + " and the gameobject was called: " + hit.collider.gameObject.name + " Object: " + gameObject.name);
-            Debug.DrawLine(transform.position, pos, Color.red, 10);
-            Debug.DrawLine(pos, hit.point, Color.red, 10);
-            //We found a valid spot
-            return true;
+            if (hit.collider.gameObject.tag != "DONOTJUMPHERE")
+            {
+                //if we didn't hit the camera layer
+                Debug.DrawLine(transform.position, pos, Color.magenta, 10);
+                Debug.DrawLine(pos, hit.point, Color.red, 10);
+                Debug.Log(hit.collider.gameObject.tag);
+                //We found a valid spot
+                return true;
+            }
         }
         return false;
     }
@@ -89,7 +92,6 @@ public class slimeController : MonoBehaviour
         //If we cannot go in a straight direction?
         else
         {
-
             //check positions in a circle and pick the shortest distance one
             int spawnOnAngle = 10;
 
