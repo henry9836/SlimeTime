@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour
 
         if (hp <= 0f)
         {
-            gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+            //gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
         }
     }
 
