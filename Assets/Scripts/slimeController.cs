@@ -67,8 +67,8 @@ public class slimeController : MonoBehaviour
             if (hit.collider.gameObject.tag != "DONOTJUMPHERE")
             {
                 //if we didn't hit the camera layer
-                Debug.DrawLine(transform.position, pos, Color.magenta, 10);
-                Debug.DrawLine(pos, hit.point, Color.red, 10);
+                Debug.DrawLine(transform.position, pos, Color.magenta, 1000);
+                Debug.DrawLine(pos, hit.point, Color.red, 1000);
                 Debug.Log(hit.collider.gameObject.tag);
                 //We found a valid spot
                 return true;
