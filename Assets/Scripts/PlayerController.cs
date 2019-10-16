@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
 
             if (GameObject.Find("GameManager").GetComponent<GameManager>().CanRespawn == true)
             {
-                health = 100;
+                health = 100f;
                 transform.position = GameObject.Find("GameManager").GetComponent<GameManager>().respawnpos;
             }
         }
@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controllerNotBound) {
-            health = -9999;
+            health = -9999f;
         }
     }
 

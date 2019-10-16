@@ -12,11 +12,12 @@ public class HealthBar : MonoBehaviour
     private void FixedUpdate()
     {
         float hp = player.GetComponent<PlayerController>().health;
-        this.gameObject.GetComponent<Image>().fillAmount = hp / 100.0f;
+        GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.GetComponent<Image>().fillAmount = hp / 100.0f;
 
         if (hp <= 0.0f)
         {
-            this.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, gameObject.GetComponent<Image>().color.a);
+            //this.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, gameObject.GetComponent<Image>().color.a);
+            GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
         }
     }
 
