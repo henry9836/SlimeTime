@@ -126,9 +126,6 @@ public class PlayerController : MonoBehaviour
 
         lastAimVec = transform.forward;
 
-
-       
-
         //set projType
         if (charcterType == CHARACTER.ARCHER)
         {
