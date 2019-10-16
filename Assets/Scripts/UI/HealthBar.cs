@@ -9,15 +9,36 @@ public class HealthBar : MonoBehaviour
     public GameObject player;
 
 
+    private void Start()
+    {
+        gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+    }
+
     private void FixedUpdate()
     {
+        //get hp
         float hp = player.GetComponent<PlayerController>().health;
+        //select health bar according which player we are
         GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.GetComponent<Image>().fillAmount = hp / 100.0f;
 
-        if (hp <= 0.0f)
+        //Debug.Log("player is: " + player.name + " and his cntroller is: " + player.GetComponent<PlayerController>().controllerNotBound + " I think player num is: " + player.GetComponent<PlayerController>().playerType);
+        //If our player is valid
+        if (!player.GetComponent<PlayerController>().controllerNotBound)
         {
+            //Debug.Log("Setting player " + player.GetComponent<PlayerController>().playerType + "'s image which is: " + GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.name);
             //this.gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, gameObject.GetComponent<Image>().color.a);
-            GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+            //make image trans
+            GameObject.Find("Healthbars").transform.GetChild((int)player.GetComponent<PlayerController>().charcterType).gameObject.GetComponent<CanvasGroup>().alpha = 1.0f;
+        }
+        else
+        {
+            gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
+
+        }
+
+        if (hp <= 0f)
+        {
+            gameObject.GetComponent<CanvasGroup>().alpha = 0.5f;
         }
     }
 
