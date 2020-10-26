@@ -1,4 +1,3 @@
-# Slime Time
 ![Title](https://raw.githubusercontent.com/henry9836/SlimeTime/master/docs/title.png)
 ##### Built by David Morris, Henry Oliver, Matthew Moore, Vaughan Webb and Xin Yin Lee
 
