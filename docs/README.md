@@ -1,5 +1,5 @@
 ![Title](https://raw.githubusercontent.com/henry9836/SlimeTime/master/docs/title.png)
-##### Built by David Morris, Henry Oliver, Matthew Moore, Vaughan Webb and Xin Yin Lee
+##### Built by David Morris, Henry Oliver, Matthew Moore, Ronaldo Chen, Vaughan Webb and Xin Yin Lee
 
 Slime Time is a local coop game where you try and survive through as many waves of slimes as you can. 
 
