@@ -1,7 +1,7 @@
 ![Title](https://raw.githubusercontent.com/henry9836/SlimeTime/master/docs/title.png)
 ##### Built by David Morris, Henry Oliver, Matthew Moore, Vaughan Webb and Xin Yin Lee
 
-Slime time is a local coop game where you try and survive through as many waves of slimes as you can. 
+Slime Time is a local coop game where you try and survive through as many waves of slimes as you can. 
 
 ##### Must be played with controllers
 
